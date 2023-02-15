@@ -3,7 +3,6 @@
 /**
  * Add actions related to Theme.
  *
- * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
  * @package astra-child-theme
  */
