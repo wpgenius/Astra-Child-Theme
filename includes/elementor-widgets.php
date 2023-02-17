@@ -5,7 +5,7 @@
  * @package astra-child-theme
  */
 
-//https://develowp.com/build-a-custom-elementor-widget/
+// https://develowp.com/build-a-custom-elementor-widget/
 
 class Wpgenius_Elementor_Widgets {
 
@@ -13,7 +13,7 @@ class Wpgenius_Elementor_Widgets {
 
 	public static function get_instance() {
 		if ( ! isset( static::$instance ) ) {
-			static::$instance = new static;
+			static::$instance = new static();
 		}
 
 		return static::$instance;
@@ -21,27 +21,25 @@ class Wpgenius_Elementor_Widgets {
 
 	protected function __construct() {
 		// Register widget Styles
-		add_action( 'elementor/frontend/before_enqueue_styles', [ $this, 'widget_styles' ] );
+		add_action( 'elementor/frontend/before_enqueue_styles', array( $this, 'widget_styles' ) );
 		// Register widget scripts
-		add_action( 'elementor/frontend/after_register_scripts', [ $this, 'widget_scripts' ] );
+		add_action( 'elementor/frontend/after_register_scripts', array( $this, 'widget_scripts' ) );
 		// Register widgets
-		add_action( 'elementor/widgets/widgets_registered', [ $this, 'register_widgets' ] );
+		add_action( 'elementor/widgets/widgets_registered', array( $this, 'register_widgets' ) );
 	}
 	public function widget_styles() {
 
-		//Enqueue styles for widget
-
+		// Enqueue styles for widget
 	}
 
 	public function widget_scripts() {
 
-		//Enqueue Scripts for widget
-
+		// Enqueue Scripts for widget
 	}
 
 	public function register_widgets() {
-		//register widget here
-		require_once( __DIR__.'/widgets/wpg-widget.php');
+		// register widget here
+		require_once __DIR__ . '/widgets/wpg-widget.php';
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor\WPG_widget() );
 	}
 
