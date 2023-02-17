@@ -1,8 +1,7 @@
-<?php 
+<?php
 
 /**
  * Add actions related to Theme.
- *
  *
  * @package astra-child-theme
  */

@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 /**
  * Create Testimonial post type.
- * 
+ *
  * To add custom fields use ACF plugin.
  * field names: rating;
  */
