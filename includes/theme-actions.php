@@ -32,6 +32,7 @@ class WPGenius_theme_action {
 
 	public function my_theme_enqueue_styles() {
 		wp_enqueue_style( 'astra-child-theme', get_stylesheet_uri(), array( 'astra-theme-css' ), wp_get_theme()->get( 'Version' ) );
+		wp_enqueue_style( 'custom', get_stylesheet_directory() . 'assets/css/custom.css', array( 'astra-child-theme' ), 1.00 );
 	}
 }
 WPGenius_theme_action::init();
