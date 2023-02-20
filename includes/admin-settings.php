@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * @class       Wpgenius_settings
+ * @class       WPGenius_settings
  * @author      Team WPGenius (Makarand Mane)
  * @category    Admin
  * @package     wpg-setting-api/includes
@@ -12,28 +12,31 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class Wpgenius_settings {
+if( class_exists( 'WPGenius_settings' ) )
+	return;
+
+class WPGenius_settings {
 
 	public static $instance;
 	private $prefix		= 'wpg_';
 	private $opt_grp	= 'wpg_api_';
-	private $page		= 'wpg_settings';
+	private $page		= 'wpgenius_settings';
 	
 	public static function init(){
 
 	    if ( is_null( self::$instance ) )
-	        self::$instance = new Wpgenius_settings();
+	        self::$instance = new WPGenius_settings();
 	    return self::$instance;
 	}
 
 	private function __construct(){
 
-		add_action( 'admin_menu', array($this,'wpg_settings_menu'), 11);
-		add_action( 'admin_init', array($this,'wpg_register_settings'),10);
+		add_action( 'admin_menu', array($this,'add_menu_page'), 11);
+		add_action( 'admin_init', array($this,'register_settings'),10);
 
 	} // END public function __construct
 
-	function wpg_settings_menu(){
+	function add_menu_page(){
 
 		add_submenu_page(
 			'edit.php?post_type=album',
@@ -41,24 +44,24 @@ class Wpgenius_settings {
 			__('Settings' ), // menu title
 			'manage_options', // capability
 			$this->page, // menu slug
-			array( $this, 'wpg_settings_callback')
+			array( $this, 'settings_page')
 		);
 	}
 
-	function wpg_register_settings() {
+	function register_settings() {
 		
 		//Register settings
 	    register_setting( $this->opt_grp, $this->prefix.'register_setting', array( 'type' => 'string', 'default' => '' ) );
 
 		//Register sections
-		add_settings_section( $this->prefix.'register_section',		__('Youtube API','astra-child-theme'),			array( $this, 'wpg_register_section_title' ),	$this->page );
+		add_settings_section( $this->prefix.'register_section',		__('First Section','astra-child-theme'),			array( $this, 'wpg_register_section_title' ),	$this->page );
 		
 		//Add settings to section- braincert_api_section 
-		add_settings_field( $this->prefix.'register_setting',	__('Register setting :','astra-child-theme'), array( $this, 'wpg_register_setting_field' ), 	$this->page, $this->prefix.'api_section' );
+		add_settings_field( $this->prefix.'register_setting',	__('Register setting :','astra-child-theme'), array( $this, 'setting_field' ), 	$this->page, $this->prefix.'api_section' );
 		
 	}
 	
-	function wpg_settings_callback(){
+	function settings_page(){
 		?>
         <div class="wrap">
     	
@@ -86,11 +89,11 @@ class Wpgenius_settings {
         <?php 
 	}
 	
-	function wpg_register_setting_field(){
+	function setting_field(){
 		?>
        	<input type='text' name='<?php echo $this->prefix ?>register_setting' id='<?php echo $this->prefix ?>register_setting' value='<?php echo get_option( $this->prefix.'register_setting' );?>' style="width: 300px;">
         <?php
 	}
 	
 }
-Wpgenius_settings::init();
+WPGenius_settings::init();
