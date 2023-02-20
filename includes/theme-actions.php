@@ -6,20 +6,35 @@
  * @package astra-child-theme
  */
 
-function my_theme_enqueue_styles() {
-	wp_enqueue_style( 'astra-theme-css', get_template_directory_uri() . '/style.css', array(), wp_get_theme()->parent()->get( 'Version' ) );
-	wp_enqueue_style( 'astra-child-theme', get_stylesheet_uri(), array( 'astra-theme-css' ), wp_get_theme()->get( 'Version' ) );
 
-	// Remove Gutenberg Block Library CSS from loading on the frontend
-	wp_dequeue_style( 'wp-block-library' );
-	wp_dequeue_style( 'bp-member-block' );
-	wp_dequeue_style( 'wp-block-library-theme' );
-	wp_dequeue_style( 'wc-block-style' );
-	wp_dequeue_style( 'wc-blocks-vendors-style' );
-	wp_deregister_style( 'wc-block-editor' );
-	wp_deregister_style( 'wc-blocks-style' );
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
-add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles' );
+
+if ( class_exists( 'WPGenius_theme_action' ) ) {
+	return;
+}
+
+class WPGenius_theme_action {
+	public static $instance;
+
+	public static function init() {
+
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new WPGenius_theme_action();
+		}
+		return self::$instance;
+	}
+
+	private function __construct() {
+		add_action( 'wp_enqueue_scripts', array( $this, 'enque_scripts' ) );
+	}
+
+	public function my_theme_enqueue_styles() {
+		wp_enqueue_style( 'astra-child-theme', get_stylesheet_uri(), array( 'astra-theme-css' ), wp_get_theme()->get( 'Version' ) );
+	}
+}
+WPGenius_theme_action::init();
 
 /**
  * Disable Gutenberg on the back end.

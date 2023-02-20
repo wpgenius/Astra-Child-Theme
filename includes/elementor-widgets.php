@@ -7,7 +7,7 @@
 
 // https://develowp.com/build-a-custom-elementor-widget/
 
-class Wpgenius_Elementor_Widgets {
+class WPGenius_Elementor_Widgets {
 
 	protected static $instance = null;
 
@@ -46,6 +46,6 @@ class Wpgenius_Elementor_Widgets {
 }
 
 function wpg_elementor_widgets() {
-	Wpgenius_Elementor_Widgets::get_instance();
+	WPGenius_Elementor_Widgets::get_instance();
 }
 add_action( 'init', 'wpg_elementor_widgets' );
