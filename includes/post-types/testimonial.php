@@ -21,6 +21,7 @@ if ( !class_exists( 'WPGenius_testimonial' ) ) {
 			add_action( 'init', array( $this, 'register_post_type' ), 10, 1 );
 			add_filter( 'manage_testimonial_posts_columns ', array( $this, 'manage_column' ) );
 			add_action( 'manage_testimonial_posts_custom_column', array( $this, 'manage_custom_column' ), 10, 2 );
+			add_filter( 'enter_title_here', array( $this, 'entry_title_text' ), 10, 2 );
 		}
 	
 		 /**
@@ -97,6 +98,23 @@ if ( !class_exists( 'WPGenius_testimonial' ) ) {
 				echo get_post_meta( 'ratings_value' );
 			}
 		}
+
+		/**
+		 * Change post entry title
+		 *
+		 * @param string $title
+		 * @param object $post
+		 * @return string
+		 */
+		public function entry_title_text( $title, $post ) {
+			if ( $post->post_type == 'testimonial' ) {
+
+				$title = 'Enter testimonial author title';
+			}
+
+			return $title;
+		}
+
 		}
 	}
 	WPGenius_testimonial::init();
