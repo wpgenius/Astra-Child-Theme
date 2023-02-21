@@ -64,27 +64,27 @@ if ( !class_exists( 'WPGenius_testimonial' ) ) {
 			register_post_type( 'testimonial', $args );
 
 		}
-	
+
 		/**
 		 * Edit columns
 		 *
 		 * @param array $columns
 		 * @return void
 		 */
-		function manage_column( $columns ) {
-	
+		public function manage_column( $columns ) {
+
 			$inserted = array(
 				'editor'    => 'Testimonial',
 				'thumbnail' => 'Testimonial Photo',
 			);
-	
+
 			return array_merge(
 				array_slice( $columns, 0, 2 ),
 				$inserted,
 				array_slice( $columns, 2 )
 			);
 		}
-	
+
 		/**
 		 * Create Custom columns
 		 *
@@ -92,17 +92,11 @@ if ( !class_exists( 'WPGenius_testimonial' ) ) {
 		 * @param int    $post_id
 		 * @return void
 		 */
-		function manage_custom_column( $column_name, $post_id ) {
-	
-			if ( $column_name == 'editor' ) {
-				echo 'Rating: ' . get_field( 'rating' );
-				echo '<blockquote>"' . get_the_content() . '"</blockquote>';
+		public function manage_custom_column( $column_name, $post_id ) {
+			if ( $column_name == 'rating' ) {
+				echo get_post_meta( 'ratings_value' );
 			}
-	
-			if ( $column_name == 'thumbnail' ) {
-				echo get_the_post_thumbnail( $post_id, 'thumbnail' );
-			}
-	
+		}
 		}
 	}
 	WPGenius_testimonial::init();
