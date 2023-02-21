@@ -22,6 +22,8 @@ if ( !class_exists( 'WPGenius_testimonial' ) ) {
 			add_filter( 'manage_testimonial_posts_columns ', array( $this, 'manage_column' ) );
 			add_action( 'manage_testimonial_posts_custom_column', array( $this, 'manage_custom_column' ), 10, 2 );
 			add_filter( 'enter_title_here', array( $this, 'entry_title_text' ), 10, 2 );
+			add_action( 'add_meta_boxes', array( $this, 'meta_box' ) );
+			add_action( 'save_post', array( $this, 'save_post_meta' ) );
 		}
 	
 		 /**
@@ -115,8 +117,53 @@ if ( !class_exists( 'WPGenius_testimonial' ) ) {
 			return $title;
 		}
 
+		/**
+		 * Add metabox for testimonial.
+		 *
+		 * @return array
+		 */
+		public function meta_box() {
+			add_meta_box( 'testimonial-meta', __( 'Testimonials meta' ), array( $this, 'post_meta_callback' ), 'testimonial', 'advanced', 'high' );
 		}
-	}
+
+		/**
+		 * Add post meta boxes to post type
+		 *
+		 * @param object $post
+		 * @return void
+		 */
+		public function post_meta_callback( $post ) {
+
+			$value = get_post_meta( $post->ID, 'ratings_value', true ); ?>
+
+			<table class="form-table as_metabox">
+
+				<div class="myplugin-image-preview">
+					<div style="margin-bottom:10px;">
+						<label for="rating">Add rating</label>
+					</div>
+					<div>
+						<input style="width:100%; padding:10px !important;" type="text" id="rating" name="rating" value="<?php echo $value; ?>" />
+					</div>
+				</div>
+			</table>
+			<?php
+		}
+
+		/**
+		 * Save post data of post type
+		 *
+		 * @param int $post_id
+		 * @return void
+		 */
+		public function save_post_meta( $post_id ) {
+
+			if ( isset( $_POST['rating'] ) && $_POST['rating'] != '' ) {
+				$mydata = $_POST['rating'];
+				update_post_meta( $post_id, 'ratings_value', $mydata );
+
+			}
+		}
 	WPGenius_testimonial::init();
 }
 
