@@ -73,7 +73,3 @@ class WPGenius_Elementor_Widgets {
 
 }
 
-function wpg_elementor_widgets() {
-	WPGenius_Elementor_Widgets::get_instance();
-}
-add_action( 'init', 'wpg_elementor_widgets' );
