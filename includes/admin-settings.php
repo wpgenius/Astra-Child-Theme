@@ -91,7 +91,7 @@ if ( ! class_exists( 'WPGenius_settings' ) ) {
 
 		public function section_title() {
 			?>
-			<p><?php // _e( '' ); ?></p>
+			<p><?php _e( 'First section' ); ?></p>
 			<?php
 		}
 
@@ -104,5 +104,3 @@ if ( ! class_exists( 'WPGenius_settings' ) ) {
 	}
 	WPGenius_settings::init();
 }
-
-

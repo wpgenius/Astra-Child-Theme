@@ -5,22 +5,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( !class_exists( 'WPGenius_post_type' ) ) {
-	class WPGenius_post_type {
+if ( !class_exists( 'WPGenius_testimonial' ) ) {
+	class WPGenius_testimonial {
 		public static $instance;
 	
 		public static function init() {
 	
 			if ( is_null( self::$instance ) ) {
-				self::$instance = new WPGenius_post_type();
+				self::$instance = new WPGenius_testimonial();
 			}
 			return self::$instance;
 		}
 	
 		private function __construct() {
 			add_action( 'init', array( $this, 'register_post_type' ), 10, 1 );
-			add_filter( 'manage_testimonial_posts_columns ', array( $this, 'manage_testimonial_cols' ) );
-			add_action( 'manage_testimonial_posts_custom_column', array( $this, 'testimonial_field_col' ), 10, 2 );
+			add_filter( 'manage_testimonial_posts_columns ', array( $this, 'manage_column' ) );
+			add_action( 'manage_testimonial_posts_custom_column', array( $this, 'manage_custom_column' ), 10, 2 );
 		}
 	
 		 /**
@@ -73,7 +73,7 @@ if ( !class_exists( 'WPGenius_post_type' ) ) {
 		 * @param array $columns
 		 * @return void
 		 */
-		function manage_testimonial_cols( $columns ) {
+		function manage_column( $columns ) {
 	
 			$inserted = array(
 				'editor'    => 'Testimonial',
@@ -94,7 +94,7 @@ if ( !class_exists( 'WPGenius_post_type' ) ) {
 		 * @param int    $post_id
 		 * @return void
 		 */
-		function testimonial_field_col( $column_name, $post_id ) {
+		function manage_custom_column( $column_name, $post_id ) {
 	
 			if ( $column_name == 'editor' ) {
 				echo 'Rating: ' . get_field( 'rating' );
@@ -107,7 +107,7 @@ if ( !class_exists( 'WPGenius_post_type' ) ) {
 	
 		}
 	}
-	WPGenius_post_type::init();
+	WPGenius_testimonial::init();
 }
 
 
