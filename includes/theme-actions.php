@@ -30,31 +30,31 @@ if ( ! class_exists( 'WPGenius_theme_action' ) ) {
 		 * @var array
 		 */
 		private $post_types = array(
-            'testimonial'
-        );
+			'testimonial',
+		);
 
 		/**
-		 * List of widgets to be loaded 
+		 * List of widgets to be loaded
 		 *
 		 * @var array
 		 */
 		private $widgets = array(
-            'testimonial'
-        );
-	
+			'testimonial',
+		);
+
 		/**
 		 * Initialise class
 		 *
 		 * @return void
 		 */
 		public static function init() {
-	
+
 			if ( is_null( self::$instance ) ) {
 				self::$instance = new WPGenius_theme_action();
 			}
 			return self::$instance;
 		}
-	
+
 		/**
 		 * Class constructor
 		 */
@@ -66,15 +66,15 @@ if ( ! class_exists( 'WPGenius_theme_action' ) ) {
 			add_action( 'init', array( $this, 'register_widgets_elementor' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		}
-		
+
 		/**
 		 * Enqueue stylesheet file on front end.
 		 *
 		 * @return void
 		 */
 		public function enqueue_scripts() {
-			//wp_enqueue_style( 'astra-child-theme', get_stylesheet_uri(), array( 'astra-theme-css' ), wp_get_theme()->get( 'Version' ) );
-			//We will not use default stylesheet file. Only write CSS to style.css file under assets/css folder.
+			// wp_enqueue_style( 'astra-child-theme', get_stylesheet_uri(), array( 'astra-theme-css' ), wp_get_theme()->get( 'Version' ) );
+			// We will not use default stylesheet file. Only write CSS to style.css file under assets/css folder.
 			wp_enqueue_style( 'astra-child-theme', get_stylesheet_directory() . 'assets/css/style.css', array( 'astra-theme-css' ), wp_get_theme()->get( 'Version' ) );
 		}
 
@@ -84,12 +84,12 @@ if ( ! class_exists( 'WPGenius_theme_action' ) ) {
 		 *
 		 * @return void
 		 */
-		private function register_post_types(){
-			foreach ($this->post_types as $post_type) {
-                if (file_exists(dirname(__FILE__) . '/post-types/' . $post_type . '.php')) {
-                    include dirname(__FILE__) . '/post-types/' . $post_type . '.php';
-                }
-            }
+		private function register_post_types() {
+			foreach ( $this->post_types as $post_type ) {
+				if ( file_exists( dirname( __FILE__ ) . '/post-types/' . $post_type . '.php' ) ) {
+					include dirname( __FILE__ ) . '/post-types/' . $post_type . '.php';
+				}
+			}
 		}
 
 		/**
@@ -98,12 +98,12 @@ if ( ! class_exists( 'WPGenius_theme_action' ) ) {
 		 *
 		 * @return void
 		 */
-		private function register_widgets(){
-			foreach ($this->widgets as $widget) {
-                if (file_exists(dirname(__FILE__) . '/widgets/widget-' . $widget . '.php')) {
-                    include dirname(__FILE__) . '/widgets/widget-' . $widget . '.php';
-                }
-            }
+		private function register_widgets() {
+			foreach ( $this->widgets as $widget ) {
+				if ( file_exists( dirname( __FILE__ ) . '/widgets/widget-' . $widget . '.php' ) ) {
+					include dirname( __FILE__ ) . '/widgets/widget-' . $widget . '.php';
+				}
+			}
 		}
 
 		/**
@@ -114,7 +114,6 @@ if ( ! class_exists( 'WPGenius_theme_action' ) ) {
 		public function register_widgets_elementor() {
 			WPGenius_Elementor_Widgets::get_instance();
 		}
-		
 
 	}
 	WPGenius_theme_action::init();
