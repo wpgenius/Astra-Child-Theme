@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Add actions related to Security.
+ * Security actions
  *
  * @package astra-child-theme
  */
@@ -10,9 +10,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! class_exists( 'WPGenius_security_action' ) ) {
+
+	/**
+	 * Security measurements for each project
+	 */
 	class WPGenius_security_action {
-		public static $instance;
+		/**
+		 * instance of class
+		 *
+		 * @var object
+		 */
+		protected static $instance;
 	
+		/**
+		 * Initialise class
+		 *
+		 * @return void
+		 */
 		public static function init() {
 	
 			if ( is_null( self::$instance ) ) {
@@ -20,12 +34,13 @@ if ( ! class_exists( 'WPGenius_security_action' ) ) {
 			}
 			return self::$instance;
 		}
-	
+
+		/**
+		 * Class constructor
+		 */
 		private function __construct() {
 			// Enter hooks here
 		}
 	}
 	WPGenius_security_action::init();
 }
-
-
