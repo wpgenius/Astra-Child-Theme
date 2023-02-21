@@ -1,10 +1,10 @@
 <?php
 /**
  *
- * @class       WPGenius_settings
+ * @class       Settings template for child theme
  * @author      Team WPGenius (Makarand Mane)
  * @category    Admin
- * @package     wpg-setting-api/includes
+ * @package     includes/admin-settings
  * @version     1.0
  */
 
@@ -13,13 +13,44 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! class_exists( 'WPGenius_settings' ) ) {
+	/**
+	 * Class for child theme settings
+	 */
 	class WPGenius_settings {
 
-		public static $instance;
+		/**
+		 * instance of class
+		 *
+		 * @var object
+		 */
+		protected static $instance;
+
+		/**
+		 * Prefix for every setting field name & section
+		 *
+		 * @var string
+		 */
 		private $prefix  = 'wpg_';
+
+		/**
+		 * Prefix for option groups
+		 *
+		 * @var string
+		 */
 		private $opt_grp = 'wpg_api_';
+
+		/**
+		 * Setting page menu slug
+		 *
+		 * @var string
+		 */
 		private $page    = 'wpgenius_settings';
 
+		/**
+		 * Initialise class
+		 *
+		 * @return void
+		 */
 		public static function init() {
 
 			if ( is_null( self::$instance ) ) {
@@ -28,6 +59,9 @@ if ( ! class_exists( 'WPGenius_settings' ) ) {
 			return self::$instance;
 		}
 
+		/**
+		 * Class constructor
+		 */
 		private function __construct() {
 
 			add_action( 'admin_menu', array( $this, 'add_menu_page' ), 11 );
@@ -35,6 +69,11 @@ if ( ! class_exists( 'WPGenius_settings' ) ) {
 
 		} // END public function __construct
 
+		/**
+		 * Register menu page
+		 *
+		 * @return void
+		 */
 		public function add_menu_page() {
 
 			add_submenu_page(
@@ -47,6 +86,11 @@ if ( ! class_exists( 'WPGenius_settings' ) ) {
 			);
 		}
 
+		/**
+		 * Register setting, settings field & sections
+		 *
+		 * @return void
+		 */
 		public function register_settings() {
 
 			// Register settings
@@ -67,6 +111,12 @@ if ( ! class_exists( 'WPGenius_settings' ) ) {
 
 		}
 
+		/**
+		 * Callback for settings page.
+		 * Display registered setting sections & fields
+		 *
+		 * @return void
+		 */
 		public function settings_page() {
 			?>
 			<div class="wrap">
@@ -89,12 +139,22 @@ if ( ! class_exists( 'WPGenius_settings' ) ) {
 
 		}
 
+		/**
+		 * Sample section
+		 *
+		 * @return void
+		 */
 		public function section_title() {
 			?>
 			<p><?php _e( 'First section' ); ?></p>
 			<?php
 		}
 
+		/**
+		 * Sample text field
+		 *
+		 * @return void
+		 */
 		public function per_page() {
 			?>
 			   <input type='text' name='<?php echo $this->prefix; ?>register_setting' id='<?php echo $this->prefix; ?>register_setting' value='<?php echo get_option( $this->prefix . 'register_setting' ); ?>' style="width: 300px;">
