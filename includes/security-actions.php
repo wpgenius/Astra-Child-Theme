@@ -43,11 +43,16 @@ if ( ! class_exists( 'WPGenius_security_action' ) ) {
 			 * Remove WordPress Meta Generator Tag
 			 */
 			remove_action('wp_head', 'wp_generator');
-			
+
 			/**
 			 * Disable XMLRPC
 			 */
 			add_filter('xmlrpc_enabled', '__return_false');
+
+			/**
+			 * Remove link to the Really Simple Discovery service endpoint.
+			 */
+			remove_action( 'wp_head', 'rsd_link' );
 		}
 	}
 	WPGenius_security_action::init();
