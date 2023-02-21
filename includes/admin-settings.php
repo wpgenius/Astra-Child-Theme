@@ -60,10 +60,10 @@ if ( ! class_exists( 'WPGenius_settings' ) ) {
 			);
 
 			// Register sections
-			add_settings_section( $this->prefix . 'register_section', __( 'First Section', 'astra-child-theme' ), array( $this, 'wpg_register_section_title' ), $this->page );
+			add_settings_section( $this->prefix . 'register_section', __( 'Testimonials setting section', 'astra-child-theme' ), array( $this, 'section_title' ), $this->page );
 
 			// Add settings to section- braincert_api_section
-			add_settings_field( $this->prefix . 'register_setting', __( 'Register setting :', 'astra-child-theme' ), array( $this, 'setting_field' ), $this->page, $this->prefix . 'api_section' );
+			add_settings_field( $this->prefix . 'per_page', __( 'Testimonial per page:', 'astra-child-theme' ), array( $this, 'per_page' ), $this->page, $this->prefix . 'register_section' );
 
 		}
 
@@ -89,13 +89,13 @@ if ( ! class_exists( 'WPGenius_settings' ) ) {
 
 		}
 
-		public function wpg_api_section_title() {
+		public function section_title() {
 			?>
-			<p><?php _e( 'Get API details from https://developers.google.com/ & put below.', 'astra-child-theme' ); ?></p>
+			<p><?php // _e( '' ); ?></p>
 			<?php
 		}
 
-		public function setting_field() {
+		public function per_page() {
 			?>
 			   <input type='text' name='<?php echo $this->prefix; ?>register_setting' id='<?php echo $this->prefix; ?>register_setting' value='<?php echo get_option( $this->prefix . 'register_setting' ); ?>' style="width: 300px;">
 			<?php
