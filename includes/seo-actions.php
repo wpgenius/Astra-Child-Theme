@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Add actions related to SEO.
+ * SEO actions.
  *
  * @package astra-child-theme
  */
@@ -11,9 +11,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! class_exists( 'WPGenius_seo_action' ) ) {
-	class WPGenius_seo_action {
-		public static $instance;
 	
+	/**
+	 * SEO actions needed for every project
+	 */
+	class WPGenius_seo_action {
+		/**
+		 * instance of class
+		 *
+		 * @var object
+		 */
+		protected static $instance;
+	
+		/**
+		 * Initialise class
+		 *
+		 * @return void
+		 */
 		public static function init() {
 	
 			if ( is_null( self::$instance ) ) {
@@ -22,6 +36,9 @@ if ( ! class_exists( 'WPGenius_seo_action' ) ) {
 			return self::$instance;
 		}
 	
+		/**
+		 * Class constructor
+		 */
 		private function __construct() {
 			// Enter hooks here
 		}
@@ -29,4 +46,3 @@ if ( ! class_exists( 'WPGenius_seo_action' ) ) {
 	WPGenius_seo_action::init();
 	
 }
-
