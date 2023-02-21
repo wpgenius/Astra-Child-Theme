@@ -55,6 +55,11 @@ if ( ! class_exists( 'WPGenius_cleanup_action' ) ) {
 			
 			add_action( 'wp_dashboard_setup', array( $this, 'remove_dashboard_widgets' ), 9999 );
 
+			/**
+			 * Remove Slider Revolution Meta Generator Tag
+			 */
+			add_filter( 'revslider_meta_generator', '__return_empty_string' );
+
 		}
 
 		/**
