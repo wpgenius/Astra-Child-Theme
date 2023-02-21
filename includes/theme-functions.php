@@ -8,10 +8,10 @@
  */
 
 require get_stylesheet_directory() . '/includes/theme-actions.php';
+require get_stylesheet_directory() . '/includes/theme-settings.php';
 require get_stylesheet_directory() . '/includes/security-actions.php';
 require get_stylesheet_directory() . '/includes/cleanup-action.php';
 require get_stylesheet_directory() . '/includes/user-actions.php';
-require get_stylesheet_directory() . '/includes/admin-settings.php';
 require get_stylesheet_directory() . '/includes/seo-actions.php';
 require get_stylesheet_directory() . '/includes/woo-actions.php';
 require get_stylesheet_directory() . '/includes/theme-shortcodes.php';
