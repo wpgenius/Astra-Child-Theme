@@ -54,6 +54,7 @@ if ( ! class_exists( 'WPGenius_cleanup_action' ) ) {
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 			
 			add_action( 'wp_dashboard_setup', array( $this, 'remove_dashboard_widgets' ), 9999 );
+			add_action( 'admin_init', array( $this, 'remove_welcome_panel' ), 9999 );
 
 			/**
 			 * Remove Slider Revolution Meta Generator Tag
@@ -87,6 +88,15 @@ if ( ! class_exists( 'WPGenius_cleanup_action' ) ) {
 			$wp_meta_boxes['dashboard']['normal']['core'] = array();
 			$wp_meta_boxes['dashboard']['side']['core']   = array();
 			$wp_meta_boxes['dashboard']['normal']['high'] = array();
+		}
+
+		/**
+		 * Remove Dashboard Welcome Panel
+		 *
+		 * @return void
+		 */
+		public function remove_welcome_panel() {
+			remove_action( 'welcome_panel', 'wp_welcome_panel' );
 		}
 	}
 	WPGenius_cleanup_action::init();
