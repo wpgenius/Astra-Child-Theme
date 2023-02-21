@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! class_exists( 'WPGenius_user_action' ) ) {
+	
 	class WPGenius_user_action {
 		public static $instance;
 	
@@ -22,7 +23,7 @@ if ( ! class_exists( 'WPGenius_user_action' ) ) {
 		}
 	
 		private function __construct() {
-			add_filter( 'wp_is_application_passwords_available', array( $this, '__return_false' ) );
+			add_filter( 'wp_is_application_passwords_available', '__return_false' );
 		}
 	}
 	WPGenius_user_action::init();
