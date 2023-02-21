@@ -1,6 +1,6 @@
 <?php
 /**
- * Add actions related to Woocommerce.
+ * Woocommerce actions from child theme
  *
  * @package astra-child-theme
  */
@@ -10,9 +10,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! class_exists( 'WPGenius_woo_action' ) ) {
-	class WPGenius_woo_action {
-		public static $instance;
 	
+	/**
+	 * WooCommerce hooks
+	 */
+	class WPGenius_woo_action {
+		/**
+		 * instance of class
+		 *
+		 * @var object
+		 */
+		protected static $instance;
+	
+		/**
+		 * Initialise class
+		 *
+		 * @return void
+		 */
 		public static function init() {
 	
 			if ( is_null( self::$instance ) ) {
@@ -21,10 +35,12 @@ if ( ! class_exists( 'WPGenius_woo_action' ) ) {
 			return self::$instance;
 		}
 	
+		/**
+		 * Class constructor
+		 */
 		private function __construct() {
 			// Add hooks here
 		}
 	}
 	WPGenius_woo_action::init();
 }
-
