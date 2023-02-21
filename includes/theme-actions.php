@@ -36,10 +36,10 @@ if ( ! class_exists( 'WPGenius_theme_action' ) ) {
 			$this->register_post_types();
 			$this->register_widget();
 
-			add_action( 'wp_enqueue_scripts', array( $this, 'enque_scripts' ) );
+			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		}
 	
-		public function my_theme_enqueue_styles() {
+		public function enqueue_scripts() {
 			wp_enqueue_style( 'astra-child-theme', get_stylesheet_uri(), array( 'astra-theme-css' ), wp_get_theme()->get( 'Version' ) );
 			wp_enqueue_style( 'custom', get_stylesheet_directory() . 'assets/css/custom.css', array( 'astra-child-theme' ), 1.00 );
 		}
