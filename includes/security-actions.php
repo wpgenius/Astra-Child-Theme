@@ -38,8 +38,11 @@ if ( ! class_exists( 'WPGenius_security_action' ) ) {
 		/**
 		 * Class constructor
 		 */
-		private function __construct() {
-			// Enter hooks here
+		private function __construct() {			
+			/**
+			 * Remove WordPress Meta Generator Tag
+			 */
+			remove_action('wp_head', 'wp_generator');
 		}
 	}
 	WPGenius_security_action::init();
