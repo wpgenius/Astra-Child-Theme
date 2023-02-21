@@ -18,7 +18,7 @@ if ( !class_exists( 'WPGenius_post_type' ) ) {
 		}
 	
 		private function __construct() {
-			add_action( 'init', array( $this, 'testimonial_post_type' ), 10, 1 );
+			add_action( 'init', array( $this, 'register_post_type' ), 10, 1 );
 			add_filter( 'manage_testimonial_posts_columns ', array( $this, 'manage_testimonial_cols' ) );
 			add_action( 'manage_testimonial_posts_custom_column', array( $this, 'testimonial_field_col' ), 10, 2 );
 		}
@@ -29,7 +29,7 @@ if ( !class_exists( 'WPGenius_post_type' ) ) {
 		  * To add custom fields use ACF plugin.
 		  * field names: rating;
 		  */
-		public function testimonial_post_type() {
+		public function register_post_type() {
 			$labels = array(
 				'name'               => __( 'Testimonial', 'astra-child-theme' ),
 				'singular_name'      => __( 'Testimonial', 'astra-child-theme' ),

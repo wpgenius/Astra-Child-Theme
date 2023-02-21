@@ -39,7 +39,7 @@ class WPGenius_Elementor_Widgets {
 
 	public function register_widgets() {
 		// register widget here
-		require_once __DIR__ . '/widgets/wpg-widget.php';
+		require_once __DIR__ . '/widgets-elementor/widget-testimonial.php';
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor\WPG_widget() );
 	}
 
