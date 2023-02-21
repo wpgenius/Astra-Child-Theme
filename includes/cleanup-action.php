@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Add actions related to Cleanup.
+ * Cleanup actions for every project
  *
  * @package astra-child-theme
  */
@@ -12,9 +12,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! class_exists( 'WPGenius_cleanup_action' ) ) {
-	class WPGenius_cleanup_action {
-		public static $instance;
 
+	/**
+	 * Clean unwanted, unnecessory code from WordPress, Plugins or theme
+	 */
+	class WPGenius_cleanup_action {
+		/**
+		 * instance of class
+		 *
+		 * @var object
+		 */
+		protected static $instance;
+
+		/**
+		 * Initialise class
+		 *
+		 * @return void
+		 */
 		public static function init() {
 			if ( is_null( self::$instance ) ) {
 				self::$instance = new WPGenius_cleanup_action();
@@ -22,9 +36,11 @@ if ( ! class_exists( 'WPGenius_cleanup_action' ) ) {
 			return self::$instance;
 		}
 
+		/**
+		 * Class constructor
+		 */
 		private function __construct() {
 
-			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 			/**
 			 * Disable Gutenberg on the back end.
 			 */
@@ -35,7 +51,9 @@ if ( ! class_exists( 'WPGenius_cleanup_action' ) ) {
 			 */
 			add_filter( 'use_widgets_block_editor', '__return_false' );
 
-			add_action( 'wp_dashboard_setup', array( $this, 'remove_unwanted_widgets' ), 9999 );
+			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+			
+			add_action( 'wp_dashboard_setup', array( $this, 'remove_dashboard_widgets' ), 9999 );
 
 		}
 
@@ -59,7 +77,7 @@ if ( ! class_exists( 'WPGenius_cleanup_action' ) ) {
 		 *
 		 * @return void
 		 */
-		public function remove_unwanted_widgets() {
+		public function remove_dashboard_widgets() {
 			global $wp_meta_boxes;
 			$wp_meta_boxes['dashboard']['normal']['core'] = array();
 			$wp_meta_boxes['dashboard']['side']['core']   = array();
@@ -68,5 +86,3 @@ if ( ! class_exists( 'WPGenius_cleanup_action' ) ) {
 	}
 	WPGenius_cleanup_action::init();
 }
-
-
