@@ -5,18 +5,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( !class_exists( 'WPGenius_testimonial' ) ) {
+if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 	class WPGenius_testimonial {
-		public static $instance;
-	
+		protected static $instance;
+
 		public static function init() {
-	
+
 			if ( is_null( self::$instance ) ) {
 				self::$instance = new WPGenius_testimonial();
 			}
 			return self::$instance;
 		}
-	
+
 		private function __construct() {
 			add_action( 'init', array( $this, 'register_post_type' ), 10, 1 );
 			add_filter( 'manage_testimonial_posts_columns ', array( $this, 'manage_column' ) );
@@ -26,7 +26,7 @@ if ( !class_exists( 'WPGenius_testimonial' ) ) {
 			add_action( 'save_post', array( $this, 'save_post_meta' ) );
 			add_action( 'wp', array( $this, 'template_hooks' ) );
 		}
-	
+
 		 /**
 		  * Create Testimonial post type.
 		  *
