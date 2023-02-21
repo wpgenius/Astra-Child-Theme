@@ -61,7 +61,7 @@ if ( ! class_exists( 'WPGenius_theme_action' ) ) {
 		private function __construct() {
 
 			$this->register_post_types();
-			$this->register_widget();
+			$this->register_widgets();
 
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		}
@@ -97,7 +97,7 @@ if ( ! class_exists( 'WPGenius_theme_action' ) ) {
 		 *
 		 * @return void
 		 */
-		private function register_widget(){
+		private function register_widgets(){
 			foreach ($this->widgets as $widget) {
                 if (file_exists(dirname(__FILE__) . '/widgets/widget-' . $widget . '.php')) {
                     include dirname(__FILE__) . '/widgets/widget-' . $widget . '.php';
