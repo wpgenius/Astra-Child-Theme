@@ -8,9 +8,18 @@
 // https://develowp.com/build-a-custom-elementor-widget/
 
 class WPGenius_Elementor_Widgets {
-
+	/**
+	 * instance of class
+	 *
+	 * @var object
+	 */
 	protected static $instance = null;
 
+	/**
+	 * Initialise class
+	 *
+	 * @return void
+	 */
 	public static function get_instance() {
 		if ( ! isset( static::$instance ) ) {
 			static::$instance = new static();
@@ -19,6 +28,9 @@ class WPGenius_Elementor_Widgets {
 		return static::$instance;
 	}
 
+	/**
+	 * Class constructor
+	 */
 	protected function __construct() {
 		// Register widget Styles
 		add_action( 'elementor/frontend/before_enqueue_styles', array( $this, 'widget_styles' ) );
@@ -27,16 +39,32 @@ class WPGenius_Elementor_Widgets {
 		// Register widgets
 		add_action( 'elementor/widgets/widgets_registered', array( $this, 'register_widgets' ) );
 	}
+
+	/**
+	 * Enqueue styles for widget
+	 *
+	 * @return void
+	 */
 	public function widget_styles() {
 
 		// Enqueue styles for widget
 	}
 
+	/**
+	 * Enqueue Scripts for widget
+	 *
+	 * @return void
+	 */
 	public function widget_scripts() {
 
 		// Enqueue Scripts for widget
 	}
 
+	/**
+	 * Register widget
+	 *
+	 * @return void
+	 */
 	public function register_widgets() {
 		// register widget here
 		require_once __DIR__ . '/widgets-elementor/widget-testimonial.php';
