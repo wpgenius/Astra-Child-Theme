@@ -53,6 +53,12 @@ if ( ! class_exists( 'WPGenius_security_action' ) ) {
 			 * Remove link to the Really Simple Discovery service endpoint.
 			 */
 			remove_action( 'wp_head', 'rsd_link' );
+
+			/**
+			 * Disable wlwmanifest link
+			 */
+			remove_action('wp_head', 'wlwmanifest_link');
+
 		}
 	}
 	WPGenius_security_action::init();
