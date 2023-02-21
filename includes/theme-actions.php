@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Add actions related to Theme.
+ * Theme related actions
  *
  * @package astra-child-theme
  */
@@ -12,17 +12,41 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! class_exists( 'WPGenius_theme_action' ) ) {
-	class WPGenius_theme_action {
-		public static $instance;
 
+	/**
+	 * First class from theme to execute actions
+	 */
+	class WPGenius_theme_action {
+		/**
+		 * instance of class
+		 *
+		 * @var object
+		 */
+		protected static $instance;
+
+		/**
+		 * List of post type to be created.
+		 *
+		 * @var array
+		 */
 		private $post_types = array(
             'testimonial'
         );
 
+		/**
+		 * List of widgets to be loaded 
+		 *
+		 * @var array
+		 */
 		private $widgets = array(
             'testimonial'
         );
 	
+		/**
+		 * Initialise class
+		 *
+		 * @return void
+		 */
 		public static function init() {
 	
 			if ( is_null( self::$instance ) ) {
@@ -31,6 +55,9 @@ if ( ! class_exists( 'WPGenius_theme_action' ) ) {
 			return self::$instance;
 		}
 	
+		/**
+		 * Class constructor
+		 */
 		private function __construct() {
 
 			$this->register_post_types();
@@ -38,13 +65,25 @@ if ( ! class_exists( 'WPGenius_theme_action' ) ) {
 
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		}
-	
+		
+		/**
+		 * Enqueue stylesheet file on front end.
+		 *
+		 * @return void
+		 */
 		public function enqueue_scripts() {
-			wp_enqueue_style( 'astra-child-theme', get_stylesheet_uri(), array( 'astra-theme-css' ), wp_get_theme()->get( 'Version' ) );
-			wp_enqueue_style( 'custom', get_stylesheet_directory() . 'assets/css/custom.css', array( 'astra-child-theme' ), 1.00 );
+			//wp_enqueue_style( 'astra-child-theme', get_stylesheet_uri(), array( 'astra-theme-css' ), wp_get_theme()->get( 'Version' ) );
+			//We will not use default stylesheet file. Only write CSS to style.css file under assets/css folder.
+			wp_enqueue_style( 'astra-child-theme', get_stylesheet_directory() . 'assets/css/style.css', array( 'astra-theme-css' ), wp_get_theme()->get( 'Version' ) );
 		}
 
-		public function register_post_types(){
+		/**
+		 * Includes post type files. Check if file exist or not and then include it.
+		 * To add more post types create php file with post type as name & add name in array $post_types present in this class
+		 *
+		 * @return void
+		 */
+		private function register_post_types(){
 			foreach ($this->post_types as $post_type) {
                 if (file_exists(dirname(__FILE__) . '/post-types/' . $post_type . '.php')) {
                     include dirname(__FILE__) . '/post-types/' . $post_type . '.php';
@@ -52,7 +91,13 @@ if ( ! class_exists( 'WPGenius_theme_action' ) ) {
             }
 		}
 
-		public function register_widget(){
+		/**
+		 * Includes widget files. Check if file exist or not and then include it.
+		 * To add more widget create php file with prefix "widget-" & add name in array $widgets present in this class
+		 *
+		 * @return void
+		 */
+		private function register_widget(){
 			foreach ($this->widgets as $widget) {
                 if (file_exists(dirname(__FILE__) . '/widgets/widget-' . $widget . '.php')) {
                     include dirname(__FILE__) . '/widgets/widget-' . $widget . '.php';
@@ -63,5 +108,3 @@ if ( ! class_exists( 'WPGenius_theme_action' ) ) {
 	}
 	WPGenius_theme_action::init();
 }
-
-
