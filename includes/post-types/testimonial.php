@@ -24,6 +24,7 @@ if ( !class_exists( 'WPGenius_testimonial' ) ) {
 			add_filter( 'enter_title_here', array( $this, 'entry_title_text' ), 10, 2 );
 			add_action( 'add_meta_boxes', array( $this, 'meta_box' ) );
 			add_action( 'save_post', array( $this, 'save_post_meta' ) );
+			add_action( 'wp', array( $this, 'template_hooks' ) );
 		}
 	
 		 /**
@@ -164,6 +165,40 @@ if ( !class_exists( 'WPGenius_testimonial' ) ) {
 
 			}
 		}
+
+		/**
+		 * add hooks for archive page
+		 *
+		 * @return void
+		 */
+		public function template_hooks() {
+			if ( is_post_type_archive( 'testimonial' ) ) {
+				add_action( 'astra_archive_header', array( $this, 'archive_header' ) );
+				add_action( 'astra_template_parts_content', array( $this, 'template_parts_function' ) );
+			}
+		}
+
+		/**
+		 * Add title to archive page.
+		 *
+		 * @return string
+		 */
+		public function archive_header() {
+			echo '<h1 class="post-title">Testimonials</h1>';
+		}
+
+		/**
+		 * Add code to display content on post type archive page.
+		 *
+		 * @return void
+		 */
+		public function template_parts_function() {
+			global $post;
+			// Enter template code here to show on archive page
+		}
+
+	}
+
 	WPGenius_testimonial::init();
 }
 
