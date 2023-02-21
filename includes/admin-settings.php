@@ -30,7 +30,7 @@ if ( ! class_exists( 'WPGenius_settings' ) ) {
 		 *
 		 * @var string
 		 */
-		private $prefix  = 'wpg_';
+		private $prefix = 'wpg_';
 
 		/**
 		 * Prefix for option groups
@@ -44,7 +44,7 @@ if ( ! class_exists( 'WPGenius_settings' ) ) {
 		 *
 		 * @var string
 		 */
-		private $page    = 'wpgenius_settings';
+		private $page = 'wpgenius_settings';
 
 		/**
 		 * Initialise class
@@ -77,7 +77,7 @@ if ( ! class_exists( 'WPGenius_settings' ) ) {
 		public function add_menu_page() {
 
 			add_submenu_page(
-				'edit.php?post_type=testimonial',
+				'astra',
 				__( 'WPGenius Settings' ), // page title
 				__( 'Settings' ), // menu title
 				'manage_options', // capability
