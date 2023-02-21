@@ -14,4 +14,5 @@ require get_stylesheet_directory() . '/includes/user-actions.php';
 require get_stylesheet_directory() . '/includes/admin-settings.php';
 require get_stylesheet_directory() . '/includes/seo-actions.php';
 require get_stylesheet_directory() . '/includes/woo-actions.php';
+require get_stylesheet_directory() . '/includes/theme-shortcodes.php';
 require get_stylesheet_directory() . '/includes/widgets-elementor.php';
