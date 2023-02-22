@@ -2,7 +2,7 @@
 
 namespace Elementor;
 
-class WPG_widget extends Widget_Base {
+class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 
 	public function get_name() {
 		return 'testimonial-slider';
