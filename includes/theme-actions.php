@@ -63,6 +63,7 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 
 			add_action( 'init', array( $this, 'register_widgets_elementor' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+			add_action( 'after_switch_theme', array( $this, 'activation_hook' ) );
 		}
 
 		/**
@@ -112,7 +113,27 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 		public function register_widgets_elementor() {
 			WPGenius_Elementor_Widgets::get_instance();
 		}
-
+		/**
+		 * Activate astra addon option While activate child theme.
+		 *
+		 * @return void
+		 */
+		function activation_hook() {
+			if ( get_option( 'WPG_child_activate' ) != '1' ) {
+				update_option( 'WPG_child_activate', '1' );
+			}
+			$module_id                      = sanitize_text_field( $_POST['module_id'] );
+			$extensions[ $module_id ]       = $module_id;
+			$enabled_data                   = array();
+			$enabled_data['advanced-hooks'] = 'advanced-hooks';
+			$enabled_data['typography']     = 'typography';
+			$enabled_data['site-layouts']   = 'site-layouts';
+			$enabled_data['advanced-hooks'] = 'advanced-hooks';
+			$enabled_data['spacing']        = 'spacing';
+			$enabled_data['blog-pro']       = 'blog-pro';
+			$extensions                     = array_map( 'esc_attr', $enabled_data );
+			Astra_Admin_Helper::update_admin_settings_option( '_astra_ext_enabled_extensions', $extensions );
+		}
 	}
 	WPGenius_theme_actions::init();
 }
