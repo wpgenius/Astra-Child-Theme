@@ -9,12 +9,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WPGenius_seo_action' ) ) {
+if ( ! class_exists( 'WPGenius_seo_actions' ) ) {
 	
 	/**
 	 * SEO actions needed for every project
 	 */
-	class WPGenius_seo_action {
+	class WPGenius_seo_actions {
 		/**
 		 * instance of class
 		 *
@@ -30,7 +30,7 @@ if ( ! class_exists( 'WPGenius_seo_action' ) ) {
 		public static function init() {
 	
 			if ( is_null( self::$instance ) ) {
-				self::$instance = new WPGenius_seo_action();
+				self::$instance = new WPGenius_seo_actions();
 			}
 			return self::$instance;
 		}
@@ -42,6 +42,6 @@ if ( ! class_exists( 'WPGenius_seo_action' ) ) {
 			// Enter hooks here
 		}
 	}
-	WPGenius_seo_action::init();
+	WPGenius_seo_actions::init();
 	
 }

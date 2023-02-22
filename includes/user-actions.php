@@ -9,12 +9,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WPGenius_user_action' ) ) {
+if ( ! class_exists( 'WPGenius_user_actions' ) ) {
 	
 	/**
 	 * User actions for each class
 	 */
-	class WPGenius_user_action {
+	class WPGenius_user_actions {
 		/**
 		 * instance of class
 		 *
@@ -30,7 +30,7 @@ if ( ! class_exists( 'WPGenius_user_action' ) ) {
 		public static function init() {
 	
 			if ( is_null( self::$instance ) ) {
-				self::$instance = new WPGenius_user_action();
+				self::$instance = new WPGenius_user_actions();
 			}
 			return self::$instance;
 		}
@@ -42,6 +42,6 @@ if ( ! class_exists( 'WPGenius_user_action' ) ) {
 			add_filter( 'wp_is_application_passwords_available', '__return_false' );
 		}
 	}
-	WPGenius_user_action::init();
+	WPGenius_user_actions::init();
 	
 }

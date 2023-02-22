@@ -9,12 +9,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WPGenius_woo_action' ) ) {
+if ( ! class_exists( 'WPGenius_woo_actions' ) ) {
 	
 	/**
 	 * WooCommerce hooks
 	 */
-	class WPGenius_woo_action {
+	class WPGenius_woo_actions {
 		/**
 		 * instance of class
 		 *
@@ -30,7 +30,7 @@ if ( ! class_exists( 'WPGenius_woo_action' ) ) {
 		public static function init() {
 	
 			if ( is_null( self::$instance ) ) {
-				self::$instance = new WPGenius_woo_action();
+				self::$instance = new WPGenius_woo_actions();
 			}
 			return self::$instance;
 		}
@@ -42,5 +42,5 @@ if ( ! class_exists( 'WPGenius_woo_action' ) ) {
 			// Add hooks here
 		}
 	}
-	WPGenius_woo_action::init();
+	WPGenius_woo_actions::init();
 }

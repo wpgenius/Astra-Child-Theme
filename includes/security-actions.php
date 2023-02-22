@@ -9,12 +9,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WPGenius_security_action' ) ) {
+if ( ! class_exists( 'WPGenius_security_actions' ) ) {
 
 	/**
 	 * Security measurements for each project
 	 */
-	class WPGenius_security_action {
+	class WPGenius_security_actions {
 		/**
 		 * instance of class
 		 *
@@ -30,7 +30,7 @@ if ( ! class_exists( 'WPGenius_security_action' ) ) {
 		public static function init() {
 	
 			if ( is_null( self::$instance ) ) {
-				self::$instance = new WPGenius_security_action();
+				self::$instance = new WPGenius_security_actions();
 			}
 			return self::$instance;
 		}
@@ -61,5 +61,5 @@ if ( ! class_exists( 'WPGenius_security_action' ) ) {
 
 		}
 	}
-	WPGenius_security_action::init();
+	WPGenius_security_actions::init();
 }

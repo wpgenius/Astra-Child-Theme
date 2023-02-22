@@ -9,12 +9,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WPGenius_theme_action' ) ) {
+if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 
 	/**
 	 * First class from theme to execute actions
 	 */
-	class WPGenius_theme_action {
+	class WPGenius_theme_actions {
 		/**
 		 * instance of class
 		 *
@@ -48,7 +48,7 @@ if ( ! class_exists( 'WPGenius_theme_action' ) ) {
 		public static function init() {
 
 			if ( is_null( self::$instance ) ) {
-				self::$instance = new WPGenius_theme_action();
+				self::$instance = new WPGenius_theme_actions();
 			}
 			return self::$instance;
 		}
@@ -114,5 +114,5 @@ if ( ! class_exists( 'WPGenius_theme_action' ) ) {
 		}
 
 	}
-	WPGenius_theme_action::init();
+	WPGenius_theme_actions::init();
 }

@@ -9,12 +9,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WPGenius_cleanup_action' ) ) {
+if ( ! class_exists( 'WPGenius_cleanup_actions' ) ) {
 
 	/**
 	 * Clean unwanted, unnecessory code from WordPress, Plugins or theme
 	 */
-	class WPGenius_cleanup_action {
+	class WPGenius_cleanup_actions {
 		/**
 		 * instance of class
 		 *
@@ -29,7 +29,7 @@ if ( ! class_exists( 'WPGenius_cleanup_action' ) ) {
 		 */
 		public static function init() {
 			if ( is_null( self::$instance ) ) {
-				self::$instance = new WPGenius_cleanup_action();
+				self::$instance = new WPGenius_cleanup_actions();
 			}
 			return self::$instance;
 		}
@@ -97,5 +97,5 @@ if ( ! class_exists( 'WPGenius_cleanup_action' ) ) {
 			remove_action( 'welcome_panel', 'wp_welcome_panel' );
 		}
 	}
-	WPGenius_cleanup_action::init();
+	WPGenius_cleanup_actions::init();
 }
