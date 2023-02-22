@@ -1,11 +1,9 @@
 <?php
-
 /**
  * Cleanup actions for every project
  *
  * @package astra-child-theme
  */
-
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

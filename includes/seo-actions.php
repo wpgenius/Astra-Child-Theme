@@ -1,5 +1,4 @@
 <?php
-
 /**
  * SEO actions.
  *

@@ -1,10 +1,10 @@
 <?php
-
 /**
  * Security actions
  *
  * @package astra-child-theme
  */
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }

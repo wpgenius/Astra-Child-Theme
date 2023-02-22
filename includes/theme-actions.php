@@ -1,11 +1,9 @@
 <?php
-
 /**
  * Theme related actions
  *
  * @package astra-child-theme
  */
-
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
