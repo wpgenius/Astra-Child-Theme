@@ -113,6 +113,7 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 		public function register_widgets_elementor() {
 			WPGenius_Elementor_Widgets::get_instance();
 		}
+
 		/**
 		 * Activate astra addon option While activate child theme.
 		 *
