@@ -59,6 +59,11 @@ if ( ! class_exists( 'WPGenius_security_actions' ) ) {
 			 */
 			remove_action('wp_head', 'wlwmanifest_link');
 
+			/**
+			 * Disable pings on the front end.
+			 */
+			add_filter('pings_open', '__return_false', 20, 2);
+
 		}
 	}
 	WPGenius_security_actions::init();
