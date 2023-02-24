@@ -82,6 +82,11 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 			 */
 			if( WHITE_LABEL_ADMIN_FOOTER )
 				add_filter( 'admin_footer_text', array( $this, 'white_label_admin_footer' ) );
+
+			/**
+			 * Lowercase Filenames for Uploads
+			 */
+			add_filter( 'sanitize_file_name', 'mb_strtolower' );
 			
 		}
 
