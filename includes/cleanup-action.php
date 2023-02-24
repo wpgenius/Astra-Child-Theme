@@ -40,17 +40,14 @@ if ( ! class_exists( 'WPGenius_cleanup_actions' ) ) {
 		private function __construct() {
 
 			/**
-			 * Disable Gutenberg on the back end.
+			 * Remove unwanted JS & CSS from front end
+			 * - Gutenberg
 			 */
-			add_filter( 'use_block_editor_for_post', '__return_false' );
-
-			/**
-			 * Disable Gutenberg for widgets.
-			 */
-			add_filter( 'use_widgets_block_editor', '__return_false' );
-
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 			
+			/**
+			 * Remove all dashboard widgets from admin panel
+			 */
 			add_action( 'wp_dashboard_setup', array( $this, 'remove_dashboard_widgets' ), 9999 );
 			add_action( 'admin_init', array( $this, 'remove_welcome_panel' ), 9999 );
 
