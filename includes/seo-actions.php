@@ -46,6 +46,12 @@ if ( ! class_exists( 'WPGenius_seo_actions' ) ) {
 			if( DISABLE_ATTACHMENT_PAGES )
 				add_action( 'template_redirect', array( $this, 'disable_attachment_pages' ), 1 );
 			
+			/**
+			 * Remove Query Strings From Static Files
+			 */
+			if( WP_ENVIRONMENT_TYPE === 'production' && REMOVE_QUERY_STRINGS )
+				add_action( 'init', array( $this, 'remove_query_strings' ) );
+
 		}
 
 		/**
@@ -70,6 +76,31 @@ if ( ! class_exists( 'WPGenius_seo_actions' ) ) {
 			}
 			exit;
 		}
+
+		/**
+		 * Add filter to remove Query Strings From Static Files
+		 *
+		 * @return void
+		 */
+		public function remove_query_strings() {
+			if ( ! is_admin() ) {
+				add_filter( 'script_loader_src', array( $this, 'remove_query_strings_split' ), 15 );
+				add_filter( 'style_loader_src', array( $this, 'remove_query_strings_split' ), 15 );
+			}
+		}
+
+		/**
+		 * Split Query Strings From urls
+		 *
+		 * @param string $src
+		 * @return string
+		 */
+		public function remove_query_strings_split( $src ) {
+			$output = preg_split( "/(&ver|\?ver)/", $src );
+		
+			return $output ? $output[0] : '';
+		}
+
 	}
 	WPGenius_seo_actions::init();
 	

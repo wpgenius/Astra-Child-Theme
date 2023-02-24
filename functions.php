@@ -50,6 +50,12 @@ define( 'DISABLE_AUTOMATIC_UPDATES', false );
 define( 'DISABLE_AUTOMATIC_UPDATE_EMAIL', false );
 
 /**
+ * Remove Query Strings From Static Files
+ * Default : true
+ */
+define( 'REMOVE_QUERY_STRINGS', true );
+
+/**
  * Enable option to duplicate posts
  * Default : true
  */
