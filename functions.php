@@ -32,6 +32,12 @@ define( 'DISABLE_EMOJI', true );
 define( 'DISABLE_OEMBED', true );
 
 /**
+ * Disable RSS FEEDS
+ * Default : true
+ */
+define( 'DISABLE_FEEDS', true );
+
+/**
  * Disable Attachment Pages
  * Default : true
  */

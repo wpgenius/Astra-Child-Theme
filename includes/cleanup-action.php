@@ -67,6 +67,22 @@ if ( ! class_exists( 'WPGenius_cleanup_actions' ) ) {
 			 */
 			add_action( 'init', array( $this, 'disable_oembed' ), 9999 );
 
+			/**
+			 * Disable RSS FEEDS
+			 */
+			if ( DISABLE_FEEDS ){
+				// Replace all feeds with the message above.
+				add_action( 'do_feed_rdf', array( $this, 'disable_feed' ), 1 );
+				add_action( 'do_feed_rss', array( $this, 'disable_feed' ), 1 );
+				add_action( 'do_feed_rss2', array( $this, 'disable_feed' ), 1 );
+				add_action( 'do_feed_atom', array( $this, 'disable_feed' ), 1 );
+				add_action( 'do_feed_rss2_comments', array( $this, 'disable_feed' ), 1 );
+				add_action( 'do_feed_atom_comments', array( $this, 'disable_feed' ), 1 );
+				// Remove links to feed from the header.
+				remove_action( 'wp_head', 'feed_links_extra', 3 );
+				remove_action( 'wp_head', 'feed_links', 2 );
+			}			
+
 		}
 
 		/**
@@ -206,7 +222,23 @@ if ( ! class_exists( 'WPGenius_cleanup_actions' ) ) {
 	
 			return $rules;
 		}
-		
+
+		/**
+		 * Display a custom message instead of the RSS Feeds.
+		 *
+		 * @return void
+		 */
+		public function disable_feed() {
+			wp_die(
+				sprintf(
+					// Translators: Placeholders for the homepage link.
+					esc_html__( 'No feed available, please visit our %1$shomepage%2$s!' ),
+					' <a href="' . esc_url( home_url( '/' ) ) . '">',
+					'</a>'
+				)
+			);
+		}
+
 	}
 	WPGenius_cleanup_actions::init();
 }
