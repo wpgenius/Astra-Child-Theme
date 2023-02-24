@@ -60,6 +60,15 @@ if ( ! class_exists( 'WPGenius_security_actions' ) ) {
 			remove_action('wp_head', 'wlwmanifest_link');
 
 			/**
+			 * 1. Close comments on the front-end
+			 * 2. Hide existing comments
+			 */
+			if ( DISABLE_COMMENTS ) {
+				add_filter('comments_open', '__return_false', 20, 2);
+				add_filter('comments_array', '__return_empty_array', 10, 2);
+			}				
+
+			/**
 			 * Disable pings on the front end.
 			 */
 			add_filter('pings_open', '__return_false', 20, 2);

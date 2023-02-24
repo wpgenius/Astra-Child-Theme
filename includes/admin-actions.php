@@ -58,6 +58,15 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 				add_filter( 'wp_check_filetype_and_ext', array( $this, 'check_filetype_and_ext' ), 10, 5 );
 			}			
 			
+			/**
+			 * Remove comments support for all post types. Remove comment menu, widget from admin
+			 */
+			if ( DISABLE_COMMENTS ) {
+				add_action('admin_init',  	array( $this, 'disable_comments_support' ) );
+				add_action('admin_menu',  	array( $this, 'remove_comments_page' ) );
+				add_action('init',  		array( $this, 'remove_admin_bar_comments_menu' ) );
+			}
+			
 		}
 
 		/**
@@ -109,6 +118,54 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 	
 			return $wp_check_filetype_and_ext;
 	
+		}
+
+		/**
+		 * 1. Redirect any user trying to access comments page
+		 * 2. Remove comments metabox from dashboard
+		 * 3. Disable support for comments and trackbacks in post types
+		 *
+		 * @return void
+		 */
+		public function disable_comments_support() {
+			// Redirect any user trying to access comments page
+			global $pagenow;
+			
+			if ($pagenow === 'edit-comments.php') {
+				wp_safe_redirect(admin_url());
+				exit;
+			}
+		
+			// Remove comments metabox from dashboard
+			remove_meta_box('dashboard_recent_comments', 'dashboard', 'normal');
+		
+			// Disable support for comments and trackbacks in post types
+			foreach (get_post_types() as $post_type) {
+				if (post_type_supports($post_type, 'comments')) {
+					remove_post_type_support($post_type, 'comments');
+					remove_post_type_support($post_type, 'trackbacks');
+				}
+			}
+		}
+
+		/**
+		 * Remove comments page in menu
+		 *
+		 * @return void
+		 */
+		public function remove_comments_page() {
+			remove_menu_page('edit-comments.php');
+		}
+
+		/**
+		 * Remove comments links from admin bar
+		 * 
+		 * @return void
+		 */
+		public function remove_admin_bar_comments_menu() {
+			if (is_admin_bar_showing()) {
+				remove_action('admin_bar_menu', 'wp_admin_bar_comments_menu', 60);
+			}
 		}
 
 	}

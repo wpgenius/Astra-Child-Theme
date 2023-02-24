@@ -13,4 +13,10 @@
  */
 define( 'ALLOW_SVG', false );
 
+/**
+ * Disable comments from comments. Removes comments menu from admin.
+ * Default : true
+ */
+define( 'DISABLE_COMMENTS', true );
+
 require get_stylesheet_directory() . '/includes/theme-functions.php';
