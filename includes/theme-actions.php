@@ -134,7 +134,6 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 		 * @return void
 		 */
 		function activate_required_astra_extentions() {
-			if ( class_exists( 'Astra_Admin_Helper' ) ) {
 				$enabled_ext = array(
 					'colors-and-background' => 'colors-and-background',
 					'typography'            => 'typography',
@@ -144,7 +143,6 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 				);
 				$extensions  = array_map( 'esc_attr', $enabled_ext );
 				Astra_Admin_Helper::update_admin_settings_option( '_astra_ext_enabled_extensions', $extensions );
-			}
 		}
 
 		/**
