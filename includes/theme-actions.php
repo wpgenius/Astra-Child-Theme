@@ -123,6 +123,7 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 			if ( get_option( 'WPG_child_activate' ) != '1' ) {
 				update_option( 'WPG_child_activate', '1' );
 				$this->activate_required_astra_extentions();
+				Flush_rewrite_rules();
 			}
 		}
 
