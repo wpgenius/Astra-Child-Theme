@@ -43,7 +43,8 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 			/**
 			 * Disable Gutenberg on the back end.
 			 */
-			add_filter( 'use_block_editor_for_post', '__return_false' );
+			add_filter( 'use_block_editor_for_post', '__return_false', 5);
+			add_filter( 'gutenberg_can_edit_post', '__return_false', 5);
 
 			/**
 			 * Disable Gutenberg for widgets.
