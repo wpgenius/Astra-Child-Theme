@@ -258,6 +258,7 @@ if ( ! class_exists( 'WPGenius_cleanup_actions' ) ) {
 				#front-static-pages label[for="page_for_posts"],
 				#front-static-pages .screen-reader-text + p , /* Hide posts selection page option */
 				<?php } ?>
+				/** write more admin cleanup css here */
 			</style>
 			<?php
 		}
