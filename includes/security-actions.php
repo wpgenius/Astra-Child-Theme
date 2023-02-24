@@ -69,10 +69,29 @@ if ( ! class_exists( 'WPGenius_security_actions' ) ) {
 			}				
 
 			/**
+			 * Disable Comment Form Website URL
+			 */
+			add_filter( 'comment_form_default_fields', array( $this, 'disable_url_field_comment_form' ), 150 );
+
+			/**
 			 * Disable pings on the front end.
 			 */
 			add_filter('pings_open', '__return_false', 20, 2);
 
+		}
+
+		/**
+		 * Unset website URL field from comment form
+		 *
+		 * @param array $fields
+		 * @return array
+		 */
+		public function disable_url_field_comment_form($fields) {
+			if ( isset( $fields['url'] ) ) {
+				unset( $fields['url'] );
+			}
+		
+			return $fields;
 		}
 	}
 	WPGenius_security_actions::init();
