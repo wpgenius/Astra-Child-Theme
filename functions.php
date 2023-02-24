@@ -31,4 +31,10 @@ define( 'DISABLE_EMOJI', true );
  */
 define( 'DISABLE_OEMBED', true );
 
+/**
+ * Disable Attachment Pages
+ * Default : true
+ */
+define( 'DISABLE_ATTACHMENT_PAGES', true );
+
 require get_stylesheet_directory() . '/includes/theme-functions.php';
