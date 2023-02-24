@@ -62,6 +62,11 @@ if ( ! class_exists( 'WPGenius_cleanup_actions' ) ) {
 			if ( DISABLE_EMOJI )
 				add_action( 'init', array( $this, 'disable_emoji' ) );
 
+			/**
+			 * Disable all embeds in WordPress.
+			 */
+			add_action( 'init', array( $this, 'disable_oembed' ), 9999 );
+
 		}
 
 		/**
@@ -147,6 +152,61 @@ if ( ! class_exists( 'WPGenius_cleanup_actions' ) ) {
 			return $urls;
 		}
 
+		/**
+		 * Disable all embeds in WordPress.
+		 *
+		 * @return void
+		 */
+		public function disable_oembed() {
+			// Remove the REST API endpoint.
+			remove_action( 'rest_api_init', 'wp_oembed_register_route' );
+		
+			// Turn off oEmbed auto discovery.
+			add_filter( 'embed_oembed_discover', '__return_false' );
+		
+			// Don't filter oEmbed results.
+			remove_filter( 'oembed_dataparse', 'wp_filter_oembed_result', 10 );
+		
+			// Remove oEmbed discovery links.
+			remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
+		
+			// Remove oEmbed-specific JavaScript from the front-end and back-end.
+			remove_action( 'wp_head', 'wp_oembed_add_host_js' );
+			add_filter( 'tiny_mce_plugins', array( $this, 'disable_oembed_from_tinymce' ) );
+		
+			// Remove all embeds rewrite rules.
+			add_filter( 'rewrite_rules_array', array( $this, 'disable_oembed_from_rewrite_rules' ) );
+		
+			// Remove filter of the oEmbed result before any HTTP requests are made.
+			remove_filter( 'pre_oembed_result', 'wp_filter_pre_oembed_result', 10 );
+		}
+
+		/**
+		 * Remove all embeds from tinymce editor
+		 *
+		 * @param array $plugins
+		 * @return array
+		 */
+		public function disable_oembed_from_tinymce( $plugins ) {
+			return array_diff( $plugins, array( 'wpembed' ) );
+		}
+
+		/**
+		 * Remove all embeds rewrite rules.
+		 *
+		 * @param array $rules
+		 * @return array
+		 */
+		public function disable_oembed_from_rewrite_rules( $rules ) {
+			foreach ( $rules as $rule => $rewrite ) {
+				if ( false !== strpos( $rewrite, 'embed=true' ) ) {
+					unset( $rules[ $rule ] );
+				}
+			}
+	
+			return $rules;
+		}
+		
 	}
 	WPGenius_cleanup_actions::init();
 }

@@ -25,4 +25,10 @@ define( 'DISABLE_COMMENTS', true );
  */
 define( 'DISABLE_EMOJI', true );
 
+/**
+ * Disable all embeds in WordPress.
+ * Default : true
+ */
+define( 'DISABLE_OEMBED', true );
+
 require get_stylesheet_directory() . '/includes/theme-functions.php';
