@@ -84,6 +84,11 @@ if ( ! class_exists( 'WPGenius_cleanup_actions' ) ) {
 				remove_action( 'wp_head', 'feed_links', 2 );
 			}			
 
+			/**
+			 * Clean wordpress admin
+			 */
+			add_action( 'admin_print_styles', array( $this, 'clean_admin' ), 9999 );
+
 		}
 
 		/**
@@ -240,6 +245,22 @@ if ( ! class_exists( 'WPGenius_cleanup_actions' ) ) {
 			);
 		}
 
+		/**
+		 * Clears things from WordPress admin
+		 *
+		 * @return void
+		 */
+		public function clean_admin() {
+			?>
+			<style type="text/css">
+				<?php if( DISABLE_BLOG ) { ?>
+				#menu-posts,	/* Hide posts menu from back end */
+				#front-static-pages label[for="page_for_posts"],
+				#front-static-pages .screen-reader-text + p , /* Hide posts selection page option */
+				<?php } ?>
+			</style>
+			<?php
+		}
 	}
 	WPGenius_cleanup_actions::init();
 }

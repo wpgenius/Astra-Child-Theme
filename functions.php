@@ -14,6 +14,12 @@
 define( 'ALLOW_SVG', false );
 
 /**
+ * Disable blog. Removes posts option from admin.
+ * Default : false
+ */
+define( 'DISABLE_BLOG', false );
+
+/**
  * Disable comments from comments. Removes comments menu from admin.
  * Default : true
  */
