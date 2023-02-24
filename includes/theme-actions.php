@@ -122,18 +122,27 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 		function activation_hook() {
 			if ( get_option( 'WPG_child_activate' ) != '1' ) {
 				update_option( 'WPG_child_activate', '1' );
+				$this->activate_required_astra_extentions();
 			}
-			$module_id                      = sanitize_text_field( $_POST['module_id'] );
-			$extensions[ $module_id ]       = $module_id;
-			$enabled_data                   = array();
-			$enabled_data['advanced-hooks'] = 'advanced-hooks';
-			$enabled_data['typography']     = 'typography';
-			$enabled_data['site-layouts']   = 'site-layouts';
-			$enabled_data['advanced-hooks'] = 'advanced-hooks';
-			$enabled_data['spacing']        = 'spacing';
-			$enabled_data['blog-pro']       = 'blog-pro';
-			$extensions                     = array_map( 'esc_attr', $enabled_data );
-			Astra_Admin_Helper::update_admin_settings_option( '_astra_ext_enabled_extensions', $extensions );
+		}
+
+		/**
+		 * Activates required astra addon modules for every project.
+		 *
+		 * @return void
+		 */
+		function activate_required_astra_extentions() {
+			if ( class_exists( 'Astra_Admin_Helper' ) ) {
+				$enabled_ext = array(
+					'colors-and-background' => 'colors-and-background',
+					'typography'            => 'typography',
+					'spacing'               => 'spacing',
+					'site-layouts'          => 'site-layouts',
+					'advanced-hooks'        => 'advanced-hooks',
+				);
+				$extensions  = array_map( 'esc_attr', $enabled_ext );
+				Astra_Admin_Helper::update_admin_settings_option( '_astra_ext_enabled_extensions', $extensions );
+			}
 		}
 	}
 	WPGenius_theme_actions::init();
