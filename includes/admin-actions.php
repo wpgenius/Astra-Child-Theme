@@ -75,6 +75,12 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 				add_filter( 'page_row_actions', array( $this, 'duplicate_post_link' ), 10, 2 );
 				add_action( 'admin_action_duplicate_post', array( $this, 'duplicate_post_action' ) );
 			}
+
+			/**
+			 * White label admin footer
+			 */
+			if( WHITE_LABEL_ADMIN_FOOTER )
+				add_filter( 'admin_footer_text', array( $this, 'white_label_admin_footer' ) );
 			
 		}
 
@@ -291,6 +297,18 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 				wp_die( 'Error loading post for duplication, please try again.' );
 			}
 		}
+
+		/**
+		 * White label admin footer
+		 *
+		 * @param string $footer_text
+		 * @return string
+		 */
+		public function white_label_admin_footer( $footer_text ) {
+			$footer_text = 'Powered by <a href="https://wpgenius.in" target="_blank" rel="noopener">WPGenius</a>';			
+			return $footer_text;
+		}
+
 	}
 	WPGenius_admin_actions::init();
 	

@@ -49,4 +49,10 @@ define( 'DISABLE_AUTOMATIC_UPDATES', false );
  */
 define( 'ENABLE_DUPLICATE_POST', true );
 
+/**
+ * White label admin footer.
+ * Default : true
+ */
+define( 'WHITE_LABEL_ADMIN_FOOTER', true );
+
 require get_stylesheet_directory() . '/includes/theme-functions.php';
