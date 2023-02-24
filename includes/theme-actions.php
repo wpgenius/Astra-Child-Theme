@@ -123,6 +123,8 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 			if ( get_option( 'WPG_child_activate' ) != '1' ) {
 				update_option( 'WPG_child_activate', '1' );
 				$this->activate_required_astra_extentions();
+				$this->edit_white_lables();
+				Flush_rewrite_rules();
 			}
 		}
 
@@ -132,7 +134,6 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 		 * @return void
 		 */
 		function activate_required_astra_extentions() {
-			if ( class_exists( 'Astra_Admin_Helper' ) ) {
 				$enabled_ext = array(
 					'colors-and-background' => 'colors-and-background',
 					'typography'            => 'typography',
@@ -142,7 +143,24 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 				);
 				$extensions  = array_map( 'esc_attr', $enabled_ext );
 				Astra_Admin_Helper::update_admin_settings_option( '_astra_ext_enabled_extensions', $extensions );
-			}
+		}
+
+		/**
+		 * Renames white lables when theme switch.
+		 *
+		 * @return void
+		 */
+		function edit_white_lables() {
+			$white_label_settings = Astra_Ext_White_Label_Markup::get_white_labels();
+
+			$white_label_settings['astra-agency']['author']     = 'WPGenius Solutions LLP';
+			$white_label_settings['astra-agency']['author_url'] = 'http://wpgenius.in';
+			$white_label_settings['astra']['name']              = 'WPGenius name';
+			$white_label_settings['astra']['description']       = 'One stop destination for all WordPress Solutions';
+			$white_label_settings['astra']['screenshot']        = 'https://wpgenius.in/wp-content/uploads/2019/06/wpgenius_logo_webnav.png';
+			$white_label_settings['astra']['icon']              = 'https://wpgenius.in/wp-content/uploads/2019/06/wpgenius_logo_webnav.png';
+
+			Astra_Admin_Helper::update_admin_settings_option( '_astra_ext_white_label', $white_label_settings, true );
 		}
 	}
 	WPGenius_theme_actions::init();
