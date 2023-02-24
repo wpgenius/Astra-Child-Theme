@@ -43,4 +43,10 @@ define( 'DISABLE_ATTACHMENT_PAGES', true );
  */
 define( 'DISABLE_AUTOMATIC_UPDATES', false );
 
+/**
+ * Enable option to duplicate posts
+ * Default : true
+ */
+define( 'ENABLE_DUPLICATE_POST', true );
+
 require get_stylesheet_directory() . '/includes/theme-functions.php';
