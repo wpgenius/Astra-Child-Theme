@@ -65,7 +65,8 @@ if ( ! class_exists( 'WPGenius_cleanup_actions' ) ) {
 			/**
 			 * Disable all embeds in WordPress.
 			 */
-			add_action( 'init', array( $this, 'disable_oembed' ), 9999 );
+			if ( DISABLE_OEMBED )
+				add_action( 'init', array( $this, 'disable_oembed' ), 9999 );
 
 			/**
 			 * Disable RSS FEEDS
