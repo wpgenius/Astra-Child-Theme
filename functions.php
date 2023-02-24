@@ -44,6 +44,12 @@ define( 'DISABLE_ATTACHMENT_PAGES', true );
 define( 'DISABLE_AUTOMATIC_UPDATES', false );
 
 /**
+ * Disable automatic updates email
+ * Default : false
+ */
+define( 'DISABLE_AUTOMATIC_UPDATE_EMAIL', false );
+
+/**
  * Enable option to duplicate posts
  * Default : true
  */

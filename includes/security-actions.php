@@ -89,6 +89,17 @@ if ( ! class_exists( 'WPGenius_security_actions' ) ) {
 				add_filter( 'auto_update_theme', '__return_false' );
 			}
 
+			/**
+			 * 1. Disable auto-update emails for core.
+			 * 2. Disable auto-update emails for plugins.
+			 * 3. Disable auto-update emails for themes.
+			 */
+			if( DISABLE_AUTOMATIC_UPDATE_EMAIL ){
+				add_filter( 'auto_core_update_send_email', '__return_false' );
+				add_filter( 'auto_plugin_update_send_email', '__return_false' );
+				add_filter( 'auto_theme_update_send_email', '__return_false' );
+			}
+
 		}
 
 		/**
