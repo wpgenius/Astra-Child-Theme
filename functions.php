@@ -19,4 +19,10 @@ define( 'ALLOW_SVG', false );
  */
 define( 'DISABLE_COMMENTS', true );
 
+/**
+ * Disable the emojis in WordPress from backend & front end.
+ * Default : true
+ */
+define( 'DISABLE_EMOJI', true );
+
 require get_stylesheet_directory() . '/includes/theme-functions.php';

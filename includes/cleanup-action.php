@@ -56,6 +56,12 @@ if ( ! class_exists( 'WPGenius_cleanup_actions' ) ) {
 			 */
 			add_filter( 'revslider_meta_generator', '__return_empty_string' );
 
+			/**
+			 * Disable the emojis in WordPress.
+			 */
+			if ( DISABLE_EMOJI )
+				add_action( 'init', array( $this, 'disable_emoji' ) );
+
 		}
 
 		/**
@@ -93,6 +99,54 @@ if ( ! class_exists( 'WPGenius_cleanup_actions' ) ) {
 		public function remove_welcome_panel() {
 			remove_action( 'welcome_panel', 'wp_welcome_panel' );
 		}
+
+		/**
+		 * Disable the emojis in WordPress.
+		 *
+		 * @return void
+		 */
+		public function disable_emoji() {
+			remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+			remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+			remove_action( 'wp_print_styles', 'print_emoji_styles' );
+			remove_action( 'admin_print_styles', 'print_emoji_styles' );
+			remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+			remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
+			remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+			add_filter( 'tiny_mce_plugins', array( $this, 'disable_emoji_from_tinymce' ) );
+			add_filter( 'wp_resource_hints', array( $this, 'disable_emoji_from_prefetch' ), 10, 2 );
+		}
+
+		/**
+		 * Remove from TinyMCE.
+		 *
+		 * @param array $plugins
+		 * @return array
+		 */
+		public function disable_emoji_from_tinymce( $plugins ) {
+			if ( is_array( $plugins ) ) {
+				return array_diff( $plugins, array( 'wpemoji' ) );
+			} else {
+				return array();
+			}
+		}
+
+		/**
+		 * Remove from dns-prefetch.
+		 *
+		 * @param string $urls
+		 * @param array $relation_type
+		 * @return array
+		 */
+		public function disable_emoji_from_prefetch( $urls, $relation_type ) {
+			if ( 'dns-prefetch' === $relation_type ) {
+				$emoji_svg_url = apply_filters( 'emoji_svg_url', 'https://s.w.org/images/core/emoji/2/svg/' );
+				$urls          = array_diff( $urls, array( $emoji_svg_url ) );
+			}
+	
+			return $urls;
+		}
+
 	}
 	WPGenius_cleanup_actions::init();
 }
