@@ -74,6 +74,12 @@ define( 'REMOVE_QUERY_STRINGS', true );
 define( 'ENABLE_DUPLICATE_POST', true );
 
 /**
+ * Strict admin mode.
+ * Default : true
+ */
+define( 'STRICY_ADMIN_MODE', true );
+
+/**
  * White label admin footer.
  * Default : true
  */

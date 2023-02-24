@@ -100,6 +100,10 @@ if ( ! class_exists( 'WPGenius_security_actions' ) ) {
 				add_filter( 'auto_theme_update_send_email', '__return_false' );
 			}
 
+			if ( STRICY_ADMIN_MODE ) {
+				add_action( 'admin_print_scripts', array( $this, 'hide_unwanted_links' ) );
+			}
+
 		}
 
 		/**
@@ -124,6 +128,27 @@ if ( ! class_exists( 'WPGenius_security_actions' ) ) {
 		private function is_wpg_user(){
 			$user = wp_get_current_user();
 			return $user && isset($user->user_login) && ($user->user_login == 'makarand' || preg_match('/^\w+@wpgenius\.in$/i', $user->user_email ) > 0 );	
+		}
+
+		/**
+		 * Hide unwanted links to non WPG user.
+		 *
+		 * @return void
+		 */
+		function hide_unwanted_links(){
+			if( ! $this->is_wpg_user() ){
+				//remove menu
+				remove_menu_page( 'elementor' );
+				remove_submenu_page( 'woocommerce', 'wc-status' );
+				remove_submenu_page( 'woocommerce', 'wc-addons' );
+				//Hide links using css
+				?>
+				<style type="text/css">
+					#menu-plugins, #menu-settings, 
+					.theme.add-new-theme, div[data-slug="astra"], .themes-php .page-title-action{ display:none; }
+				</style>
+				<?php	
+			}
 		}
 
 	}
