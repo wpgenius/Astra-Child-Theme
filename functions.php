@@ -37,4 +37,10 @@ define( 'DISABLE_OEMBED', true );
  */
 define( 'DISABLE_ATTACHMENT_PAGES', true );
 
+/**
+ * Disable automatic updates
+ * Default : false
+ */
+define( 'DISABLE_AUTOMATIC_UPDATES', false );
+
 require get_stylesheet_directory() . '/includes/theme-functions.php';

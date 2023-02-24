@@ -78,6 +78,17 @@ if ( ! class_exists( 'WPGenius_security_actions' ) ) {
 			 */
 			add_filter('pings_open', '__return_false', 20, 2);
 
+			/**
+			 * 1. Disable core auto-updates
+			 * 2. Disable auto-updates for plugins.
+			 * 3. Disable auto-updates for themes.
+			 */
+			if( DISABLE_AUTOMATIC_UPDATES ){
+				add_filter( 'auto_update_core', '__return_false' );
+				add_filter( 'auto_update_plugin', '__return_false' );
+				add_filter( 'auto_update_theme', '__return_false' );
+			}
+
 		}
 
 		/**
