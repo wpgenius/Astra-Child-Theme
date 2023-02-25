@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WPGenius_woo_actions' ) ) {
+if ( ! class_exists( 'WPGenius_woo_actions' ) && class_exists( 'WooCommerce' ) ) {
 	
 	/**
 	 * WooCommerce hooks
