@@ -93,7 +93,14 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 				 * Hide ACF custom fields menu from back end.
 				 */
 				define( 'ACF_LITE', true );
-			
+
+				/**
+				 * White label Ultimate addons for elementor
+				 */
+				define( 'WP_UAEL_WL', true );
+				define( 'UAEL_WL_KNOWLEDGEBASE', 'disable' );
+				define( 'UAEL_WL_BETA_UPDATE_BOX', 'disable' );
+				define( 'UAEL_WL_INTERNAL_HELP_LINKS',  'disable' );
 			}
 			
 		}
