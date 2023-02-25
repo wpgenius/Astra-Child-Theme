@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
-	
+
 	/**
 	 * Class for Admin hooks
 	 */
@@ -21,30 +21,30 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 		 * @var object
 		 */
 		protected static $instance;
-	
+
 		/**
 		 * Initialise class
 		 *
 		 * @return void
 		 */
 		public static function init() {
-	
+
 			if ( is_null( self::$instance ) ) {
 				self::$instance = new WPGenius_admin_actions();
 			}
 			return self::$instance;
 		}
-	
+
 		/**
 		 * Class constructor
 		 */
 		private function __construct() {
-			
+
 			/**
 			 * Disable Gutenberg on the back end.
 			 */
-			add_filter( 'use_block_editor_for_post', '__return_false', 5);
-			add_filter( 'gutenberg_can_edit_post', '__return_false', 5);
+			add_filter( 'use_block_editor_for_post', '__return_false', 5 );
+			add_filter( 'gutenberg_can_edit_post', '__return_false', 5 );
 
 			/**
 			 * Disable Gutenberg for widgets.
@@ -57,19 +57,19 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 			if ( ALLOW_SVG ) {
 				add_filter( 'upload_mimes', array( $this, 'enable_svg' ) );
 				add_filter( 'wp_check_filetype_and_ext', array( $this, 'check_filetype_and_ext' ), 10, 5 );
-			}			
-			
+			}
+
 			/**
 			 * Remove comments support for all post types. Remove comment menu, widget from admin
 			 */
 			if ( DISABLE_COMMENTS ) {
-				add_action('admin_init',  	array( $this, 'disable_comments_support' ) );
-				add_action('admin_menu',  	array( $this, 'remove_comments_page' ) );
-				add_action('init',  		array( $this, 'remove_admin_bar_comments_menu' ) );
+				add_action( 'admin_init', array( $this, 'disable_comments_support' ) );
+				add_action( 'admin_menu', array( $this, 'remove_comments_page' ) );
+				add_action( 'init', array( $this, 'remove_admin_bar_comments_menu' ) );
 			}
 
 			/**
-			 * Add duplicate button to post/page list of actions. 
+			 * Add duplicate button to post/page list of actions.
 			 */
 			if ( ENABLE_DUPLICATE_POST ) {
 				add_filter( 'post_row_actions', array( $this, 'duplicate_post_link' ), 10, 2 );
@@ -80,15 +80,16 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 			/**
 			 * White label admin footer
 			 */
-			if( WHITE_LABEL_ADMIN_FOOTER )
+			if ( WHITE_LABEL_ADMIN_FOOTER ) {
 				add_filter( 'admin_footer_text', array( $this, 'white_label_admin_footer' ) );
+			}
 
 			/**
 			 * Lowercase Filenames for Uploads
 			 */
 			add_filter( 'sanitize_file_name', 'mb_strtolower' );
 
-			if( WP_ENVIRONMENT_TYPE === 'production' ){
+			if ( WP_ENVIRONMENT_TYPE === 'production' ) {
 				/**
 				 * Hide ACF custom fields menu from back end.
 				 */
@@ -100,7 +101,7 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 				define( 'WP_UAEL_WL', true );
 				define( 'UAEL_WL_KNOWLEDGEBASE', 'disable' );
 				define( 'UAEL_WL_BETA_UPDATE_BOX', 'disable' );
-				define( 'UAEL_WL_INTERNAL_HELP_LINKS',  'disable' );
+				define( 'UAEL_WL_INTERNAL_HELP_LINKS', 'disable' );
 			}
 
 			/**
@@ -123,10 +124,10 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 			if ( ! current_user_can( 'administrator' ) ) {
 				return $upload_mimes;
 			}
-	
+
 			$upload_mimes['svg']  = 'image/svg+xml';
 			$upload_mimes['svgz'] = 'image/svg+xml';
-	
+
 			return $upload_mimes;
 		}
 
@@ -142,22 +143,22 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 		public function check_filetype_and_ext( $wp_check_filetype_and_ext, $file, $filename, $mimes, $real_mime ) {
 
 			if ( ! $wp_check_filetype_and_ext['type'] ) {
-	
+
 				$check_filetype  = wp_check_filetype( $filename, $mimes );
 				$ext             = $check_filetype['ext'];
 				$type            = $check_filetype['type'];
 				$proper_filename = $filename;
-	
+
 				if ( $type && 0 === strpos( $type, 'image/' ) && 'svg' !== $ext ) {
 					$ext  = false;
 					$type = false;
 				}
-	
+
 				$wp_check_filetype_and_ext = compact( 'ext', 'type', 'proper_filename' );
 			}
-	
+
 			return $wp_check_filetype_and_ext;
-	
+
 		}
 
 		/**
@@ -170,20 +171,20 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 		public function disable_comments_support() {
 			// Redirect any user trying to access comments page
 			global $pagenow;
-			
-			if ($pagenow === 'edit-comments.php') {
-				wp_safe_redirect(admin_url());
+
+			if ( $pagenow === 'edit-comments.php' ) {
+				wp_safe_redirect( admin_url() );
 				exit;
 			}
-		
+
 			// Remove comments metabox from dashboard
-			remove_meta_box('dashboard_recent_comments', 'dashboard', 'normal');
-		
+			remove_meta_box( 'dashboard_recent_comments', 'dashboard', 'normal' );
+
 			// Disable support for comments and trackbacks in post types
-			foreach (get_post_types() as $post_type) {
-				if (post_type_supports($post_type, 'comments')) {
-					remove_post_type_support($post_type, 'comments');
-					remove_post_type_support($post_type, 'trackbacks');
+			foreach ( get_post_types() as $post_type ) {
+				if ( post_type_supports( $post_type, 'comments' ) ) {
+					remove_post_type_support( $post_type, 'comments' );
+					remove_post_type_support( $post_type, 'trackbacks' );
 				}
 			}
 		}
@@ -194,23 +195,23 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 		 * @return void
 		 */
 		public function remove_comments_page() {
-			remove_menu_page('edit-comments.php');
+			remove_menu_page( 'edit-comments.php' );
 		}
 
 		/**
 		 * Remove comments links from admin bar
-		 * 
+		 *
 		 * @return void
 		 */
 		public function remove_admin_bar_comments_menu() {
-			if (is_admin_bar_showing()) {
-				remove_action('admin_bar_menu', 'wp_admin_bar_comments_menu', 60);
+			if ( is_admin_bar_showing() ) {
+				remove_action( 'admin_bar_menu', 'wp_admin_bar_comments_menu', 60 );
 			}
 		}
 
 		/**
 		 * Add duplication post link in action links to the admin
-		 * 
+		 *
 		 * @param array   $actions The actions added as links to the admin.
 		 * @param WP_Post $post The post object.
 		 *
@@ -224,7 +225,6 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 			if ( null === $post_type_object || ! current_user_can( $post_type_object->cap->create_posts ) ) {
 				return $actions;
 			}
-
 
 			$url = wp_nonce_url(
 				add_query_arg(
@@ -253,18 +253,18 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 			if ( empty( $_GET['post_id'] ) ) {
 				wp_die( 'No post id set for the duplicate action.' );
 			}
-		
+
 			$post_id = absint( $_GET['post_id'] );
-		
+
 			// Check the nonce specific to the post we are duplicating.
 			if ( ! isset( $_GET['wpgenius_duplicate_nonce'] ) || ! wp_verify_nonce( $_GET['wpgenius_duplicate_nonce'], 'wpgenius_duplicate_post_' . $post_id ) ) {
 				// Display a message if the nonce is invalid, may it expired.
 				wp_die( 'The link you followed has expired, please try again.' );
 			}
-		
+
 			// Load the post we want to duplicate.
 			$post = get_post( $post_id );
-		
+
 			// Create a new post data array from the post loaded.
 			if ( $post ) {
 				$current_user = wp_get_current_user();
@@ -279,7 +279,7 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 					'post_parent'    => $post->post_parent,
 					'post_password'  => $post->post_password,
 					'post_status'    => 'draft',
-					'post_title'     => $post->post_title . ' (copy)',// Add "(copy)" to the title.
+					'post_title'     => $post->post_title . ' (copy)', // Add "(copy)" to the title.
 					'post_type'      => $post->post_type,
 					'to_ping'        => $post->to_ping,
 				);
@@ -296,7 +296,7 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 				// Copy all the custom fields.
 				$post_meta = get_post_meta( $post_id );
 				if ( $post_meta ) {
-		
+
 					foreach ( $post_meta as $meta_key => $meta_values ) {
 						if ( '_wp_old_slug' === $meta_key ) { // skip old slug.
 							continue;
@@ -306,13 +306,13 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 						}
 					}
 				}
-		
+
 				// Redirect to edit the new post.
 				wp_safe_redirect(
 					add_query_arg(
 						array(
 							'action' => 'edit',
-							'post'   => $duplicate_id
+							'post'   => $duplicate_id,
 						),
 						admin_url( 'post.php' )
 					)
@@ -330,7 +330,7 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 		 * @return string
 		 */
 		public function white_label_admin_footer( $footer_text ) {
-			$footer_text = 'Powered by <a href="https://wpgenius.in" target="_blank" rel="noopener">WPGenius</a>';			
+			$footer_text = 'Powered by <a href="https://wpgenius.in" target="_blank" rel="noopener">WPGenius</a>';
 			return $footer_text;
 		}
 
@@ -355,5 +355,5 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 
 	}
 	WPGenius_admin_actions::init();
-	
+
 }
