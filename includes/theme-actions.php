@@ -155,10 +155,13 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 
 			$white_label_settings['astra-agency']['author']     = 'WPGenius Solutions LLP';
 			$white_label_settings['astra-agency']['author_url'] = 'http://wpgenius.in';
+			$white_label_settings['astra-agency']['licence']    = 'https://wpgenius.in/contact/';
 			$white_label_settings['astra']['name']              = 'WPGenius name';
-			$white_label_settings['astra']['description']       = 'One stop destination for all WordPress Solutions';
-			$white_label_settings['astra']['screenshot']        = 'https://wpgenius.in/wp-content/uploads/2019/06/wpgenius_logo_webnav.png';
-			$white_label_settings['astra']['icon']              = 'https://wpgenius.in/wp-content/uploads/2019/06/wpgenius_logo_webnav.png';
+			$white_label_settings['astra']['description']       = 'WPGenius offers, fast, fully customizable & beautiful WordPress theme suitable for all your project needs.';
+			$white_label_settings['astra']['screenshot']        = get_stylesheet_directory_uri() . '/screenshot.jpg';
+			$white_label_settings['astra']['icon']              = get_stylesheet_directory_uri() . '';
+			$white_label_settings['astra-pro']['name']          = 'WPGenius Pro';
+			$white_label_settings['astra-pro']['description']   = 'This plugin is an add-on for your Theme. It offers premium features & functionalities that enhance your theming experience at next level.';
 
 			Astra_Admin_Helper::update_admin_settings_option( '_astra_ext_white_label', $white_label_settings, true );
 		}
