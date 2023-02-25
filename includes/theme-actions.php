@@ -124,6 +124,7 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 				update_option( 'WPG_child_activate', '1' );
 				$this->activate_required_astra_extentions();
 				$this->edit_white_lables();
+				$this->edit_uae_white_lables();
 				Flush_rewrite_rules();
 			}
 		}
@@ -165,6 +166,36 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 
 			Astra_Admin_Helper::update_admin_settings_option( '_astra_ext_white_label', $white_label_settings, true );
 		}
+
+		/**
+		 * Change Ultimate adons white lables.
+		 *
+		 * @return void
+		 */
+		function edit_uae_white_lables() {
+			$uae_lables = array(
+				'agency'                => array(
+					'author'        => 'WPGenius Solutions LLPssss',
+					'author_url'    => 'https://wpgenius.in',
+					'hide_branding' => false,
+				),
+				'plugin'                => array(
+					'name'        => 'WPGenius Ultimate Addons',
+					'short_name'  => 'WAE',
+					'description' => 'WPGenius Ultimate Addons is a premium extension for Elementor that adds 40+ widgets and works on top of any Elementor Package (Free, Pro). You can use it with any WordPress theme.',
+				),
+				'replace_logo'          => 'enable',
+				'enable_knowledgebase'  => 'disable',
+				'knowledgebase_url'     => '',
+				'enable_support'        => 'enable',
+				'support_url'           => 'https://wpgenius.in/contact/',
+				'enable_beta_box'       => 'enable',
+				'enable_custom_tagline' => 'disable',
+				'internal_help_links'   => 'enable',
+			);
+			update_option( '_uael_white_label', $uae_lables );
+		}
+
 	}
 	WPGenius_theme_actions::init();
 }
