@@ -103,11 +103,7 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 				define( 'UAEL_WL_BETA_UPDATE_BOX', 'disable' );
 				define( 'UAEL_WL_INTERNAL_HELP_LINKS', 'disable' );
 			}
-
-			/**
-			 * Change White label Ultimate addons for elementor
-			 */
-			add_filter( 'uael_branding_options', array( $this, 'change_uae_white_lables' ) );
+			
 		}
 
 		/**
@@ -332,25 +328,6 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 		public function white_label_admin_footer( $footer_text ) {
 			$footer_text = 'Powered by <a href="https://wpgenius.in" target="_blank" rel="noopener">WPGenius</a>';
 			return $footer_text;
-		}
-
-		/**
-		 * Change White label Ultimate addons for elementor.
-		 *
-		 * @param array $branding
-		 * @return void
-		 */
-		public function change_uae_white_lables( $branding ) {
-			$branding['agency']['author']      = 'WPGenius Solutions LLP';
-			$branding['agency']['author_url']  = 'https://wpgenius.in';
-			$branding['plugin']['name']        = 'WPGenius Ultimate Addons';
-			$branding['plugin']['short_name']  = 'WAE';
-			$branding['plugin']['description'] = 'WPGenius Ultimate Addons is a premium extension for Elementor that adds 40+ widgets and works on top of any Elementor Package (Free, Pro). You can use it with any WordPress theme.';
-			$branding['replace_logo']          = 'enable';
-			$branding['enable_support']        = 'enable';
-			$branding['internal_help_links']   = 'https://wpgenius.in/contact/';
-
-			return $branding;
 		}
 
 	}
