@@ -87,6 +87,14 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 			 * Lowercase Filenames for Uploads
 			 */
 			add_filter( 'sanitize_file_name', 'mb_strtolower' );
+
+			if( WP_ENVIRONMENT_TYPE === 'production' ){
+				/**
+				 * Hide ACF custom fields menu from back end.
+				 */
+				define( 'ACF_LITE', true );
+			
+			}
 			
 		}
 
