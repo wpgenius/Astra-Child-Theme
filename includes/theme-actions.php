@@ -160,7 +160,7 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 			$white_label_settings['astra']['name']              = 'WPGenius name';
 			$white_label_settings['astra']['description']       = 'WPGenius offers, fast, fully customizable & beautiful WordPress theme suitable for all your project needs.';
 			$white_label_settings['astra']['screenshot']        = get_stylesheet_directory_uri() . '/screenshot.jpg';
-			$white_label_settings['astra']['icon']              = get_stylesheet_directory_uri() . '';
+			$white_label_settings['astra']['icon']              = get_stylesheet_directory_uri() . '/assets/images/wpgenius_logo.png';
 			$white_label_settings['astra-pro']['name']          = 'WPGenius Pro';
 			$white_label_settings['astra-pro']['description']   = 'This plugin is an add-on for your Theme. It offers premium features & functionalities that enhance your theming experience at next level.';
 
