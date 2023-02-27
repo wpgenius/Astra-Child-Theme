@@ -44,7 +44,7 @@ if ( ! class_exists( 'WPGenius_cleanup_actions' ) ) {
 			 * - Gutenberg
 			 */
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-			
+
 			/**
 			 * Remove all dashboard widgets from admin panel
 			 */
@@ -59,19 +59,21 @@ if ( ! class_exists( 'WPGenius_cleanup_actions' ) ) {
 			/**
 			 * Disable the emojis in WordPress.
 			 */
-			if ( DISABLE_EMOJI )
+			if ( DISABLE_EMOJI ) {
 				add_action( 'init', array( $this, 'disable_emoji' ) );
+			}
 
 			/**
 			 * Disable all embeds in WordPress.
 			 */
-			if ( DISABLE_OEMBED )
+			if ( DISABLE_OEMBED ) {
 				add_action( 'init', array( $this, 'disable_oembed' ), 9999 );
+			}
 
 			/**
 			 * Disable RSS FEEDS
 			 */
-			if ( DISABLE_FEEDS ){
+			if ( DISABLE_FEEDS ) {
 				// Replace all feeds with the message above.
 				add_action( 'do_feed_rdf', array( $this, 'disable_feed' ), 1 );
 				add_action( 'do_feed_rss', array( $this, 'disable_feed' ), 1 );
@@ -82,10 +84,10 @@ if ( ! class_exists( 'WPGenius_cleanup_actions' ) ) {
 				// Remove links to feed from the header.
 				remove_action( 'wp_head', 'feed_links_extra', 3 );
 				remove_action( 'wp_head', 'feed_links', 2 );
-			}			
+			}
 
 			/**
-			 * Clean wordpress admin
+			 * Clean WordPress admin
 			 */
 			add_action( 'admin_print_styles', array( $this, 'clean_admin' ), 9999 );
 
@@ -162,7 +164,7 @@ if ( ! class_exists( 'WPGenius_cleanup_actions' ) ) {
 		 * Remove from dns-prefetch.
 		 *
 		 * @param string $urls
-		 * @param array $relation_type
+		 * @param array  $relation_type
 		 * @return array
 		 */
 		public function disable_emoji_from_prefetch( $urls, $relation_type ) {
@@ -170,7 +172,7 @@ if ( ! class_exists( 'WPGenius_cleanup_actions' ) ) {
 				$emoji_svg_url = apply_filters( 'emoji_svg_url', 'https://s.w.org/images/core/emoji/2/svg/' );
 				$urls          = array_diff( $urls, array( $emoji_svg_url ) );
 			}
-	
+
 			return $urls;
 		}
 
@@ -182,23 +184,23 @@ if ( ! class_exists( 'WPGenius_cleanup_actions' ) ) {
 		public function disable_oembed() {
 			// Remove the REST API endpoint.
 			remove_action( 'rest_api_init', 'wp_oembed_register_route' );
-		
+
 			// Turn off oEmbed auto discovery.
 			add_filter( 'embed_oembed_discover', '__return_false' );
-		
+
 			// Don't filter oEmbed results.
 			remove_filter( 'oembed_dataparse', 'wp_filter_oembed_result', 10 );
-		
+
 			// Remove oEmbed discovery links.
 			remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
-		
+
 			// Remove oEmbed-specific JavaScript from the front-end and back-end.
 			remove_action( 'wp_head', 'wp_oembed_add_host_js' );
 			add_filter( 'tiny_mce_plugins', array( $this, 'disable_oembed_from_tinymce' ) );
-		
+
 			// Remove all embeds rewrite rules.
 			add_filter( 'rewrite_rules_array', array( $this, 'disable_oembed_from_rewrite_rules' ) );
-		
+
 			// Remove filter of the oEmbed result before any HTTP requests are made.
 			remove_filter( 'pre_oembed_result', 'wp_filter_pre_oembed_result', 10 );
 		}
@@ -225,7 +227,7 @@ if ( ! class_exists( 'WPGenius_cleanup_actions' ) ) {
 					unset( $rules[ $rule ] );
 				}
 			}
-	
+
 			return $rules;
 		}
 
