@@ -253,19 +253,18 @@ if ( ! class_exists( 'WPGenius_cleanup_actions' ) ) {
 		 * @return void
 		 */
 		public function clean_admin() {
+			if ( DISABLE_BLOG ) {
 			?>
-			<style type="text/css">
-				<?php if ( DISABLE_BLOG ) { ?>
-				#menu-posts,	/* Hide posts menu from back end */
-				#front-static-pages label[for="page_for_posts"],
-				#front-static-pages .screen-reader-text + p {
-					display: none;
-				} /* Hide posts selection page option */
-					
-				/** write more admin cleanup css here */
-			</style>
-					<?php
-				}
+				<style type="text/css">
+					<?php  ?>
+					#menu-posts,	/* Hide posts menu from back end */
+					#front-static-pages label[for="page_for_posts"],
+					#front-static-pages .screen-reader-text + p {
+						display: none;
+					}
+				</style>
+			<?php
+			}
 		}
 	}
 	WPGenius_cleanup_actions::init();
