@@ -60,8 +60,9 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 
 			$this->register_post_types();
 			$this->register_widgets();
-
-			add_action( 'init', array( $this, 'register_widgets_elementor' ) );
+			if ( is_plugin_active( 'elementor/elementor.php' ) ) {
+				add_action( 'init', array( $this, 'register_widgets_elementor' ) );
+			}
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 			add_action( 'after_switch_theme', array( $this, 'activation_hook' ) );
 		}
