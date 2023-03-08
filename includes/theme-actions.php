@@ -65,6 +65,11 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 			}
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 			add_action( 'after_switch_theme', array( $this, 'activation_hook' ) );
+
+			if ( class_exists( 'WP_CLI' ) ) {
+				WP_CLI::add_command( 'easy_setup', array( $this, 'easy_setup_command' ) );
+			}
+
 		}
 
 		/**
@@ -113,6 +118,20 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 		 */
 		public function register_widgets_elementor() {
 			WPGenius_Elementor_Widgets::get_instance();
+		}
+		
+		/**
+		 * Register new wp cli command as easy_setup.
+		 *
+		 * @param array $args
+		 * @return void
+		 */
+		public function easy_setup_command( $args ) {
+			$this->activate_required_astra_extentions();
+			$this->edit_white_lables();
+			$this->edit_uae_white_lables();
+			Flush_rewrite_rules();
+			WP_CLI::success( 'Easy setup done...' );
 		}
 
 		/**
