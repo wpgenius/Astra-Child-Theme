@@ -162,7 +162,9 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 			$white_label_settings['astra']['screenshot']        = get_stylesheet_directory_uri() . '/screenshot.jpg';
 			$white_label_settings['astra']['icon']              = get_stylesheet_directory_uri() . '/assets/images/wpgenius_logo.png';
 			$white_label_settings['astra-pro']['name']          = 'WPGenius Pro';
-			$white_label_settings['astra-pro']['description']   = 'This plugin is an add-on for your Theme. It offers premium features & functionalities that enhance your theming experience at next level.';
+			$white_label_settings['astra-pro']['description']   = 'This plugin is an add-on for your website. It offers premium features & functionalities that enhance your theming experience at next level.';
+			$white_label_settings['astra-sites']['name']        = 'WPGenius Starter Templates';
+			$white_label_settings['astra-sites']['description'] = 'WPGenius Starter Templates is all in one solution for complete starter sites, single page templates, blocks & images. This plugin offers the premium library of ready templates & provides quick access to beautiful Pixabay images that can be imported in your website easily.';
 
 			Astra_Admin_Helper::update_admin_settings_option( '_astra_ext_white_label', $white_label_settings, true );
 		}
