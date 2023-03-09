@@ -60,7 +60,7 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 
 			$this->register_post_types();
 			$this->register_widgets();
-			if ( is_plugin_active( 'elementor/elementor.php' ) ) {
+			if ( did_action( 'elementor/loaded' ) ) {
 				add_action( 'init', array( $this, 'register_widgets_elementor' ) );
 			}
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
