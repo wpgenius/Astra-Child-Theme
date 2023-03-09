@@ -127,11 +127,8 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 		 * @return void
 		 */
 		public function easy_setup_command( $args ) {
-			$this->activate_required_astra_extentions();
-			$this->edit_white_lables();
-			$this->edit_uae_white_lables();
-			Flush_rewrite_rules();
-			WP_CLI::success( 'Easy setup done...' );
+			$this->activation_hook();
+			WP_CLI::success( 'Child theme is ready with initial configuration...' );
 		}
 
 		/**
