@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! class_exists( 'WPGenius_woo_actions' ) && class_exists( 'WooCommerce' ) ) {
-	
+
 	/**
 	 * WooCommerce hooks
 	 */
@@ -21,20 +21,20 @@ if ( ! class_exists( 'WPGenius_woo_actions' ) && class_exists( 'WooCommerce' ) )
 		 * @var object
 		 */
 		protected static $instance;
-	
+
 		/**
 		 * Initialise class
 		 *
 		 * @return void
 		 */
 		public static function init() {
-	
+
 			if ( is_null( self::$instance ) ) {
 				self::$instance = new WPGenius_woo_actions();
 			}
 			return self::$instance;
 		}
-	
+
 		/**
 		 * Class constructor
 		 */

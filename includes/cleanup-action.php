@@ -254,16 +254,15 @@ if ( ! class_exists( 'WPGenius_cleanup_actions' ) ) {
 		 */
 		public function clean_admin() {
 			if ( DISABLE_BLOG ) {
-			?>
+				?>
 				<style type="text/css">
-					<?php  ?>
 					#menu-posts,	/* Hide posts menu from back end */
 					#front-static-pages label[for="page_for_posts"],
 					#front-static-pages .screen-reader-text + p {
 						display: none;
 					}
 				</style>
-			<?php
+				<?php
 			}
 		}
 	}

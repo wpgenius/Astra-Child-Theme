@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! class_exists( 'WPGenius_user_actions' ) ) {
-	
+
 	/**
 	 * User actions for each class
 	 */
@@ -21,20 +21,20 @@ if ( ! class_exists( 'WPGenius_user_actions' ) ) {
 		 * @var object
 		 */
 		protected static $instance;
-		
+
 		/**
 		 * Initialise class
 		 *
 		 * @return void
 		 */
 		public static function init() {
-	
+
 			if ( is_null( self::$instance ) ) {
 				self::$instance = new WPGenius_user_actions();
 			}
 			return self::$instance;
 		}
-		
+
 		/**
 		 * Class constructor
 		 */
@@ -48,7 +48,7 @@ if ( ! class_exists( 'WPGenius_user_actions' ) ) {
 			/**
 			 * Remove Login Shake Animation
 			 */
-			if( WP_ENVIRONMENT_TYPE === 'production' ){
+			if ( WP_ENVIRONMENT_TYPE === 'production' ) {
 				add_action( 'login_footer', array( $this, 'remove_shake_js' ) );
 				add_filter( 'login_errors', array( $this, 'hide_login_error' ) );
 			}
@@ -77,5 +77,5 @@ if ( ! class_exists( 'WPGenius_user_actions' ) ) {
 
 	}
 	WPGenius_user_actions::init();
-	
+
 }

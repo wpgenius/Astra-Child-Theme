@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! class_exists( 'WPGenius_seo_actions' ) ) {
-	
+
 	/**
 	 * SEO actions needed for every project
 	 */
@@ -21,36 +21,38 @@ if ( ! class_exists( 'WPGenius_seo_actions' ) ) {
 		 * @var object
 		 */
 		protected static $instance;
-	
+
 		/**
 		 * Initialise class
 		 *
 		 * @return void
 		 */
 		public static function init() {
-	
+
 			if ( is_null( self::$instance ) ) {
 				self::$instance = new WPGenius_seo_actions();
 			}
 			return self::$instance;
 		}
-	
+
 		/**
 		 * Class constructor
 		 */
 		private function __construct() {
-			
+
 			/**
 			 * Disable Attachment Pages
 			 */
-			if( DISABLE_ATTACHMENT_PAGES )
+			if ( DISABLE_ATTACHMENT_PAGES ) {
 				add_action( 'template_redirect', array( $this, 'disable_attachment_pages' ), 1 );
-			
+			}
+
 			/**
 			 * Remove Query Strings From Static Files
 			 */
-			if( WP_ENVIRONMENT_TYPE === 'production' && REMOVE_QUERY_STRINGS )
+			if ( WP_ENVIRONMENT_TYPE === 'production' && REMOVE_QUERY_STRINGS ) {
 				add_action( 'init', array( $this, 'remove_query_strings' ) );
+			}
 
 		}
 
@@ -64,7 +66,7 @@ if ( ! class_exists( 'WPGenius_seo_actions' ) ) {
 			if ( ! is_attachment() || ! isset( $post->post_parent ) || ! is_numeric( $post->post_parent ) ) {
 				return;
 			}
-	
+
 			// Does the attachment have a parent post?
 			// If the post is trashed, fallback to redirect to homepage.
 			if ( 0 !== $post->post_parent && 'trash' !== get_post_status( $post->post_parent ) ) {
@@ -96,12 +98,12 @@ if ( ! class_exists( 'WPGenius_seo_actions' ) ) {
 		 * @return string
 		 */
 		public function remove_query_strings_split( $src ) {
-			$output = preg_split( "/(&ver|\?ver)/", $src );
-		
+			$output = preg_split( '/(&ver|\?ver)/', $src );
+
 			return $output ? $output[0] : '';
 		}
 
 	}
 	WPGenius_seo_actions::init();
-	
+
 }

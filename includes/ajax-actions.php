@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! class_exists( 'WPGenius_ajax_actions' ) ) {
-	
+
 	/**
 	 * Class for AJAX hooks
 	 */
@@ -21,20 +21,20 @@ if ( ! class_exists( 'WPGenius_ajax_actions' ) ) {
 		 * @var object
 		 */
 		protected static $instance;
-	
+
 		/**
 		 * Initialise class
 		 *
 		 * @return void
 		 */
 		public static function init() {
-	
+
 			if ( is_null( self::$instance ) ) {
 				self::$instance = new WPGenius_ajax_actions();
 			}
 			return self::$instance;
 		}
-	
+
 		/**
 		 * Class constructor
 		 */
@@ -43,5 +43,5 @@ if ( ! class_exists( 'WPGenius_ajax_actions' ) ) {
 		}
 	}
 	WPGenius_ajax_actions::init();
-	
+
 }

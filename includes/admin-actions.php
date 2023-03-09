@@ -103,7 +103,7 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 				define( 'UAEL_WL_BETA_UPDATE_BOX', 'disable' );
 				define( 'UAEL_WL_INTERNAL_HELP_LINKS', 'disable' );
 			}
-			
+
 		}
 
 		/**
