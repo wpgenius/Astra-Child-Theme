@@ -139,9 +139,9 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 		function activation_hook() {
 			if ( get_option( 'WPG_child_activate' ) != '1' ) {
 				update_option( 'WPG_child_activate', '1' );
+				require get_stylesheet_directory() . '/includes/theme-configurator.php';
 				Flush_rewrite_rules();
 			}
-			require get_stylesheet_directory() . '/includes/theme-configurator.php';
 		}
 	}
 	WPGenius_theme_actions::init();
