@@ -77,7 +77,7 @@ if ( ! class_exists( 'WPGenius_settings' ) ) {
 		public function add_menu_page() {
 
 			add_submenu_page(
-				'astra',
+				'wpgenius',
 				__( 'WPGenius Settings' ), // page title
 				__( 'Settings' ), // menu title
 				'manage_options', // capability
