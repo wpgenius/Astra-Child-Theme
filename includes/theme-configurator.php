@@ -1,6 +1,6 @@
 <?php
 /**
- * Theme shortcodes
+ * Theme Configurator exicute on theme switch and using wpcli command.
  *
  * @package astra-child-theme
  */
@@ -19,8 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'WPGenius_Theme_Configurator' ) ) {
 
 	/**
-	 * Shortcodes from theme.
-	 * Write all shortcodes under class
+	 * Write theme configuration functions 
 	 */
 	class WPGenius_Theme_Configurator {
 		/**
@@ -74,10 +73,10 @@ if ( ! class_exists( 'WPGenius_Theme_Configurator' ) ) {
 		function activation_hook() {
 			if ( get_option( 'WPG_child_activate' ) != '1' ) {
 				update_option( 'WPG_child_activate', '1' );
-				$this->activate_required_astra_extentions();
-				$this->edit_white_lables();
+				$this->activate_astra_modules();
+				$this->astra_white_lables();
 				$this->activate_uael_modules();
-				$this->edit_uae_white_lables();
+				$this->uae_white_lables();
 				Flush_rewrite_rules();
 			}
 		}
@@ -87,7 +86,7 @@ if ( ! class_exists( 'WPGenius_Theme_Configurator' ) ) {
 		 *
 		 * @return void
 		 */
-		function activate_required_astra_extentions() {
+		function activate_astra_modules() {
 			$enabled_ext = array(
 				'colors-and-background' => 'colors-and-background',
 				'typography'            => 'typography',
@@ -108,7 +107,7 @@ if ( ! class_exists( 'WPGenius_Theme_Configurator' ) ) {
 		 *
 		 * @return void
 		 */
-		function edit_white_lables() {
+		function astra_white_lables() {
 			$white_label_settings = Astra_Ext_White_Label_Markup::get_white_labels();
 
 			$white_label_settings['astra-agency']['author']     = 'WPGenius Solutions LLP';
@@ -166,7 +165,7 @@ if ( ! class_exists( 'WPGenius_Theme_Configurator' ) ) {
 		 *
 		 * @return void
 		 */
-		function edit_uae_white_lables() {
+		function uae_white_lables() {
 			$uae_lables = array(
 				'agency'                => array(
 					'author'        => 'WPGenius Solutions LLPssss',
