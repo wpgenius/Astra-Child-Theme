@@ -22,6 +22,7 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 			add_filter( 'manage_testimonial_posts_columns ', array( $this, 'manage_column' ) );
 			add_action( 'manage_testimonial_posts_custom_column', array( $this, 'manage_custom_column' ), 10, 2 );
 			add_filter( 'enter_title_here', array( $this, 'entry_title_text' ), 10, 2 );
+			add_filter( 'default_content', array( $this, 'editor_content' ),10, 2 );
 			add_action( 'add_meta_boxes', array( $this, 'meta_box' ) );
 			add_action( 'save_post', array( $this, 'save_post_meta' ) );
 			add_action( 'wp', array( $this, 'template_hooks' ) );
@@ -118,6 +119,18 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 			return $title;
 		}
 
+		/**
+		 * Change default content of editor
+		 *
+		 * @param string $content
+		 * @return void
+		 */
+		function editor_content( $content,$post ) {
+			if ( 'testimonial' == $post->post_type ) {  
+				$content = 'Enter description here.';
+			}
+			return $content;
+		}
 		/**
 		 * Add metabox for testimonial.
 		 *
