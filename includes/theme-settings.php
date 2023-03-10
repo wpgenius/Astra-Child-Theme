@@ -96,7 +96,7 @@ if ( ! class_exists( 'WPGenius_settings' ) ) {
 			// Register settings
 			register_setting(
 				$this->opt_grp,
-				$this->prefix . 'register_setting',
+				$this->prefix . 'testimonial_per_page',
 				array(
 					'type'    => 'string',
 					'default' => '',
@@ -157,7 +157,7 @@ if ( ! class_exists( 'WPGenius_settings' ) ) {
 		 */
 		public function per_page() {
 			?>
-			   <input type='text' name='<?php echo $this->prefix; ?>register_setting' id='<?php echo $this->prefix; ?>register_setting' value='<?php echo get_option( $this->prefix . 'register_setting' ); ?>' style="width: 300px;">
+			   <input type='text' name='<?php echo $this->prefix; ?>testimonial_per_page' id='<?php echo $this->prefix; ?>testimonial_per_page' value='<?php echo get_option( $this->prefix . 'testimonial_per_page' ); ?>' style="width: 300px;">
 			<?php
 		}
 
