@@ -47,10 +47,39 @@ if ( ! class_exists( 'WPGenius_Theme_Configurator' ) ) {
 		 * Class constructor
 		 */
 		private function __construct() {
-			$this->activate_required_astra_extentions();
-			$this->edit_white_lables();
-			$this->activate_uael_modules();
-			$this->edit_uae_white_lables();
+
+			add_action( 'after_switch_theme', array( $this, 'activation_hook' ) );
+
+			if ( class_exists( 'WP_CLI' ) ) {
+				WP_CLI::add_command( 'easy_setup', array( $this, 'easy_setup_command' ) );
+			}
+		}
+
+		/**
+		 * Register new wp cli command as easy_setup.
+		 *
+		 * @param array $args
+		 * @return void
+		 */
+		public function easy_setup_command( $args ) {
+			$this->activation_hook();
+			WP_CLI::success( 'Child theme is ready with initial configuration...' );
+		}
+
+		/**
+		 * Activate astra addon option While activate child theme.
+		 *
+		 * @return void
+		 */
+		function activation_hook() {
+			if ( get_option( 'WPG_child_activate' ) != '1' ) {
+				update_option( 'WPG_child_activate', '1' );
+				$this->activate_required_astra_extentions();
+				$this->edit_white_lables();
+				$this->activate_uael_modules();
+				$this->edit_uae_white_lables();
+				Flush_rewrite_rules();
+			}
 		}
 
 		/**
