@@ -264,6 +264,9 @@ if ( ! class_exists( 'WPGenius_cleanup_actions' ) ) {
 				</style>
 				<?php
 			}
+			?>
+			<style>#toplevel_page_wpgenius .wp-menu-image{background-image: url(<?php echo get_stylesheet_directory_uri() ?>/assets/images/wpgenius-icon.png) !important;}</style>
+			<?php
 		}
 	}
 	WPGenius_cleanup_actions::init();
