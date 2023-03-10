@@ -253,19 +253,19 @@ if ( ! class_exists( 'WPGenius_cleanup_actions' ) ) {
 		 * @return void
 		 */
 		public function clean_admin() {
-			if ( DISABLE_BLOG ) {
 				?>
 				<style type="text/css">
-					#menu-posts,	/* Hide posts menu from back end */
-					#front-static-pages label[for="page_for_posts"],
-					#front-static-pages .screen-reader-text + p {
-						display: none;
-					}
+					<?php if ( DISABLE_BLOG ) { ?>
+						#menu-posts,	/* Hide posts menu from back end */
+						#front-static-pages label[for="page_for_posts"],
+						#front-static-pages .screen-reader-text + p {
+							display: none;
+						}
+					<?php } ?>
+					#toplevel_page_wpgenius .wp-menu-image{background-image: url(<?php echo get_stylesheet_directory_uri() ?>/assets/images/wpgenius-icon.png) !important;}
 				</style>
 				<?php
-			}
 			?>
-			<style>#toplevel_page_wpgenius .wp-menu-image{background-image: url(<?php echo get_stylesheet_directory_uri() ?>/assets/images/wpgenius-icon.png) !important;}</style>
 			<?php
 		}
 	}
