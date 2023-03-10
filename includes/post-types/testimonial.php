@@ -38,18 +38,18 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 		  */
 		public function register_post_type() {
 			$labels = array(
-				'name'               => __( 'Testimonials', 'akhilbaheti' ),
-				'singular_name'      => __( 'Testimonial', 'akhilbaheti' ),
-				'add_new'            => __( 'Add New', 'akhilbaheti' ),
-				'add_new_item'       => __( 'Add new testimonial', 'akhilbaheti' ),
-				'edit_item'          => __( 'Edit testimonial', 'akhilbaheti' ),
-				'new_item'           => __( 'New testimonial', 'akhilbaheti' ),
-				'view_item'          => __( 'View testimonials', 'akhilbaheti' ),
-				'search_items'       => __( 'Search testimonials', 'akhilbaheti' ),
-				'not_found'          => __( 'No testimonials found', 'akhilbaheti' ),
-				'not_found_in_trash' => __( 'No testimonials found in Trash', 'akhilbaheti' ),
-				'featured_image'     => __( 'Testimonial author Photo', 'akhilbaheti' ),
-				'set_featured_image' => __( 'Set as testimonial\'s author picture', 'akhilbaheti' ),
+				'name'               => __( 'Testimonials', 'ast-child-theme' ),
+				'singular_name'      => __( 'Testimonial', 'ast-child-theme' ),
+				'add_new'            => __( 'Add New', 'ast-child-theme' ),
+				'add_new_item'       => __( 'Add new testimonial', 'ast-child-theme' ),
+				'edit_item'          => __( 'Edit testimonial', 'ast-child-theme' ),
+				'new_item'           => __( 'New testimonial', 'ast-child-theme' ),
+				'view_item'          => __( 'View testimonials', 'ast-child-theme' ),
+				'search_items'       => __( 'Search testimonials', 'ast-child-theme' ),
+				'not_found'          => __( 'No testimonials found', 'ast-child-theme' ),
+				'not_found_in_trash' => __( 'No testimonials found in Trash', 'ast-child-theme' ),
+				'featured_image'     => __( 'Testimonial author Photo', 'ast-child-theme' ),
+				'set_featured_image' => __( 'Set as testimonial\'s author picture', 'ast-child-theme' ),
 			);
 
 			$args = array(
