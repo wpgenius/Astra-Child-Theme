@@ -10,7 +10,7 @@ namespace UltimateElementor\Classes;
 use UltimateElementor\Classes\UAEL_Helper;
 use Astra_Admin_Helper;
 use Astra_Ext_White_Label_Markup;
-
+use WP_CLI;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
