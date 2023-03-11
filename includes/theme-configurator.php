@@ -5,13 +5,6 @@
  * @package astra-child-theme
  */
 
-namespace UltimateElementor\Classes;
-
-use UltimateElementor\Classes\UAEL_Helper;
-use Astra_Admin_Helper;
-use Astra_Ext_White_Label_Markup;
-use WP_CLI;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -75,8 +68,8 @@ if ( ! class_exists( 'WPGenius_Theme_Configurator' ) ) {
 				update_option( 'WPG_child_activate', '1' );
 				$this->activate_astra_modules();
 				$this->astra_white_lables();
-				$this->activate_uael_modules();
 				$this->uae_white_lables();
+				require get_stylesheet_directory() . '/includes/Modules/uae-modules.php';
 				Flush_rewrite_rules();
 			}
 		}
@@ -123,41 +116,6 @@ if ( ! class_exists( 'WPGenius_Theme_Configurator' ) ) {
 			$white_label_settings['astra-sites']['description'] = 'WPGenius Starter Templates is all in one solution for complete starter sites, single page templates, blocks & images. This plugin offers the premium library of ready templates & provides quick access to beautiful Pixabay images that can be imported in your website easily.';
 
 			Astra_Admin_Helper::update_admin_settings_option( '_astra_ext_white_label', $white_label_settings, true );
-		}
-
-		/**
-		 * Activate uae
-		 *
-		 * @param array  $atts
-		 * @param string $content
-		 * @return string
-		 */
-		public function activate_uael_modules() {
-
-			$widgets = UAEL_Helper::get_admin_settings_option( '_uael_widgets', array() );
-
-			$new_widgets = array(
-				'Presets'          => 'Presets',
-				'Cross_Domain'     => 'Cross_Domain',
-				'Modal_Popup'      => 'Modal_Popup',
-				'CfStyler'         => 'CfStyler',
-				'Fancy_Heading'    => 'Fancy_Heading',
-				'Advanced_Heading' => 'Advanced_Heading',
-				'Image_Gallery'    => 'Image_Gallery',
-			);
-
-			foreach ( $widgets as $slug => $value ) {
-				if ( ! isset( $new_widgets[ $slug ] ) ) {
-					$new_widgets[ $slug ] = 'disabled';
-				}
-			}
-
-			$new_widgets = array_map( 'esc_attr', $new_widgets );
-
-			// Update widgets.
-			UAEL_Helper::update_admin_settings_option( '_uael_widgets', $new_widgets );
-			UAEL_Helper::create_specific_stylesheet();
-
 		}
 
 		/**
