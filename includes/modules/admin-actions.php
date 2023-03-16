@@ -39,6 +39,11 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 		 * Class constructor
 		 */
 		private function __construct() {
+			
+			/**
+			 * Remove application password settings from user profile
+			 */
+			add_filter( 'wp_is_application_passwords_available', '__return_false' );
 
 			/**
 			 * Disable Gutenberg on the back end.

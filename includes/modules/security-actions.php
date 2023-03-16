@@ -103,6 +103,14 @@ if ( ! class_exists( 'WPGenius_security_actions' ) ) {
 			if ( STRICY_ADMIN_MODE ) {
 				add_action( 'admin_print_scripts', array( $this, 'hide_unwanted_links' ) );
 			}
+			
+			/**
+			 * Remove Login Shake Animation
+			 */
+			if ( !defined( WP_ENVIRONMENT_TYPE ) || WP_ENVIRONMENT_TYPE === 'production' ) {
+				add_action( 'login_footer', array( $this, 'remove_shake_js' ) );
+				add_filter( 'login_errors', array( $this, 'hide_login_error' ) );
+			}
 
 		}
 
@@ -149,6 +157,26 @@ if ( ! class_exists( 'WPGenius_security_actions' ) ) {
 				</style>
 				<?php
 			}
+		}
+		
+		/**
+		 * Remove Login Shake Animation
+		 *
+		 * @return void
+		 */
+		public function remove_shake_js() {
+			remove_action( 'login_footer', 'wp_shake_js', 12 );
+		}
+
+		/**
+		 * Hide Login Errors in WordPress. Add custom login error message
+		 *
+		 * @param string $error
+		 * @return string
+		 */
+		public function hide_login_error( $error ) {
+			// Edit the line below to customize the message.
+			return __( 'Something is wrong!', 'astra-child-theme' );
 		}
 
 	}
