@@ -89,7 +89,7 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 			 */
 			add_filter( 'sanitize_file_name', 'mb_strtolower' );
 
-			if ( WP_ENVIRONMENT_TYPE === 'production' ) {
+			if ( !defined( WP_ENVIRONMENT_TYPE ) || WP_ENVIRONMENT_TYPE === 'production' ) {
 				/**
 				 * Hide ACF custom fields menu from back end.
 				 */
@@ -326,8 +326,7 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 		 * @return string
 		 */
 		public function white_label_admin_footer( $footer_text ) {
-			$footer_text = 'Powered by <a href="https://wpgenius.in" target="_blank" rel="noopener">WPGenius</a>';
-			return $footer_text;
+			return __( 'Powered by <a href="https://wpgenius.in" target="_blank" rel="noopener">WPGenius</a>', 'astra-child-theme' );
 		}
 
 	}

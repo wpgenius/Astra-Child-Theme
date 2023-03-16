@@ -48,7 +48,7 @@ if ( ! class_exists( 'WPGenius_user_actions' ) ) {
 			/**
 			 * Remove Login Shake Animation
 			 */
-			if ( WP_ENVIRONMENT_TYPE === 'production' ) {
+			if ( !defined( WP_ENVIRONMENT_TYPE ) || WP_ENVIRONMENT_TYPE === 'production' ) {
 				add_action( 'login_footer', array( $this, 'remove_shake_js' ) );
 				add_filter( 'login_errors', array( $this, 'hide_login_error' ) );
 			}
