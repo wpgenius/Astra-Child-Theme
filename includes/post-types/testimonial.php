@@ -226,6 +226,9 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 		 * @return string
 		 */
 		public function archive_header() {
+			if ( is_post_type_archive( 'testimonial' ) ) {
+				remove_action( 'astra_template_parts_content', array( Astra_Loop::get_instance(), 'template_parts_default' ) );
+			}
 			echo '<h1 class="post-title">Testimonials</h1>';
 		}
 
