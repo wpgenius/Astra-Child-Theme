@@ -72,4 +72,3 @@ class WPGenius_Elementor_Widgets {
 	}
 
 }
-

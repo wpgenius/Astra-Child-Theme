@@ -62,7 +62,7 @@ if ( ! class_exists( 'WPGenius_Shortcodes' ) ) {
 			ob_start();
 
 			// include template with the arguments (The $args parameter was added in v5.5.0)
-			get_template_part( 'templates/sample-template', 'single-template-name', $atts );
+			get_template_part( 'templates/testimonial', 'loop', $atts );
 
 			return ob_get_clean();
 		}

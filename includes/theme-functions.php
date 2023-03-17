@@ -6,5 +6,3 @@
  *
  * @package astra-child-theme
  */
-
- 

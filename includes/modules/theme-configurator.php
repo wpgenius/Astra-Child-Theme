@@ -1,6 +1,6 @@
 <?php
 /**
- * Theme Configurator exicute on theme switch and using wpcli command.
+ * Theme Configurator execute on theme switch and using wpcli command.
  *
  * @package astra-child-theme
  */

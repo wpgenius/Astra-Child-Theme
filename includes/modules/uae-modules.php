@@ -1,6 +1,6 @@
 <?php
 /**
- * Theme Configurator exicute on theme switch and using wpcli command.
+ * Seperate class to activate UAE module while theme switch or using cli
  *
  * @package astra-child-theme
  */

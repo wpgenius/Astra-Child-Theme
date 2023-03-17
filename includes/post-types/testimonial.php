@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Post type : testimonial
+ *
+ * @package astra-child-theme/generic class
+ */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -115,7 +119,7 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 		public function entry_title_text( $title, $post ) {
 			if ( $post->post_type == 'testimonial' ) {
 
-				$title = 'Enter testimonial author title';
+				$title = 'Enter testimonial author title here';
 			}
 
 			return $title;
@@ -129,7 +133,7 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 		 */
 		function editor_content( $content,$post ) {
 			if ( 'testimonial' == $post->post_type ) {  
-				$content = 'Enter description here.';
+				$content = 'Write testimonial here.';
 			}
 			return $content;
 		}
