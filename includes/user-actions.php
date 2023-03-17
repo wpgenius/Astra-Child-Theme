@@ -39,9 +39,8 @@ if ( ! class_exists( 'WPGenius_user_actions' ) ) {
 		 * Class constructor
 		 */
 		private function __construct() {
-			
-			// Add hooks here
 
+			// Add hooks here
 		}
 	}
 	WPGenius_user_actions::init();

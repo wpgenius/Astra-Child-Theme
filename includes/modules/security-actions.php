@@ -103,11 +103,11 @@ if ( ! class_exists( 'WPGenius_security_actions' ) ) {
 			if ( STRICY_ADMIN_MODE ) {
 				add_action( 'admin_print_scripts', array( $this, 'hide_unwanted_links' ) );
 			}
-			
+
 			/**
 			 * Remove Login Shake Animation
 			 */
-			if ( !defined( WP_ENVIRONMENT_TYPE ) || WP_ENVIRONMENT_TYPE === 'production' ) {
+			if ( ! defined( WP_ENVIRONMENT_TYPE ) || WP_ENVIRONMENT_TYPE === 'production' ) {
 				add_action( 'login_footer', array( $this, 'remove_shake_js' ) );
 				add_filter( 'login_errors', array( $this, 'hide_login_error' ) );
 			}
@@ -158,7 +158,7 @@ if ( ! class_exists( 'WPGenius_security_actions' ) ) {
 				<?php
 			}
 		}
-		
+
 		/**
 		 * Remove Login Shake Animation
 		 *

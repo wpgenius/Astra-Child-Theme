@@ -5,6 +5,6 @@
  * @package astra-child-theme
  */
 
-//write HTML code here
+// write HTML code here
 
-?>
+

@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'WPGenius_UAEL_Modules' ) ) {
 
 	/**
-	 * Write theme configuration functions 
+	 * Write theme configuration functions
 	 */
 	class WPGenius_UAEL_Modules {
 		/**
@@ -43,7 +43,7 @@ if ( ! class_exists( 'WPGenius_UAEL_Modules' ) ) {
 		 * Class constructor
 		 */
 		private function __construct() {
-            $this->activate_uael_modules();
+			$this->activate_uael_modules();
 		}
 
 		/**

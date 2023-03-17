@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'WPGenius_Theme_Configurator' ) ) {
 
 	/**
-	 * Write theme configuration functions 
+	 * Write theme configuration functions
 	 */
 	class WPGenius_Theme_Configurator {
 		/**
