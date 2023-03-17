@@ -59,10 +59,8 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 		private function __construct() {
 
 			$this->register_post_types();
-			$this->register_widgets();
-			if ( did_action( 'elementor/loaded' ) ) {
-				add_action( 'init', array( $this, 'register_widgets_elementor' ) );
-			}
+			$this->register_widgets();			
+			add_action( 'init', array( $this, 'register_widgets_elementor' ) );			
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
 		}
@@ -112,7 +110,9 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 		 * @return void
 		 */
 		public function register_widgets_elementor() {
-			WPGenius_Elementor_Widgets::get_instance();
+			if ( did_action( 'elementor/loaded' ) ) {
+				WPGenius_Elementor_Widgets::get_instance();
+			}
 		}
 
 	}
