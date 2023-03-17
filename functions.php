@@ -85,4 +85,4 @@ define( 'STRICY_ADMIN_MODE', true );
  */
 define( 'WHITE_LABEL_ADMIN_FOOTER', true );
 
-require get_stylesheet_directory() . '/includes/theme-functions.php';
+require get_stylesheet_directory() . '/includes/theme-init.php';
