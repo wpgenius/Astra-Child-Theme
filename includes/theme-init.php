@@ -7,6 +7,7 @@
  * @package astra-child-theme
  */
 
+require get_stylesheet_directory() . '/includes/modules/theme-config.php';
 require get_stylesheet_directory() . '/includes/theme-functions.php';
 require get_stylesheet_directory() . '/includes/theme-actions.php';
 require get_stylesheet_directory() . '/includes/theme-settings.php';
