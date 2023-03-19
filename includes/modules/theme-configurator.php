@@ -103,17 +103,17 @@ if ( ! class_exists( 'WPGenius_Theme_Configurator' ) ) {
 		function astra_white_lables() {
 			$white_label_settings = Astra_Ext_White_Label_Markup::get_white_labels();
 
-			$white_label_settings['astra-agency']['author']     = 'WPGenius Solutions LLP';
+			$white_label_settings['astra-agency']['author']     = __( 'WPGenius Solutions LLP', "astra-child-theme" );
 			$white_label_settings['astra-agency']['author_url'] = 'http://wpgenius.in';
 			$white_label_settings['astra-agency']['licence']    = 'https://wpgenius.in/contact/';
-			$white_label_settings['astra']['name']              = 'WPGenius';
-			$white_label_settings['astra']['description']       = 'WPGenius offers, fast, fully customizable & beautiful WordPress theme suitable for all your project needs.';
+			$white_label_settings['astra']['name']              = __( 'WPGenius', "astra-child-theme" );
+			$white_label_settings['astra']['description']       = __( 'WPGenius offers, fast, fully customizable & beautiful WordPress theme suitable for all your project needs.', "astra-child-theme" );
 			$white_label_settings['astra']['screenshot']        = get_stylesheet_directory_uri() . '/screenshot.jpg';
 			$white_label_settings['astra']['icon']              = get_stylesheet_directory_uri() . '/assets/images/wpgenius_logo.png';
-			$white_label_settings['astra-pro']['name']          = 'WPGenius Pro';
-			$white_label_settings['astra-pro']['description']   = 'This plugin is an add-on for your website. It offers premium features & functionalities that enhance your theming experience at next level.';
-			$white_label_settings['astra-sites']['name']        = 'WPGenius Starter Templates';
-			$white_label_settings['astra-sites']['description'] = 'WPGenius Starter Templates is all in one solution for complete starter sites, single page templates, blocks & images. This plugin offers the premium library of ready templates & provides quick access to beautiful Pixabay images that can be imported in your website easily.';
+			$white_label_settings['astra-pro']['name']          = __( 'WPGenius Pro', "astra-child-theme" );
+			$white_label_settings['astra-pro']['description']   = __( 'This plugin is an add-on for your website. It offers premium features & functionalities that enhance your theming experience at next level.', "astra-child-theme" );
+			$white_label_settings['astra-sites']['name']        = __( 'WPGenius Starter Templates', "astra-child-theme" );
+			$white_label_settings['astra-sites']['description'] = __( 'WPGenius Starter Templates is all in one solution for complete starter sites, single page templates, blocks & images. This plugin offers the premium library of ready templates & provides quick access to beautiful Pixabay images that can be imported in your website easily.', "astra-child-theme" );
 
 			Astra_Admin_Helper::update_admin_settings_option( '_astra_ext_white_label', $white_label_settings, true );
 		}
@@ -126,14 +126,14 @@ if ( ! class_exists( 'WPGenius_Theme_Configurator' ) ) {
 		function uae_white_lables() {
 			$uae_lables = array(
 				'agency'                => array(
-					'author'        => 'WPGenius Solutions LLPssss',
+					'author'        => __( 'WPGenius Solutions LLP', "astra-child-theme" ),
 					'author_url'    => 'https://wpgenius.in',
 					'hide_branding' => false,
 				),
 				'plugin'                => array(
-					'name'        => 'WPGenius Ultimate Addons',
+					'name'        => __( 'WPGenius Ultimate Addons', "astra-child-theme" ),
 					'short_name'  => 'WAE',
-					'description' => 'WPGenius Ultimate Addons is a premium extension for Elementor that adds 40+ widgets and works on top of any Elementor Package (Free, Pro). You can use it with any WordPress theme.',
+					'description' => __( 'WPGenius Ultimate Addons is a premium extension for Elementor that adds 40+ widgets and works on top of any Elementor Package (Free, Pro). You can use it with any WordPress theme.', "astra-child-theme" ),
 				),
 				'replace_logo'          => 'enable',
 				'enable_knowledgebase'  => 'disable',

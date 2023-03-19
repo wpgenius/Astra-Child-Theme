@@ -36,7 +36,7 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 		$this->start_controls_section(
 			'section_title',
 			array(
-				'label' => __( 'Testimonial Slider', 'elementor' ),
+				'label' => __( 'Testimonial Slider', 'astra-child-theme' ),
 			)
 		);
 
@@ -46,14 +46,14 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'label'   => esc_html__( 'Slide to Show', 'testimonials' ),
 				'options' => array(
-					'1' => esc_html__( '1', 'elementor' ),
-					'2' => esc_html__( '2', 'elementor' ),
-					'3' => esc_html__( '3', 'elementor' ),
-					'4' => esc_html__( '4', 'elementor' ),
-					'5' => esc_html__( '5', 'elementor' ),
-					'6' => esc_html__( '6', 'elementor' ),
-					'7' => esc_html__( '7', 'elementor' ),
-					'8' => esc_html__( '8', 'elementor' ),
+					'1' => esc_html__( '1', 'astra-child-theme' ),
+					'2' => esc_html__( '2', 'astra-child-theme' ),
+					'3' => esc_html__( '3', 'astra-child-theme' ),
+					'4' => esc_html__( '4', 'astra-child-theme' ),
+					'5' => esc_html__( '5', 'astra-child-theme' ),
+					'6' => esc_html__( '6', 'astra-child-theme' ),
+					'7' => esc_html__( '7', 'astra-child-theme' ),
+					'8' => esc_html__( '8', 'astra-child-theme' ),
 				),
 				'default' => '3',
 			)
@@ -65,14 +65,14 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'label'   => esc_html__( 'Slide to Scroll', 'testimonials' ),
 				'options' => array(
-					'1' => esc_html__( '1', 'elementor' ),
-					'2' => esc_html__( '2', 'elementor' ),
-					'3' => esc_html__( '3', 'elementor' ),
-					'4' => esc_html__( '4', 'elementor' ),
-					'5' => esc_html__( '5', 'elementor' ),
-					'6' => esc_html__( '6', 'elementor' ),
-					'7' => esc_html__( '7', 'elementor' ),
-					'8' => esc_html__( '8', 'elementor' ),
+					'1' => esc_html__( '1', 'astra-child-theme' ),
+					'2' => esc_html__( '2', 'astra-child-theme' ),
+					'3' => esc_html__( '3', 'astra-child-theme' ),
+					'4' => esc_html__( '4', 'astra-child-theme' ),
+					'5' => esc_html__( '5', 'astra-child-theme' ),
+					'6' => esc_html__( '6', 'astra-child-theme' ),
+					'7' => esc_html__( '7', 'astra-child-theme' ),
+					'8' => esc_html__( '8', 'astra-child-theme' ),
 				),
 				'default' => '3',
 			)
@@ -84,10 +84,10 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'label'   => esc_html__( 'Navigation', 'testimonials' ),
 				'options' => array(
-					'dots'   => esc_html__( 'Dots', 'elementor' ),
-					'arrows' => esc_html__( 'Arrows', 'elementor' ),
-					'both'   => esc_html__( 'Arrows and Dots', 'elementor' ),
-					'none'   => esc_html__( 'None', 'elementor' ),
+					'dots'   => esc_html__( 'Dots', 'astra-child-theme' ),
+					'arrows' => esc_html__( 'Arrows', 'astra-child-theme' ),
+					'both'   => esc_html__( 'Arrows and Dots', 'astra-child-theme' ),
+					'none'   => esc_html__( 'None', 'astra-child-theme' ),
 				),
 				'default' => 'dots',
 			)
@@ -110,8 +110,8 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 			array(
 				'label'        => esc_html__( 'Autoplay', 'plugin-name' ),
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Yes', 'your-plugin' ),
-				'label_off'    => esc_html__( 'No', 'your-plugin' ),
+				'label_on'     => esc_html__( 'Yes', 'astra-child-theme' ),
+				'label_off'    => esc_html__( 'No', 'astra-child-theme' ),
 				'return_value' => 'yes',
 				'default'      => 'no',
 			)
@@ -122,8 +122,8 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 			array(
 				'label'        => esc_html__( 'Infinite Loop', 'plugin-name' ),
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Yes', 'your-plugin' ),
-				'label_off'    => esc_html__( 'No', 'your-plugin' ),
+				'label_on'     => esc_html__( 'Yes', 'astra-child-theme' ),
+				'label_off'    => esc_html__( 'No', 'astra-child-theme' ),
 				'return_value' => 'yes',
 				'default'      => 'no',
 			)
@@ -134,8 +134,8 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 			array(
 				'label'        => esc_html__( 'Pause on Hover', 'plugin-name' ),
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Yes', 'your-plugin' ),
-				'label_off'    => esc_html__( 'No', 'your-plugin' ),
+				'label_on'     => esc_html__( 'Yes', 'astra-child-theme' ),
+				'label_off'    => esc_html__( 'No', 'astra-child-theme' ),
 				'return_value' => 'yes',
 				'default'      => 'no',
 			)
@@ -146,8 +146,8 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 			array(
 				'label'        => esc_html__( 'Pause on Hover', 'plugin-name' ),
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Yes', 'your-plugin' ),
-				'label_off'    => esc_html__( 'No', 'your-plugin' ),
+				'label_on'     => esc_html__( 'Yes', 'astra-child-theme' ),
+				'label_off'    => esc_html__( 'No', 'astra-child-theme' ),
 				'return_value' => 'yes',
 				'default'      => 'no',
 			)

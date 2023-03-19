@@ -85,8 +85,8 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 		public function manage_column( $columns ) {
 
 			$inserted = array(
-				'editor'    => 'Testimonial',
-				'thumbnail' => 'Testimonial Photo',
+				'editor'    => __( 'Testimonial', 'astra-child-theme' ),
+				'thumbnail' => __( 'Author picture', 'astra-child-theme' ),
 			);
 
 			return array_merge(
@@ -119,7 +119,7 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 		public function entry_title_text( $title, $post ) {
 			if ( $post->post_type == 'testimonial' ) {
 
-				$title = 'Enter testimonial author title here';
+				$title = __( 'Enter testimonial author title here', 'astra-child-theme' );
 			}
 
 			return $title;
@@ -133,7 +133,7 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 		 */
 		function editor_content( $content,$post ) {
 			if ( 'testimonial' == $post->post_type ) {
-				$content = 'Write testimonial here.';
+				$content = __( 'Write testimonial here.', 'astra-child-theme' );
 			}
 			return $content;
 		}
@@ -166,7 +166,7 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 		 * @return array
 		 */
 		public function meta_box() {
-			add_meta_box( 'testimonial-meta', __( 'Testimonials meta' ), array( $this, 'post_meta_callback' ), 'testimonial', 'advanced', 'high' );
+			add_meta_box( 'testimonial-meta', __( 'Testimonials meta' , 'astra-child-theme' ), array( $this, 'post_meta_callback' ), 'testimonial', 'advanced', 'high' );
 		}
 
 		/**
@@ -183,7 +183,7 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 
 				<div class="myplugin-image-preview">
 					<div style="margin-bottom:10px;">
-						<label for="rating">Add rating</label>
+						<label for="rating"><?php _e( 'Choose rating', 'astra-child-theme' ); ?></label>
 					</div>
 					<div>
 						<input style="width:100%; padding:10px !important;" type="text" id="rating" name="rating" value="<?php echo $value; ?>" />
@@ -226,7 +226,7 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 		 * @return string
 		 */
 		public function archive_header() {
-			echo '<h1 class="post-title">Testimonials</h1>';
+			echo '<h1 class="post-title">'.__( 'Testimonials' , 'astra-child-theme' ).'</h1>';
 		}
 
 		/**
