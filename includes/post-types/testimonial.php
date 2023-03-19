@@ -42,18 +42,18 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 		  */
 		public function register_post_type() {
 			$labels = array(
-				'name'               => __( 'Testimonials', 'ast-child-theme' ),
-				'singular_name'      => __( 'Testimonial', 'ast-child-theme' ),
-				'add_new'            => __( 'Add New', 'ast-child-theme' ),
-				'add_new_item'       => __( 'Add new testimonial', 'ast-child-theme' ),
-				'edit_item'          => __( 'Edit testimonial', 'ast-child-theme' ),
-				'new_item'           => __( 'New testimonial', 'ast-child-theme' ),
-				'view_item'          => __( 'View testimonials', 'ast-child-theme' ),
-				'search_items'       => __( 'Search testimonials', 'ast-child-theme' ),
-				'not_found'          => __( 'No testimonials found', 'ast-child-theme' ),
-				'not_found_in_trash' => __( 'No testimonials found in Trash', 'ast-child-theme' ),
-				'featured_image'     => __( 'Testimonial author Photo', 'ast-child-theme' ),
-				'set_featured_image' => __( 'Set as testimonial\'s author picture', 'ast-child-theme' ),
+				'name'               => __( 'Testimonials', 'astra-child-theme' ),
+				'singular_name'      => __( 'Testimonial', 'astra-child-theme' ),
+				'add_new'            => __( 'Add New', 'astra-child-theme' ),
+				'add_new_item'       => __( 'Add new testimonial', 'astra-child-theme' ),
+				'edit_item'          => __( 'Edit testimonial', 'astra-child-theme' ),
+				'new_item'           => __( 'New testimonial', 'astra-child-theme' ),
+				'view_item'          => __( 'View testimonials', 'astra-child-theme' ),
+				'search_items'       => __( 'Search testimonials', 'astra-child-theme' ),
+				'not_found'          => __( 'No testimonials found', 'astra-child-theme' ),
+				'not_found_in_trash' => __( 'No testimonials found in Trash', 'astra-child-theme' ),
+				'featured_image'     => __( 'Testimonial author Photo', 'astra-child-theme' ),
+				'set_featured_image' => __( 'Set as testimonial\'s author picture', 'astra-child-theme' ),
 			);
 
 			$args = array(
@@ -132,7 +132,7 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 		 * @return void
 		 */
 		function editor_content( $content,$post ) {
-			if ( 'testimonial' == $post->post_type ) {  
+			if ( 'testimonial' == $post->post_type ) {
 				$content = 'Write testimonial here.';
 			}
 			return $content;
@@ -146,7 +146,7 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 		 */
 		function pre_get_post( $query ) {
 			// enter code here
-			if ( 'testimonial' == get_post_type() && get_option( 'wpg_testimonial_per_page' )) {  
+			if ( 'testimonial' == get_post_type() && get_option( 'wpg_testimonial_per_page' )) {
 				$query->set( 'posts_per_page', get_option( 'wpg_testimonial_per_page' ) );
 			}
 		}
