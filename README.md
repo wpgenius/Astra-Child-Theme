@@ -1,6 +1,6 @@
 # Astra Child Theme
+A starter child theme for Astra Child Theme.
 
-Create Astra theme related child theme.
 This child theme is based on object oriented. In this child theme we created usefull files to develop a new website from scratch.
 
 ### Basic Folder structure
