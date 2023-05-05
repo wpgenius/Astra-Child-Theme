@@ -144,7 +144,7 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 		$this->add_control(
 			'pause_on_interception',
 			array(
-				'label'        => esc_html__( 'Pause on Hover', 'plugin-name' ),
+				'label'        => esc_html__( 'Pause on Interception', 'plugin-name' ),
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Yes', 'your-plugin' ),
 				'label_off'    => esc_html__( 'No', 'your-plugin' ),
@@ -186,39 +186,40 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 				 $id = 'acs' . rand();
 				?>
 			<div class="elementor-element elementor-element-<?php echo $id; ?> venues_slider animated-fast elementor-arrows-position-outside elementor-widget elementor-widget-image-carousel animated fadeIn e-widget-swiper" data-id="<?php echo $id; ?>" data-element_type="widget" data-settings=<?php echo json_encode( $setting ); ?> data-widget_type="image-carousel.default">
-
-				<div class="elementor-image-carousel-wrapper swiper-container elementor-swiper" dir="ltr">
-					<div class="elementor-image-carousel swiper-wrapper">
-					<?php
-					$i = 0;
-					foreach ( $mypost as $post ) {
-						setup_postdata( $post );
-						$thumbnail = get_the_post_thumbnail_url( $post, 'post-thumbnail' );
-						?>
-						<div class="swiper-slide" data-swiper-slide-index="<?php echo $i++; ?>">
-							<div class="testimonial">
-								<div class="content_wrapper">
-									<div class="testimonial-content">
-										<p><?php echo get_the_content( $post ); ?></p>
-									</div>
-								<div class="testimonial-title">
-									<h5 class="testimonial-title"><?php echo get_the_title( $post ); ?></h5>
-								</div>
-								</div>
-							</div>
-
-						</div>
+				<div class="elementor-widget-container">
+					<style>/*! elementor - v3.12.2 - 23-04-2023 */
+						.elementor-widget-image-carousel .swiper,.elementor-widget-image-carousel .swiper-container{position:static}.elementor-widget-image-carousel .swiper-container .swiper-slide figure,.elementor-widget-image-carousel .swiper .swiper-slide figure{line-height:inherit}.elementor-widget-image-carousel .swiper-slide{text-align:center}.elementor-image-carousel-wrapper:not(.swiper-container-initialized) .swiper-slide,.elementor-image-carousel-wrapper:not(.swiper-initialized) .swiper-slide{max-width:calc(100% / var(--e-image-carousel-slides-to-show, <? echo $settings['slide_to_show']; ?>))}
+					</style>
+					<div class="elementor-image-carousel-wrapper swiper swiper-initialized swiper-horizontal swiper-pointer-events" dir="ltr">
+						<div class="elementor-image-carousel swiper-wrapper">
 						<?php
-					}
-					?>
+						$i = 0;
+						foreach ( $mypost as $post ) {
+							setup_postdata( $post );
+							$thumbnail = get_the_post_thumbnail_url( $post, 'post-thumbnail' );
+							?>
+							<div class="swiper-slide" data-swiper-slide-index="<?php echo $i++; ?>">
+								<div class="testimonial">
+									<div class="content_wrapper">
+										<div class="testimonial-content">
+											<p><?php echo get_the_content( $post ); ?></p>
+										</div>
+									<div class="testimonial-title">
+										<h5 class="testimonial-title"><?php echo get_the_title( $post ); ?></h5>
+									</div>
+									</div>
+								</div>
+
+							</div>
+							<?php
+						}
+						?>
+						</div>
+						<div class="elementor-swiper-button elementor-swiper-button-prev"><i aria-hidden="true" class="eicon-chevron-left"></i></div>
+						<div class="elementor-swiper-button elementor-swiper-button-next "><i aria-hidden="true" class="eicon-chevron-right"></i></div>
+						<div class="swiper-pagination <?php echo $id; ?>"></div>
 					</div>
-					<div class="elementor-swiper-button elementor-swiper-button-prev"><i aria-hidden="true" class="eicon-chevron-left"></i></div>
-					<div class="elementor-swiper-button elementor-swiper-button-next "><i aria-hidden="true" class="eicon-chevron-right"></i></div>
-
-					<div class="swiper-pagination <?php echo $id; ?>"></div>
-
 				</div>
-
 			</div>
 			<!-- Add Arrows -->
 			  <?php
