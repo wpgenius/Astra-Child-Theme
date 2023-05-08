@@ -73,7 +73,7 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 		public function enqueue_scripts() {
 			// wp_enqueue_style( 'astra-child-theme', get_stylesheet_uri(), array( 'astra-theme-css' ), wp_get_theme()->get( 'Version' ) );
 			// We will not use default stylesheet file. Only write CSS to style.css file under assets/css folder.
-			wp_enqueue_style( 'astra-child-theme', get_stylesheet_directory() . 'assets/css/style.css', array( 'astra-theme-css' ), wp_get_theme()->get( 'Version' ) );
+			wp_enqueue_style( 'astra-child-theme', get_stylesheet_directory_uri() . '/assets/css/style.css', array( 'astra-theme-css' ), wp_get_theme()->get( 'Version' ) );
 		}
 
 		/**
