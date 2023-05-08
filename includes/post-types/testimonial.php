@@ -26,7 +26,7 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 			add_filter( 'manage_testimonial_posts_columns ', array( $this, 'manage_column' ) );
 			add_action( 'manage_testimonial_posts_custom_column', array( $this, 'manage_custom_column' ), 10, 2 );
 			add_filter( 'enter_title_here', array( $this, 'entry_title_text' ), 10, 2 );
-			add_filter( 'default_content', array( $this, 'editor_content' ),10, 2 );
+			add_filter( 'default_content', array( $this, 'editor_content' ), 10, 2 );
 			add_action( 'pre_get_posts', array( $this, 'pre_get_post' ), 10 );
 			add_action( 'template_redirect', array( $this, 'template_redirect' ) );
 			add_action( 'add_meta_boxes', array( $this, 'meta_box' ) );
@@ -104,8 +104,11 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 		 * @return void
 		 */
 		public function manage_custom_column( $column_name, $post_id ) {
-			if ( $column_name == 'rating' ) {
-				echo get_post_meta( 'ratings_value' );
+			if ( $column_name == 'editor' ) {
+				echo '<blockquote>"' . get_the_content() . '"</blockquote>';
+			}
+			if ( $column_name == 'thumbnail' ) {
+				echo get_the_post_thumbnail( $post_id, 'thumbnail' );
 			}
 		}
 
