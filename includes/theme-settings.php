@@ -120,9 +120,9 @@ if ( ! class_exists( 'WPGenius_settings' ) ) {
 		public function settings_page() {
 			?>
 			<div class="wrap">
-			
+
 				<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
-				
+
 				<form method="POST" action="options.php">
 					<?php
 						// output security fields for the registered setting "wporg"
@@ -146,7 +146,7 @@ if ( ! class_exists( 'WPGenius_settings' ) ) {
 		 */
 		public function section_title() {
 			?>
-			<p><?php _e( 'First section' ); ?></p>
+			<p><?php _e( 'First section', 'astra-child-theme' ); ?></p>
 			<?php
 		}
 

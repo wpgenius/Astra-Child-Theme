@@ -239,7 +239,7 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 				'wpgenius_duplicate_nonce'
 			);
 
-			$actions['wpgenius_duplicate_post'] = '<a href="' . $url . '" title="Duplicate item" rel="permalink">Duplicate</a>';
+			$actions['wpgenius_duplicate_post'] = '<a href="' . $url . '" title="'.__( "Duplicate item", "astra-child-theme" ).'" rel="permalink">'.__( "Duplicate item", "astra-child-theme" ).'</a>';
 
 			return $actions;
 		}

@@ -1,26 +1,26 @@
-# Astra-Child-Theme
+# Astra Child Theme
+A starter child theme for Astra Child Theme.
 
-Create Astra theme related child theme.
-This child theme is based on object oriented. In this child them we created usefull files to develop a new website from scratch. 
+This child theme is based on object oriented. In this child theme we created usefull files to develop a new website from scratch.
 
 ### Basic Folder structure
- 
+
     ├── ...
-    ├── assets                                                      
-    │   ├── css                                     
+    ├── assets
+    │   ├── css
     │     ├── style.css                             # You can add extra style.
     │   ├── images                                  # You can upload images.
-    │     ├── wpgenius_logo.png                     
-    │   ├── js                                      
+    │     ├── wpgenius_logo.png
+    │   ├── js
     │     ├── custom.js                             # You can add extra javascript.
-    ├── includes                                    
+    ├── includes
     │   ├──Modules
     │     ├── uae-modules.php                       # Activate UAE modules.
-    │   ├──post-types                               
+    │   ├──post-types
     │     ├── testimonial.php                       # Create a new post type.
-    │   ├── widgets                                
+    │   ├── widgets
     │     ├── widget-testimonial.php                # Create a new widget.
-    │   ├── widgets-elementor                      
+    │   ├── widgets-elementor
     │     ├── widget-testimonial.php                # Create a new elementor widget.
     │   ├── admin-actions.php                       # Add admin related actions.
     │   ├── ajax-actions.php                        # Add ajax related actions.
@@ -36,7 +36,7 @@ This child theme is based on object oriented. In this child them we created usef
     ├── funtion.php                                 # You can include new files here.
     ├── screenshot.png                              # Show screenshot image to the child theme.
     ├── style.css                                   # Add custom css.
-    │   └── ...      
+    │   └── ...
     └── ...
 
 
@@ -63,7 +63,7 @@ public function register_widgets() {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor\WPG_Elementor_Testimonial_Widget() );
 	}
  ```
- 
+
 #### Use of admin-actions.php
 
 In this file you can add admin related actions.
@@ -118,13 +118,13 @@ This file use for wordpress security actions.
 * Disable Comment Form Website URL.
 * Disable pings on the front end.
 * Disable core auto-updates.
-* Disable auto-updates for plugins. 
+* Disable auto-updates for plugins.
 * Disable auto-updates for themes.
 * Disable auto-update emails for core.
 * Disable auto-update emails for plugins.
 * Disable auto-update emails for themes.
 
-#### seo-actions.php 
+#### seo-actions.php
 
 This file use for SEO related actions.
 
@@ -159,7 +159,7 @@ In this file you can includes theme files.
 
 In this file we create a sub page under the astra named as settings. In this file we write a simple setting class. By using this class you can easyly make a setting.
 
-#### theme-shortcodes.php 
+#### theme-shortcodes.php
 
 In this file you can registers a new custom shortcodes.
 
@@ -202,4 +202,4 @@ You can add theme related css here.
 
 
 
- 
+

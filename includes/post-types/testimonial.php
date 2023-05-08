@@ -42,18 +42,18 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 		  */
 		public function register_post_type() {
 			$labels = array(
-				'name'               => __( 'Testimonials', 'ast-child-theme' ),
-				'singular_name'      => __( 'Testimonial', 'ast-child-theme' ),
-				'add_new'            => __( 'Add New', 'ast-child-theme' ),
-				'add_new_item'       => __( 'Add new testimonial', 'ast-child-theme' ),
-				'edit_item'          => __( 'Edit testimonial', 'ast-child-theme' ),
-				'new_item'           => __( 'New testimonial', 'ast-child-theme' ),
-				'view_item'          => __( 'View testimonials', 'ast-child-theme' ),
-				'search_items'       => __( 'Search testimonials', 'ast-child-theme' ),
-				'not_found'          => __( 'No testimonials found', 'ast-child-theme' ),
-				'not_found_in_trash' => __( 'No testimonials found in Trash', 'ast-child-theme' ),
-				'featured_image'     => __( 'Testimonial author Photo', 'ast-child-theme' ),
-				'set_featured_image' => __( 'Set as testimonial\'s author picture', 'ast-child-theme' ),
+				'name'               => __( 'Testimonials', 'astra-child-theme' ),
+				'singular_name'      => __( 'Testimonial', 'astra-child-theme' ),
+				'add_new'            => __( 'Add New', 'astra-child-theme' ),
+				'add_new_item'       => __( 'Add new testimonial', 'astra-child-theme' ),
+				'edit_item'          => __( 'Edit testimonial', 'astra-child-theme' ),
+				'new_item'           => __( 'New testimonial', 'astra-child-theme' ),
+				'view_item'          => __( 'View testimonials', 'astra-child-theme' ),
+				'search_items'       => __( 'Search testimonials', 'astra-child-theme' ),
+				'not_found'          => __( 'No testimonials found', 'astra-child-theme' ),
+				'not_found_in_trash' => __( 'No testimonials found in Trash', 'astra-child-theme' ),
+				'featured_image'     => __( 'Testimonial author Photo', 'astra-child-theme' ),
+				'set_featured_image' => __( 'Set as testimonial\'s author picture', 'astra-child-theme' ),
 			);
 
 			$args = array(
@@ -85,8 +85,8 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 		public function manage_column( $columns ) {
 
 			$inserted = array(
-				'editor'    => 'Testimonial',
-				'thumbnail' => 'Testimonial Photo',
+				'editor'    => __( 'Testimonial', 'astra-child-theme' ),
+				'thumbnail' => __( 'Author picture', 'astra-child-theme' ),
 			);
 
 			return array_merge(
@@ -119,7 +119,7 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 		public function entry_title_text( $title, $post ) {
 			if ( $post->post_type == 'testimonial' ) {
 
-				$title = 'Enter testimonial author title here';
+				$title = __( 'Enter testimonial author title here', 'astra-child-theme' );
 			}
 
 			return $title;
@@ -132,8 +132,8 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 		 * @return void
 		 */
 		function editor_content( $content,$post ) {
-			if ( 'testimonial' == $post->post_type ) {  
-				$content = 'Write testimonial here.';
+			if ( 'testimonial' == $post->post_type ) {
+				$content = __( 'Write testimonial here.', 'astra-child-theme' );
 			}
 			return $content;
 		}
@@ -146,7 +146,7 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 		 */
 		function pre_get_post( $query ) {
 			// enter code here
-			if ( 'testimonial' == get_post_type() && get_option( 'wpg_testimonial_per_page' )) {  
+			if ( 'testimonial' == get_post_type() && get_option( 'wpg_testimonial_per_page' )) {
 				$query->set( 'posts_per_page', get_option( 'wpg_testimonial_per_page' ) );
 			}
 		}
@@ -166,7 +166,7 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 		 * @return array
 		 */
 		public function meta_box() {
-			add_meta_box( 'testimonial-meta', __( 'Testimonials meta' ), array( $this, 'post_meta_callback' ), 'testimonial', 'advanced', 'high' );
+			add_meta_box( 'testimonial-meta', __( 'Testimonials meta' , 'astra-child-theme' ), array( $this, 'post_meta_callback' ), 'testimonial', 'advanced', 'high' );
 		}
 
 		/**
@@ -183,7 +183,7 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 
 				<div class="myplugin-image-preview">
 					<div style="margin-bottom:10px;">
-						<label for="rating">Add rating</label>
+						<label for="rating"><?php _e( 'Choose rating', 'astra-child-theme' ); ?></label>
 					</div>
 					<div>
 						<input style="width:100%; padding:10px !important;" type="text" id="rating" name="rating" value="<?php echo $value; ?>" />
@@ -229,7 +229,7 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 			if ( is_post_type_archive( 'testimonial' ) ) {
 				remove_action( 'astra_template_parts_content', array( Astra_Loop::get_instance(), 'template_parts_default' ) );
 			}
-			echo '<h1 class="post-title">Testimonials</h1>';
+			echo '<h1 class="post-title">'.__( 'Testimonials' , 'astra-child-theme' ).'</h1>';
 		}
 
 		/**
