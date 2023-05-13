@@ -50,7 +50,7 @@ if ( ! class_exists( 'WPGenius_seo_actions' ) ) {
 			/**
 			 * Remove Query Strings From Static Files
 			 */
-			if ( ( ! defined( WP_ENVIRONMENT_TYPE ) || WP_ENVIRONMENT_TYPE === 'production' ) && REMOVE_QUERY_STRINGS ) {
+			if ( ( ! defined( 'WP_ENVIRONMENT_TYPE' ) || 'WP_ENVIRONMENT_TYPE' === 'production' ) && REMOVE_QUERY_STRINGS ) {
 				add_action( 'init', array( $this, 'remove_query_strings' ) );
 			}
 

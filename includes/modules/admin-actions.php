@@ -94,7 +94,7 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 			 */
 			add_filter( 'sanitize_file_name', 'mb_strtolower' );
 
-			if ( ! defined( WP_ENVIRONMENT_TYPE ) || WP_ENVIRONMENT_TYPE === 'production' ) {
+			if ( ! defined( 'WP_ENVIRONMENT_TYPE' ) || 'WP_ENVIRONMENT_TYPE' === 'production' ) {
 				/**
 				 * Hide ACF custom fields menu from back end.
 				 */
