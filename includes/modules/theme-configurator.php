@@ -70,7 +70,7 @@ if ( ! class_exists( 'WPGenius_Theme_Configurator' ) ) {
 				$this->astra_white_lables();
 				$this->uae_white_lables();
 				require get_stylesheet_directory() . '/includes/modules/uae-modules.php';
-				Flush_rewrite_rules();
+				flush_rewrite_rules();
 			}
 		}
 
