@@ -39,20 +39,8 @@ if ( ! class_exists( 'WPGenius_woo_actions' ) && class_exists( 'WooCommerce' ) )
 		 * Class constructor
 		 */
 		private function __construct() {
-			add_filter( 'woocommerce_countries_inc_tax_or_vat', array( 'cart_totals_order_total_html' ), 10, 1 );
-			add_filter( 'woocommerce_get_formatted_order_total', array( 'cart_totals_order_total_html' ), 10, 1 );
 			add_filter( 'gettext', array( $this, 'woo_email' ), 10, 3 );
 			// Add hooks here
-		}
-
-		/**
-		 * Rename text of VAT to GST on cart page.
-		 *
-		 * @param array $value
-		 * @return void
-		 */
-		function cart_totals_order_total_html( $value ) {
-			return preg_replace( '/\(includes[^)]+\)/', '(inclusive GST)', $value );
 		}
 
 		/**
