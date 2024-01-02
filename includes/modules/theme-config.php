@@ -19,7 +19,7 @@ define( 'ALLOW_SVG', false );
  * Disable blog. Removes posts option from admin.
  * Default : false
  */
-define( 'DISABLE_BLOG', false );
+define( 'DISABLE_BLOG', true );
 
 /**
  * Disable comments from comments. Removes comments menu from admin.
@@ -79,7 +79,7 @@ define( 'ENABLE_DUPLICATE_POST', true );
  * Strict admin mode.
  * Default : true
  */
-define( 'STRICY_ADMIN_MODE', true );
+define( 'STRICY_ADMIN_MODE', false );
 
 /**
  * White label admin footer.

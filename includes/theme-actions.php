@@ -28,7 +28,7 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 		 * @var array
 		 */
 		private $post_types = array(
-			'testimonial',
+			// 'testimonial',
 		);
 
 		/**
@@ -37,7 +37,7 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 		 * @var array
 		 */
 		private $widgets = array(
-			'testimonial',
+			// 'testimonial',
 		);
 
 		/**
@@ -62,7 +62,7 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 			$this->register_widgets();
 			add_action( 'init', array( $this, 'register_widgets_elementor' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-
+			add_filter( 'wp_mail_from', array( $this, 'templ_custom_mail_from' ) );
 		}
 
 		/**
@@ -113,6 +113,17 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 			if ( did_action( 'elementor/loaded' ) ) {
 				WPGenius_Elementor_Widgets::get_instance();
 			}
+		}
+
+		/**
+		 * Change from mail.
+		 *
+		 * @param string $mail
+		 * @return void
+		 */
+		public function email_from( $mail ) {
+			$new_mail = str_replace( 'wordpress', 'no-reply', $mail );
+			return $new_mail;
 		}
 
 	}
