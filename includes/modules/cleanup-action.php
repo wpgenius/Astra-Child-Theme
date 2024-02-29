@@ -91,6 +91,12 @@ if ( ! class_exists( 'WPGenius_cleanup_actions' ) ) {
 			 */
 			add_action( 'admin_print_styles', array( $this, 'clean_admin' ), 9999 );
 
+			/**
+			 * Change Action Scheduler default purge to 1 week
+			 */
+			add_filter( 'action_scheduler_retention_period', 'wpb_action_scheduler_purge' );
+
+
 		}
 
 		/**
@@ -266,6 +272,14 @@ if ( ! class_exists( 'WPGenius_cleanup_actions' ) ) {
 				</style>
 							<?php
 		}
+
+		/**
+		 * Change Action Scheduler default purge to 1 week
+		 */
+		function wpb_action_scheduler_purge() {
+			return WEEK_IN_SECONDS;
+		}
+
 	}
 	WPGenius_cleanup_actions::init();
 }
