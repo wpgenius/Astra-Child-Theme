@@ -45,21 +45,10 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 			 */
 			add_filter( 'wp_is_application_passwords_available', '__return_false' );
 
-			if (is_plugin_active( 'elementor/elementor.php' )) {
-
-				/**
-				 * Disable Gutenberg on the back end.
-				 */
-				add_filter( 'use_block_editor_for_post', '__return_false', 5 );
-
-				add_filter( 'gutenberg_can_edit_post', '__return_false', 5 );
-
-				/**
-				* Disable Gutenberg for widgets.
-				*/
-				add_filter( 'use_widgets_block_editor', '__return_false' );
-
-			}
+			/**
+			 * Disable gutenberg editor when elementor is active.
+			 */
+			add_action( 'admin_init', array($this,'disable_gutenberg') );
 
 			/**
 			 * Allow SVG uploads
@@ -115,6 +104,30 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 			}
 
 		}
+
+		/**
+		 * Disable gutenberg editor when elementor is active.
+		 *
+		 * @return void
+		 */
+		public function disable_gutenberg(){
+			if (is_plugin_active( 'elementor/elementor.php' )) {
+
+				/**
+				 * Disable Gutenberg on the back end.
+				 */
+				add_filter( 'use_block_editor_for_post', '__return_false', 5 );
+
+				add_filter( 'gutenberg_can_edit_post', '__return_false', 5 );
+
+				/**
+				* Disable Gutenberg for widgets.
+				*/
+				add_filter( 'use_widgets_block_editor', '__return_false' );
+
+			}
+		}
+
 
 		/**
 		 * Allow SVG uploads for administrator users.

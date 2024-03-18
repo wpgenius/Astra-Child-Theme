@@ -105,6 +105,9 @@ if ( ! class_exists( 'WPGenius_cleanup_actions' ) ) {
 		 * @return void
 		 */
 		public function enqueue_scripts() {
+
+			include_once(ABSPATH .'wp-admin/includes/plugin.php');
+
 			if (is_plugin_active( 'elementor/elementor.php' )) {
 				wp_dequeue_style( 'wp-block-library' );
 				wp_dequeue_style( 'bp-member-block' );
@@ -114,6 +117,7 @@ if ( ! class_exists( 'WPGenius_cleanup_actions' ) ) {
 				wp_deregister_style( 'wc-block-editor' );
 				wp_deregister_style( 'wc-blocks-style' );
 			}
+
 		}
 
 		/**
