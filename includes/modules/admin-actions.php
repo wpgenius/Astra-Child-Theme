@@ -45,21 +45,7 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 			 */
 			add_filter( 'wp_is_application_passwords_available', '__return_false' );
 
-			if (is_plugin_active( 'elementor/elementor.php' )) {
 
-				/**
-				 * Disable Gutenberg on the back end.
-				 */
-				add_filter( 'use_block_editor_for_post', '__return_false', 5 );
-
-				add_filter( 'gutenberg_can_edit_post', '__return_false', 5 );
-
-				/**
-				* Disable Gutenberg for widgets.
-				*/
-				add_filter( 'use_widgets_block_editor', '__return_false' );
-
-			}
 
 			/**
 			 * Allow SVG uploads
@@ -114,6 +100,29 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 				define( 'UAEL_WL_INTERNAL_HELP_LINKS', 'disable' );
 			}
 
+		}
+
+		/**
+		 * Disable gutenberg block editor when elementor is active.
+		 *
+		 * @return void
+		 */
+		function disable_gutenberg() {
+			if (is_plugin_active( 'elementor/elementor.php' )) {
+
+				/**
+				 * Disable Gutenberg on the back end.
+				 */
+				add_filter( 'use_block_editor_for_post', '__return_false', 5 );
+
+				add_filter( 'gutenberg_can_edit_post', '__return_false', 5 );
+
+				/**
+				* Disable Gutenberg for widgets.
+				*/
+				add_filter( 'use_widgets_block_editor', '__return_false' );
+
+			}
 		}
 
 		/**

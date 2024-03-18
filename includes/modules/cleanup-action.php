@@ -43,7 +43,7 @@ if ( ! class_exists( 'WPGenius_cleanup_actions' ) ) {
 			 * Remove unwanted JS & CSS from front end
 			 * - Gutenberg
 			 */
-			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+			add_action( 'admin_init', array( $this, 'enqueue_scripts' ) );
 
 			/**
 			 * Remove all dashboard widgets from admin panel
