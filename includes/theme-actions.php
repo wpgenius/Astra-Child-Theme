@@ -62,7 +62,7 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 			$this->register_widgets();
 			add_action( 'init', array( $this, 'register_widgets_elementor' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-			add_filter( 'wp_mail_from', array( $this, 'templ_custom_mail_from' ) );
+			add_filter( 'wp_mail_from', array( $this, 'email_from' ) );
 		}
 
 		/**
