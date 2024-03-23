@@ -23,7 +23,7 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 
 		private function __construct() {
 			add_action( 'init', array( $this, 'register_post_type' ), 10, 1 );
-			add_filter( 'manage_testimonial_posts_columns ', array( $this, 'manage_column' ) );
+			add_filter( 'manage_testimonial_posts_columns', array( $this, 'manage_column' ) );
 			add_action( 'manage_testimonial_posts_custom_column', array( $this, 'manage_custom_column' ), 10, 2 );
 			add_filter( 'enter_title_here', array( $this, 'entry_title_text' ), 10, 2 );
 			add_filter( 'default_content', array( $this, 'editor_content' ), 10, 2 );
