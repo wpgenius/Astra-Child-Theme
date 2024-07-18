@@ -21,7 +21,7 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 	}
 
 	public function get_style_depends() {
-		$styles = array( 'swiper' );
+		$styles = array( 'elementor-icons', 'swiper' );
 
 		return $styles;
 	}
