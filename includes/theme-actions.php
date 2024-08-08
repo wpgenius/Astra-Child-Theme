@@ -28,7 +28,7 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 		 * @var array
 		 */
 		private $post_types = array(
-			// 'testimonial',
+			 'testimonial',
 		);
 
 		/**
@@ -37,7 +37,7 @@ if ( ! class_exists( 'WPGenius_theme_actions' ) ) {
 		 * @var array
 		 */
 		private $widgets = array(
-			// 'testimonial',
+			 'testimonial',
 		);
 
 		/**
