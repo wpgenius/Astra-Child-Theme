@@ -154,8 +154,119 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 		);
 
 		$this->end_controls_section();
+
+
+		$this->start_controls_section(
+			'section_style',
+			array(
+				'label' => __( 'Testimonial Slider Style', 'astra-child-theme' ),
+			)
+		);
+
+		$this->add_control(
+			'text_color',
+			[
+				'label' => esc_html__( 'Heading Text Color', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .testimonial-title' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_control(
+			'paragraph_color',
+			[
+				'label' => esc_html__( 'Paragraph Color', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} p.testimonial-content' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'name' => 'background',
+				'types' => [ 'classic', 'gradient', 'video' ],
+				'selector' => '{{WRAPPER}} .content_wrapper',
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			[
+				'name' => 'border',
+				'selector' => '{{WRAPPER}} .content_wrapper',
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Box_Shadow::get_type(),
+			[
+				'name' => 'box_shadow',
+				'selector' => '{{WRAPPER}} .content_wrapper',
+			]
+		);
+
+		$this->add_control(
+			'margin',
+			[
+				'label' => esc_html__( 'Margin', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'default' => [
+					'top' => 2,
+					'right' => 0,
+					'bottom' => 2,
+					'left' => 0,
+					'unit' => 'em',
+					'isLinked' => false,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .content_wrapper' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'padding',
+			[
+				'label' => esc_html__( 'Padding', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'default' => [
+					'top' => 2,
+					'right' => 0,
+					'bottom' => 2,
+					'left' => 0,
+					'unit' => 'em',
+					'isLinked' => false,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .content_wrapper' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'arrow_color',
+			[
+				'label' => esc_html__( 'Arrow Color', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .elementor-swiper-button' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+
+		$this->end_controls_section();
 	}
 
+
+	
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 
