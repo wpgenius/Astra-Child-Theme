@@ -259,7 +259,7 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 					'{{WRAPPER}} .elementor-swiper-button' => 'color: {{VALUE}}',
 				],
 			]
-		);
+			);
 
 
 		$this->end_controls_section();
