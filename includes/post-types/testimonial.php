@@ -38,7 +38,7 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 		  * Create Testimonial post type.
 		  *
 		  * To add custom fields use ACF plugin.
-		  * field names: rating;
+		  * field names: designation;
 		  */
 		public function register_post_type() {
 			$labels = array(
@@ -180,16 +180,16 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 		 */
 		public function post_meta_callback( $post ) {
 
-			$value = get_post_meta( $post->ID, 'ratings_value', true ); ?>
+			$value = get_post_meta( $post->ID, 'designations_value', true ); ?>
 
 			<table class="form-table as_metabox">
 
 				<div class="myplugin-image-preview">
 					<div style="margin-bottom:10px;">
-						<label for="rating"><?php _e( 'Choose rating', 'astra-child-theme' ); ?></label>
+						<label for="designation"><?php _e( 'Choose designation', 'astra-child-theme' ); ?></label>
 					</div>
 					<div>
-						<input style="width:100%; padding:10px !important;" type="text" id="rating" name="rating" value="<?php echo $value; ?>" />
+						<input style="width:100%; padding:10px !important;" type="text" id="designation" name="designation" value="<?php echo $value; ?>" />
 					</div>
 				</div>
 			</table>
@@ -204,9 +204,9 @@ if ( ! class_exists( 'WPGenius_testimonial' ) ) {
 		 */
 		public function save_post_meta( $post_id ) {
 
-			if ( isset( $_POST['rating'] ) && $_POST['rating'] != '' ) {
-				$mydata = $_POST['rating'];
-				update_post_meta( $post_id, 'ratings_value', $mydata );
+			if ( isset( $_POST['designation'] ) && $_POST['designation'] != '' ) {
+				$mydata = $_POST['designation'];
+				update_post_meta( $post_id, 'designations_value', $mydata );
 
 			}
 		}
