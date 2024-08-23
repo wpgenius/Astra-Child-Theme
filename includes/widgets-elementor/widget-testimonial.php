@@ -308,6 +308,7 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 						foreach ( $mypost as $post ) {
 							setup_postdata( $post );
 							$thumbnail = get_the_post_thumbnail_url( $post, 'post-thumbnail' );
+							$value     = get_post_meta( $post->ID, 'designation_value', true );
 							?>
 							<div class="swiper-slide" data-swiper-slide-index="<?php echo $i++; ?>">
 								<div class="testimonial">
@@ -317,6 +318,7 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 										</div>
 									<div class="testimonial-title">
 										<h5 class="testimonial-title"><?php echo get_the_title( $post ); ?></h5>
+										<p class="designation"><?php echo ( $value ); ?></p>
 									</div>
 									</div>
 								</div>
@@ -360,6 +362,7 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 				foreach ( $mypost as $post ) {
 					setup_postdata( $post );
 					$thumbnail = get_the_post_thumbnail_url( $post, 'post-thumbnail' );
+					$value     = get_post_meta( $post->ID, 'designation_value', true );
 					?>
 					<div class="swiper-slide" data-swiper-slide-index="<?php echo $i++; ?>">
 						<div class="testimonial">
@@ -369,6 +372,7 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 								</div>
 							<div class="testimonial-title">
 								<h5 class="testimonial-title"><?php echo get_the_title( $post ); ?></h5>
+								<p class="designation"><?php echo ( $value ); ?></p>
 							</div>
 							</div>
 						</div>
