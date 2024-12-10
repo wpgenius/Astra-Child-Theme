@@ -160,6 +160,7 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 			'section_style',
 			array(
 				'label' => __( 'Testimonial Slider Style', 'astra-child-theme' ),
+				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
 			)
 		);
 
