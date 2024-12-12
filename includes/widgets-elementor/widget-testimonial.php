@@ -40,42 +40,34 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 			)
 		);
 
-		$this->add_control(
-			'slide_to_show',
-			array(
-				'type'    => \Elementor\Controls_Manager::SELECT,
-				'label'   => esc_html__( 'Slide to Show', 'testimonials' ),
-				'options' => array(
-					'1' => esc_html__( '1', 'astra-child-theme' ),
-					'2' => esc_html__( '2', 'astra-child-theme' ),
-					'3' => esc_html__( '3', 'astra-child-theme' ),
-					'4' => esc_html__( '4', 'astra-child-theme' ),
-					'5' => esc_html__( '5', 'astra-child-theme' ),
-					'6' => esc_html__( '6', 'astra-child-theme' ),
-					'7' => esc_html__( '7', 'astra-child-theme' ),
-					'8' => esc_html__( '8', 'astra-child-theme' ),
-				),
-				'default' => '3',
-			)
+		
+		$slides_to_show = range( 1, 6 );
+		$slides_to_show = array_combine( $slides_to_show, $slides_to_show );
+
+		$this->add_responsive_control(
+			'slides_to_show',
+			[
+				'label' => esc_html__( 'Slides to Show', 'elementor' ),
+				'type' => Controls_Manager::SELECT,
+				'options' => [
+					'' => esc_html__( 'Default', 'elementor' ),
+				] + $slides_to_show,
+				'frontend_available' => true,
+				'render_type' => 'template',
+				'selectors' => [
+					'{{WRAPPER}}' => '--e-image-carousel-slides-to-show: {{VALUE}}',
+				],
+				'content_classes' => 'elementor-control-field-select-small',
+			]
 		);
 
 		$this->add_control(
-			'slide_to_scroll',
-			array(
-				'type'    => \Elementor\Controls_Manager::SELECT,
-				'label'   => esc_html__( 'Slide to Scroll', 'testimonials' ),
-				'options' => array(
-					'1' => esc_html__( '1', 'astra-child-theme' ),
-					'2' => esc_html__( '2', 'astra-child-theme' ),
-					'3' => esc_html__( '3', 'astra-child-theme' ),
-					'4' => esc_html__( '4', 'astra-child-theme' ),
-					'5' => esc_html__( '5', 'astra-child-theme' ),
-					'6' => esc_html__( '6', 'astra-child-theme' ),
-					'7' => esc_html__( '7', 'astra-child-theme' ),
-					'8' => esc_html__( '8', 'astra-child-theme' ),
-				),
-				'default' => '3',
-			)
+			'slides_to_scroll',
+			[
+				'label'     => __( 'Slides to Scroll', 'brandsnculture' ),
+				'type'      => \Elementor\Controls_Manager::NUMBER,
+				'default'   => 1,
+			]
 		);
 
 		$this->add_control(
@@ -138,6 +130,9 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 				'label_off'    => esc_html__( 'No', 'astra-child-theme' ),
 				'return_value' => 'yes',
 				'default'      => 'no',
+				'condition'    => [
+					'autoplay' => 'yes',
+				],
 			)
 		);
 
@@ -150,6 +145,9 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 				'label_off'    => esc_html__( 'No', 'astra-child-theme' ),
 				'return_value' => 'yes',
 				'default'      => 'no',
+				'condition'    => [
+					'autoplay' => 'yes',
+				],
 			)
 		);
 
@@ -282,8 +280,10 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 
 		if ( $mypost ) {
 				$setting = array(
-					'slides_to_show'       => $settings['slide_to_show'],
-					'slides_to_scroll'     => $settings['slide_to_scroll'],
+					'slides_to_show' => $settings['slides_to_show'] ? $settings['slides_to_show'] : 4,
+                	'slides_to_show_tablet'  => $settings['slides_to_show_tablet'] ? $settings['slides_to_show_tablet'] : 2,
+                	'slides_to_show_mobile'  => $settings['slides_to_show_mobile'] ? $settings['slides_to_show_mobile'] : 1,
+                	'slidesToScroll'    => $settings['slides_to_scroll'] ? $settings['slides_to_scroll'] : 1,
 					'navigation'           => $settings['navigation'],
 					'speed'                => $settings['transition_duration'],
 					'autoplay'             => $settings['autoplay'],
