@@ -1,5 +1,8 @@
 /** Write your css here ***/
 
+.elementor-swiper-button.swiper-button-disabled {
+  visibility: hidden;
+}
 
 /*********** Smartphones ************/
 
@@ -9,12 +12,18 @@
 
 @media only screen and (max-width : 767px) {
     /* Styles */
+	.swiper-wrapper.justify-center-m{
+		justify-content: center;
+	}
 }
 
 /************* Tablets **************/
 
 @media only screen and (min-width : 768px) and (max-width : 991px) {
     /* Styles */
+	.swiper-wrapper.justify-center-t{
+		justify-content: center;
+	}
 }
 
 @media only screen and (min-width : 768px) and (max-width : 1024px) {
@@ -29,4 +38,10 @@
 
 @media only screen and (max-width : 1200px) {
     /* Styles */
+}
+@media only screen and (min-width : 992px) {
+    /* Styles */
+	.swiper-wrapper.justify-center-d{
+		justify-content: center;
+	}
 }
