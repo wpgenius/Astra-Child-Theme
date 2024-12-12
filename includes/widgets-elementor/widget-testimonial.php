@@ -294,6 +294,10 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 					'_animation'           => 'fadeIn',
 					'autoplay_speed'       => 2500,
 				);
+			
+				$show_dots = ( in_array( $settings['navigation'], [ 'dots', 'both' ] ) );
+				$show_arrows = ( in_array( $settings['navigation'], [ 'arrows', 'both' ] ) );
+				$slides_count = count( $sponsors ) ;
 
 				 $id = 'acs' . rand();
 				?>
@@ -303,7 +307,7 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 						.elementor-widget-image-carousel .swiper,.elementor-widget-image-carousel .swiper-container{position:static}.elementor-widget-image-carousel .swiper-container .swiper-slide figure,.elementor-widget-image-carousel .swiper .swiper-slide figure{line-height:inherit}.elementor-widget-image-carousel .swiper-slide{text-align:center}.elementor-image-carousel-wrapper:not(.swiper-container-initialized) .swiper-slide,.elementor-image-carousel-wrapper:not(.swiper-initialized) .swiper-slide{max-width:calc(100% / var(--e-image-carousel-slides-to-show, <? echo $settings['slide_to_show']; ?>))}
 					</style>
 					<div class="elementor-image-carousel-wrapper swiper swiper-initialized swiper-horizontal swiper-pointer-events" dir="ltr">
-						<div class="elementor-image-carousel swiper-wrapper">
+						<div class="elementor-image-carousel swiper-wrapper <?php echo $slides_count < $settings['slides_to_show']? 'justify-center-d' :''; ?> <?php echo $slides_count < $settings['slides_to_show_tablet']? 'justify-center-t' :''; ?> <?php echo $slides_count < $settings['slides_to_show_mobile']? 'justify-center-m' :''; ?>">
 						<?php
 						$i = 0;
 						foreach ( $mypost as $post ) {
@@ -329,9 +333,16 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 						}
 						?>
 						</div>
-						<div class="elementor-swiper-button elementor-swiper-button-prev"><i aria-hidden="true" class="eicon-chevron-left"></i></div>
-						<div class="elementor-swiper-button elementor-swiper-button-next "><i aria-hidden="true" class="eicon-chevron-right"></i></div>
-						<div class="swiper-pagination <?php echo $id; ?>"></div>
+						<?php if ( 1 < $slides_count ) : ?>
+							<?php if ( $show_arrows ) : ?>
+								<div class="elementor-swiper-button elementor-swiper-button-prev"><i aria-hidden="true" class="eicon-chevron-left"></i></div>
+								<div class="elementor-swiper-button elementor-swiper-button-next"><i aria-hidden="true" class="eicon-chevron-right"></i></div>
+							<?php endif; ?>
+
+							<?php if ( $show_dots ) : ?>
+								<div class="swiper-pagination <?php echo esc_attr($id); ?>"></div>
+							<?php endif; ?>
+						<?php endif; ?>
 					</div>
 				</div>
 			</div>
