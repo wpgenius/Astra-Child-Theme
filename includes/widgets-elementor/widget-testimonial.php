@@ -269,7 +269,7 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 
-		$mypost = get_posts(
+		$slides = get_posts(
 			array(
 				'post_type'   => 'testimonial',
 				'numberposts' => 100,
@@ -278,7 +278,7 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 			)
 		);
 
-		if ( $mypost ) {
+		if ( $slides ) {
 				$setting = array(
 					'slides_to_show' => $settings['slides_to_show'] ? $settings['slides_to_show'] : 4,
                 	'slides_to_show_tablet'  => $settings['slides_to_show_tablet'] ? $settings['slides_to_show_tablet'] : 2,
@@ -297,7 +297,7 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 			
 				$show_dots = ( in_array( $settings['navigation'], [ 'dots', 'both' ] ) );
 				$show_arrows = ( in_array( $settings['navigation'], [ 'arrows', 'both' ] ) );
-				$slides_count = count( $sponsors ) ;
+				$slides_count = count( $slides ) ;
 
 				 $id = 'acs' . rand();
 				?>
