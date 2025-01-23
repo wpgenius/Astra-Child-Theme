@@ -1,253 +1,330 @@
 <?php
 /**
- * Post type : testimonial
+ * Post type: testimonial
  *
  * @package astra-child-theme/generic class
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+    exit; // Prevent direct access.
 }
 
-if ( ! class_exists( 'WPGenius_testimonial' ) ) {
-	class WPGenius_testimonial {
-		protected static $instance;
+if ( ! class_exists( 'WPGenius_Testimonial' ) ) :
 
-		public static function init() {
+class WPGenius_Testimonial {
 
-			if ( is_null( self::$instance ) ) {
-				self::$instance = new WPGenius_testimonial();
-			}
-			return self::$instance;
-		}
+    /**
+     * Singleton instance.
+     *
+     * @var WPGenius_Testimonial
+     */
+    protected static $instance = null;
 
-		private function __construct() {
-			add_action( 'init', array( $this, 'register_post_type' ), 10, 1 );
-			add_filter( 'manage_testimonial_posts_columns', array( $this, 'manage_column' ) );
-			add_action( 'manage_testimonial_posts_custom_column', array( $this, 'manage_custom_column' ), 10, 2 );
-			add_filter( 'enter_title_here', array( $this, 'entry_title_text' ), 10, 2 );
-			add_filter( 'default_content', array( $this, 'editor_content' ), 10, 2 );
-			add_action( 'pre_get_posts', array( $this, 'pre_get_post' ), 10 );
-			add_action( 'template_redirect', array( $this, 'template_redirect' ) );
-			add_action( 'add_meta_boxes', array( $this, 'meta_box' ) );
-			add_action( 'save_post', array( $this, 'save_post_meta' ) );
-			add_action( 'wp', array( $this, 'template_hooks' ) );
-		}
+    /**
+     * Get or create an instance of this class.
+     *
+     * @return WPGenius_Testimonial
+     */
+    public static function init() {
+        if ( is_null( self::$instance ) ) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
 
-		 /**
-		  * Create Testimonial post type.
-		  *
-		  * To add custom fields use ACF plugin.
-		  * field names: designation;
-		  */
-		public function register_post_type() {
-			$labels = array(
-				'name'               => __( 'Testimonials', 'astra-child-theme' ),
-				'singular_name'      => __( 'Testimonial', 'astra-child-theme' ),
-				'add_new'            => __( 'Add New', 'astra-child-theme' ),
-				'add_new_item'       => __( 'Add new testimonial', 'astra-child-theme' ),
-				'edit_item'          => __( 'Edit testimonial', 'astra-child-theme' ),
-				'new_item'           => __( 'New testimonial', 'astra-child-theme' ),
-				'view_item'          => __( 'View testimonials', 'astra-child-theme' ),
-				'search_items'       => __( 'Search testimonials', 'astra-child-theme' ),
-				'not_found'          => __( 'No testimonials found', 'astra-child-theme' ),
-				'not_found_in_trash' => __( 'No testimonials found in Trash', 'astra-child-theme' ),
-				'featured_image'     => __( 'Testimonial author Photo', 'astra-child-theme' ),
-				'set_featured_image' => __( 'Set as testimonial\'s author picture', 'astra-child-theme' ),
-			);
+    /**
+     * Constructor.
+     */
+    private function __construct() {
 
-			$args = array(
-				'labels'             => $labels,
-				'menu_icon'          => 'dashicons-format-quote',
-				'show_in_menu'       => true,
-				'show_ui'            => true,
-				'show_in_nav_menus'  => true,
-				'public'             => false,
-				'publicly_queryable' => true,
-				'has_archive'        => true,
-				'rewrite'            => array(
-					'slug'       => 'testimonials',
-					'with_front' => false,
-				),
-				'supports'           => array( 'title', 'editor', 'thumbnail' ),
-			);
+        // Register custom post type.
+        add_action( 'init', [ $this, 'register_post_type' ] );
 
-			register_post_type( 'testimonial', $args );
+        // Manage columns in admin list table.
+        add_filter( 'manage_testimonial_posts_columns', [ $this, 'manage_column' ] );
+        add_action( 'manage_testimonial_posts_custom_column', [ $this, 'manage_custom_column' ], 10, 2 );
 
-		}
+        // Change admin placeholder/title for testimonials.
+        add_filter( 'enter_title_here', [ $this, 'entry_title_text' ], 10, 2 );
+        add_filter( 'default_content', [ $this, 'editor_content' ], 10, 2 );
 
-		/**
-		 * Edit columns
-		 *
-		 * @param array $columns
-		 * @return void
-		 */
-		public function manage_column( $columns ) {
+        // Adjust main query on testimonial archive.
+        add_action( 'pre_get_posts', [ $this, 'pre_get_posts_on_archive' ] );
 
-			$inserted = array(
-				'editor'    => __( 'Testimonial', 'astra-child-theme' ),
-				'thumbnail' => __( 'Author picture', 'astra-child-theme' ),
-			);
+        // Add meta boxes & save logic.
+        add_action( 'add_meta_boxes', [ $this, 'add_testimonial_meta_boxes' ] );
+        add_action( 'save_post', [ $this, 'save_post_meta' ] );
 
-			return array_merge(
-				array_slice( $columns, 0, 2 ),
-				$inserted,
-				array_slice( $columns, 2 )
-			);
-		}
+        // Astra-specific hooks for archive display.
+        //add_action( 'wp', [ $this, 'template_hooks' ] );
+    }
 
-		/**
-		 * Create Custom columns
-		 *
-		 * @param string $column_name
-		 * @param int    $post_id
-		 * @return void
-		 */
-		public function manage_custom_column( $column_name, $post_id ) {
-			if ( $column_name == 'editor' ) {
-				echo '<blockquote>"' . get_the_content() . '"</blockquote>';
-			}
-			if ( $column_name == 'thumbnail' ) {
-				echo get_the_post_thumbnail( $post_id, 'thumbnail' );
-			}
-		}
+    /**
+     * Register "testimonial" post type.
+     */
+    public function register_post_type() {
+		$public =  false ;
 
-		/**
-		 * Change post entry title
-		 *
-		 * @param string $title
-		 * @param object $post
-		 * @return string
-		 */
-		public function entry_title_text( $title, $post ) {
-			if ( $post->post_type == 'testimonial' ) {
+        $labels = [
+            'name'               => __( 'Testimonials', 'astra-child-theme' ),
+            'singular_name'      => __( 'Testimonial', 'astra-child-theme' ),
+            'add_new'            => __( 'Add New', 'astra-child-theme' ),
+            'add_new_item'       => __( 'Add new testimonial', 'astra-child-theme' ),
+            'edit_item'          => __( 'Edit testimonial', 'astra-child-theme' ),
+            'new_item'           => __( 'New testimonial', 'astra-child-theme' ),
+            'view_item'          => __( 'View testimonials', 'astra-child-theme' ),
+            'search_items'       => __( 'Search testimonials', 'astra-child-theme' ),
+            'not_found'          => __( 'No testimonials found', 'astra-child-theme' ),
+            'not_found_in_trash' => __( 'No testimonials found in Trash', 'astra-child-theme' ),
+            'featured_image'     => __( 'Testimonial author photo', 'astra-child-theme' ),
+            'set_featured_image' => __( 'Set testimonial author photo', 'astra-child-theme' ),
+        ];
 
-				$title = __( 'Enter testimonial author title here', 'astra-child-theme' );
-			}
+        $args = [
+            'labels'             => $labels,
+            'menu_icon'          => 'dashicons-format-quote',
+            'show_ui'            => true,
+            'show_in_menu'       => true,
+			'show_in_nav_menus'  => $public,
+            'public'             => $public,
+            'exclude_from_search'=> ! $public,
+            'publicly_queryable' => $public,
+            'has_archive'        => $public,
+            'rewrite'            => [
+                'slug'       => 'testimonials',
+                'with_front' => false,
+            ],
+            'supports'           => [ 'title', 'editor', 'thumbnail' ],
+        ];
 
-			return $title;
-		}
+        register_post_type( 'testimonial', $args );
+    }
 
-		/**
-		 * Change default content of editor
-		 *
-		 * @param string $content
-		 * @return void
-		 */
-		function editor_content( $content,$post ) {
-			if ( 'testimonial' == $post->post_type ) {
-				$content = __( 'Write testimonial here.', 'astra-child-theme' );
-			}
-			return $content;
-		}
+    /**
+     * Manage admin columns.
+     *
+     * @param array $columns Existing columns.
+     * @return array
+     */
+    public function manage_column( $columns ) {
 
-		/*
-		 * Display posts for a custom post type called 'testimonial'
-		 *
-		 * @param array $query
-		 * @return void
-		 */
-		function pre_get_post( $query ) {
-			// enter code here
-			if ( 'testimonial' == get_post_type() && get_option( 'wpg_testimonial_per_page' )) {
-				$query->set( 'posts_per_page', get_option( 'wpg_testimonial_per_page' ) );
-			}
-		}
+        $inserted = [
+            'editor'    => __( 'Testimonial', 'astra-child-theme' ),
+            'thumbnail' => __( 'Author Picture', 'astra-child-theme' ),
+        ];
 
-		/**
-		 * Redirect template
-		 *
-		 * @return void
-		 */
-		function template_redirect() {
-			// enter code here
-		}
+        // Insert custom columns after 'Title' and 'Author' columns, for example.
+        return array_merge(
+            array_slice( $columns, 0, 2 ),
+            $inserted,
+            array_slice( $columns, 2 )
+        );
+    }
 
-		/**
-		 * Add metabox for testimonial.
-		 *
-		 * @return array
-		 */
-		public function meta_box() {
-			add_meta_box( 'testimonial-meta', __( 'Testimonials meta' , 'astra-child-theme' ), array( $this, 'post_meta_callback' ), 'testimonial', 'advanced', 'high' );
-		}
+    /**
+     * Populate custom columns.
+     *
+     * @param string $column_name Column key.
+     * @param int    $post_id     Current post ID.
+     */
+    public function manage_custom_column( $column_name, $post_id ) {
+        if ( 'editor' === $column_name ) {
+			echo '<p>' . get_post_meta( $post_id, 'testimonial_title', true ).'</p>' ;
+            echo '<blockquote>' . esc_html( get_the_excerpt( $post_id ) ) . '</blockquote>';
+        }
+        if ( 'thumbnail' === $column_name ) {
+            echo get_the_post_thumbnail( $post_id, 'thumbnail' );
+        }
+    }
 
-		/**
-		 * Add post meta boxes to post type
-		 *
-		 * @param object $post
-		 * @return void
-		 */
-		public function post_meta_callback( $post ) {
+    /**
+     * Change placeholder text for 'title' input box.
+     *
+     * @param string $title Default placeholder text.
+     * @param object $post  WP_Post object.
+     * @return string
+     */
+    public function entry_title_text( $title, $post ) {
+        if ( 'testimonial' === $post->post_type ) {
+            $title = __( 'Enter testimonial author name here', 'astra-child-theme' );
+        }
+        return $title;
+    }
 
-			$value = get_post_meta( $post->ID, 'designations_value', true ); ?>
+    /**
+     * Change default content of the editor.
+     *
+     * @param string $content Default content.
+     * @param object $post    WP_Post object.
+     * @return string
+     */
+    public function editor_content( $content, $post ) {
+        if ( 'testimonial' === $post->post_type ) {
+            $content = __( 'Write testimonial text here...', 'astra-child-theme' );
+        }
+        return $content;
+    }
 
-			<table class="form-table as_metabox">
+    /**
+     * Modify the main query on the testimonial archive.
+     *
+     * @param WP_Query $query The WP_Query instance (passed by reference).
+     */
+    public function pre_get_posts_on_archive( $query ) {
+        // Only target the main query on the front-end, for the 'testimonial' archive.
+        if ( ! is_admin() && $query->is_main_query() && $query->is_post_type_archive( 'testimonial' ) ) {
+            if ( get_option( 'wpg_testimonial_per_page' ) ) {
+                $query->set( 'posts_per_page', get_option( 'wpg_testimonial_per_page' ) );
+            }
+        }
+    }
 
-				<div class="myplugin-image-preview">
-					<div style="margin-bottom:10px;">
-						<label for="designation"><?php _e( 'Choose designation', 'astra-child-theme' ); ?></label>
-					</div>
-					<div>
-						<input style="width:100%; padding:10px !important;" type="text" id="designation" name="designation" value="<?php echo $value; ?>" />
-					</div>
-				</div>
-			</table>
-			<?php
-		}
+    /**
+     * Add meta boxes for the "testimonial" post type.
+     */
+    public function add_testimonial_meta_boxes() {
+        add_meta_box(
+            'testimonial-meta',
+            __( 'Testimonial Details', 'astra-child-theme' ),
+            [ $this, 'testimonial_meta_box_cb' ],
+            'testimonial',
+            'advanced',
+            'high'
+        );
+    }
 
-		/**
-		 * Save post data of post type
-		 *
-		 * @param int $post_id
-		 * @return void
-		 */
-		public function save_post_meta( $post_id ) {
+    /**
+     * Meta box callback for displaying inputs.
+     *
+     * @param WP_Post $post Current post object.
+     */
+    public function testimonial_meta_box_cb( $post ) {
+        // Add a nonce field for security.
+        wp_nonce_field( 'testimonial_meta_box', 'testimonial_meta_box_nonce' );
 
-			if ( isset( $_POST['designation'] ) && $_POST['designation'] != '' ) {
-				$mydata = $_POST['designation'];
-				update_post_meta( $post_id, 'designations_value', $mydata );
+        // Retrieve existing values (if any).
+        $author_name  = get_post_meta( $post->ID, 'testimonial_title', true );
+        $author_age   = get_post_meta( $post->ID, 'author_age', true );
+        $designation  = get_post_meta( $post->ID, 'designation', true );
+        ?>
+        <table class="form-table">
+            <tr>
+                <th scope="row">
+                    <label for="testimonial_title"><?php esc_html_e( 'Testimonial title', 'astra-child-theme' ); ?></label>
+                </th>
+                <td>
+                    <input type="text" id="testimonial_title" name="testimonial_title" value="<?php echo esc_attr( $author_name ); ?>" style="width:100%" />
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <label for="author_age"><?php esc_html_e( 'Author Age', 'astra-child-theme' ); ?></label>
+                </th>
+                <td>
+                    <input type="number" id="author_age" name="author_age" value="<?php echo esc_attr( $author_age ); ?>" style="width:100%" />
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <label for="designation"><?php esc_html_e( 'Designation', 'astra-child-theme' ); ?></label>
+                </th>
+                <td>
+                    <input type="text" id="designation" name="designation" value="<?php echo esc_attr( $designation ); ?>" style="width:100%" />
+                </td>
+            </tr>
+        </table>
+        <?php
+    }
 
-			}
-		}
+    /**
+     * Save meta box data when the post is saved.
+     *
+     * @param int $post_id Post ID.
+     */
+    public function save_post_meta( $post_id ) {
 
-		/**
-		 * add hooks for archive page
-		 *
-		 * @return void
-		 */
-		public function template_hooks() {
-			if ( is_post_type_archive( 'testimonial' ) ) {
-				add_action( 'astra_archive_header', array( $this, 'archive_header' ) );
-				add_action( 'astra_template_parts_content', array( $this, 'template_parts_function' ) );
-			}
-		}
+        // Check if nonce is set.
+        if ( ! isset( $_POST['testimonial_meta_box_nonce'] ) ) {
+            return;
+        }
 
-		/**
-		 * Add title to archive page.
-		 *
-		 * @return string
-		 */
-		public function archive_header() {
-			if ( is_post_type_archive( 'testimonial' ) ) {
-				remove_action( 'astra_template_parts_content', array( Astra_Loop::get_instance(), 'template_parts_default' ) );
-			}
-			echo '<h1 class="post-title">'.__( 'Testimonials' , 'astra-child-theme' ).'</h1>';
-		}
+        // Verify nonce.
+        if ( ! wp_verify_nonce( $_POST['testimonial_meta_box_nonce'], 'testimonial_meta_box' ) ) {
+            return;
+        }
 
-		/**
-		 * Add code to display content on post type archive page.
-		 *
-		 * @return void
-		 */
-		public function template_parts_function() {
-			global $post;
-			// Enter template code here to show on archive page
-		}
+        // Avoid auto-saves, etc.
+        if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+            return;
+        }
 
-	}
+        // Check user capabilities (optional but recommended).
+        if ( isset( $_POST['post_type'] ) && 'testimonial' === $_POST['post_type'] ) {
+            if ( ! current_user_can( 'edit_post', $post_id ) ) {
+                return;
+            }
+        }
 
-	WPGenius_testimonial::init();
+        // Now safely handle & sanitize fields.
+        if ( isset( $_POST['designation'] ) ) {
+            update_post_meta(
+                $post_id,
+                'designation',
+                sanitize_text_field( $_POST['designation'] )
+            );
+        }
+
+        if ( isset( $_POST['testimonial_title'] ) ) {
+            update_post_meta(
+                $post_id,
+                'testimonial_title',
+                sanitize_text_field( $_POST['testimonial_title'] )
+            );
+        }
+
+        if ( isset( $_POST['author_age'] ) ) {
+            // Use sanitize_text_field for simplicity; or use absint() if you want strictly integer ages.
+            update_post_meta(
+                $post_id,
+                'author_age',
+                sanitize_text_field( $_POST['author_age'] )
+            );
+        }
+    }
+
+    /**
+     * Hook into Astra theme parts for the testimonial archive.
+     */
+    public function template_hooks() {
+        if ( is_post_type_archive( 'testimonial' ) ) {
+            // Remove default Astra loop and add our own custom archive header + content.
+            add_action( 'astra_archive_header', [ $this, 'archive_header' ] );
+            add_action( 'astra_template_parts_content', [ $this, 'template_parts_function' ] );
+        }
+    }
+
+    /**
+     * Add a custom header to the testimonial archive.
+     */
+    public function archive_header() {
+        if ( is_post_type_archive( 'testimonial' ) ) {
+            if ( class_exists( 'Astra_Loop' ) ) {
+                remove_action( 'astra_template_parts_content', [ Astra_Loop::get_instance(), 'template_parts_default' ] );
+            }
+            echo '<h1 class="post-title">' . esc_html__( 'Testimonials', 'astra-child-theme' ) . '</h1>';
+        }
+    }
+
+    /**
+     * Output custom template parts for each testimonial on the archive page.
+     */
+    public function template_parts_function() {
+        global $post;
+        // Custom loop or HTML to display the testimonial content, meta, etc.
+       echo '<div class="testimonial-wrap">' . get_the_content() . '</div>';
+    }
 }
 
+WPGenius_Testimonial::init();
 
+endif;
