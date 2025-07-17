@@ -507,6 +507,11 @@ class WPG_Elementor_Testimonial_Widget extends Widget_Base {
 							<div class="swiper-slide" data-swiper-slide-index="<?php echo esc_attr( $i++ ); ?>">
 								<div class="testimonial">
 									<div class="content_wrapper">
+										<?php if ( has_post_thumbnail( $post->ID ) ) : ?>
+											<div class="testimonial-image">
+												<?php echo get_the_post_thumbnail( $post->ID, 'full' ); ?>
+											</div>
+										<?php endif; ?>
 										<?php if ( $testimonial_title ) : ?>
 											<h6 class="testimonial-title"><?php echo esc_html( $testimonial_title ); ?></h6>
 										<?php endif; ?>
