@@ -48,7 +48,7 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 			/**
 			 * Disable gutenberg editor when elementor is active.
 			 */
-			add_action( 'admin_init', array($this,'disable_gutenberg') );
+			add_action( 'after_setup_theme', array($this,'disable_gutenberg') );
 
 			/**
 			 * Allow SVG uploads
@@ -124,6 +124,7 @@ if ( ! class_exists( 'WPGenius_admin_actions' ) ) {
 				* Disable Gutenberg for widgets.
 				*/
 				add_filter( 'use_widgets_block_editor', '__return_false' );
+				remove_theme_support( 'widgets-block-editor' );
 
 			}
 		}
